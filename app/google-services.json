@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "221871684088",
+    "firebase_url": "https://matchingkak.firebaseio.com",
+    "project_id": "matchingkak",
+    "storage_bucket": "matchingkak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221871684088:android:137b2f388796df9c",
+        "android_client_info": {
+          "package_name": "project.capstone.com.matchingkak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221871684088-a7onnsed3bhs5co24c2b6ehiap3u0cpc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDMDLN-LPFV8lzoh_xdIIPl3iRqJvZtiI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
