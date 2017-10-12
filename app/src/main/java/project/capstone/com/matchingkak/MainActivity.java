@@ -1,16 +1,12 @@
 package project.capstone.com.matchingkak;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -33,10 +29,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
-import static com.kakao.util.helper.Utility.getPackageInfo;
+import project.capstone.com.matchingkak.sns_login.loginActivity;
+
 import static project.capstone.com.matchingkak.R.id.webview;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         myWebView.loadUrl("http://matchingkak.com");
         myWebView.setWebViewClient(new myWebViewClient());
+
 
 
 
@@ -134,29 +130,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public static String getKeyHash(final Context context) {
-        PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
-        if (packageInfo == null)
-            return null;
 
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
-            } catch (NoSuchAlgorithmException e) {
-                Log.w("ERROR", "Unable to get MessageDigest. signature=" + signature, e);
-            }
-        }
-        return null;
-    }
     private class myWebViewClient extends WebViewClient{
 
 
         @SuppressWarnings("deprecation")
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if(url.contains("login.php")||url.contains("join.php")||url.contains("w_message")||url.contains("editor")||url.contains("profile.php")){
+            if(url.contains("login.php")){
+
+                Intent intent=new Intent(MainActivity.this,loginActivity.class);
+                intent.putExtra("url",url);
+                startActivity(intent);
+                return true;
+            }
+            if(url.contains("join.php")||url.contains("w_message")||url.contains("editor")||url.contains("profile.php")){
                 Intent intent=new Intent(MainActivity.this,LoginActivity.class);
                 intent.putExtra("url",url);
                 startActivity(intent);

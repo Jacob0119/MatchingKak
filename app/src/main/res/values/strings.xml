@@ -4,5 +4,5 @@
     <string name="text_wirte">Write</string>
     <string name="text_message">Message</string>
 
-<string name="kakao_app_key">937bc07ebdf5c1ccf379cb739a1b7ced</string>
+    <string name="kakao_app_key">937bc07ebdf5c1ccf379cb739a1b7ced</string>
 </resources>
