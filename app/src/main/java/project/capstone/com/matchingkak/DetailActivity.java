@@ -4,9 +4,13 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -32,15 +36,37 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
         textView=(TextView)findViewById(R.id.detail_text);
+
+        Toolbar toolbar=(Toolbar)findViewById(R.id.detail_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GetData task=new GetData();
         String gm_no=getIntent().getStringExtra("gm_no");
-
         task.execute(TAG_URL+"?gm_no="+gm_no);
      //  showInfo();
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.detail_message:
+                Toast.makeText(this,"message",Toast.LENGTH_LONG).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu,menu);
+    return true;
     }
 
     private void showInfo(){
@@ -73,7 +99,7 @@ public class DetailActivity extends AppCompatActivity {
                 super.onPostExecute(s);
 
             progressDialog.dismiss();
-            textView.setText(s);
+            textView.setText(s+"0000000000000000\n00000000000000000000\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
             Log.d(TAG,"response-"+s);
 
             if(s==null){
