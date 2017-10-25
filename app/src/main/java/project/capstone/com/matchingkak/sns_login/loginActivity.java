@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,7 +21,6 @@ import com.androidquery.AQuery;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.LoginButton;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
@@ -30,11 +28,6 @@ import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 import com.nhn.android.naverlogin.OAuthLogin;
-import com.nhn.android.naverlogin.OAuthLoginHandler;
-import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.security.MessageDigest;
 
@@ -49,7 +42,7 @@ public class loginActivity extends AppCompatActivity {
     CircleImageView user_img;
     LinearLayout success_layout;
     Button logout_btn;
-    LoginButton loginButton;
+    Button loginButton;
 
     AQuery aQuery;
 
@@ -69,8 +62,8 @@ public class loginActivity extends AppCompatActivity {
                 //,OAUTH_CALLBACK_INTENT
                 // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
         );
-        OAuthLoginButton naverLoginButton = ( OAuthLoginButton ) findViewById( R.id.button_naverlogin );
-        naverLoginButton.setOAuthLoginHandler( new OAuthLoginHandler( )
+        //OAuthLoginButton naverLoginButton = ( OAuthLoginButton ) findViewById( R.id.naver );
+       /* naverLoginButton.setOAuthLoginHandler( new OAuthLoginHandler( )
         {
             @Override
             public void run( boolean b )
@@ -115,7 +108,7 @@ public class loginActivity extends AppCompatActivity {
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         // 카카오톡 로그인 버튼
-        loginButton = (LoginButton)findViewById(R.id.com_kakao_login);
+        loginButton = (Button)findViewById(R.id.kakao);
         loginButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -135,6 +128,8 @@ public class loginActivity extends AppCompatActivity {
         });
 
         // 로그인 성공 시 사용할 뷰
+        //
+        /*
         success_layout = (LinearLayout)findViewById(R.id.success_layout);
         user_nickname =(TextView)findViewById(R.id.user_nickname);
         user_img =(CircleImageView) findViewById(R.id.user_img);
@@ -155,7 +150,7 @@ public class loginActivity extends AppCompatActivity {
         }else{
             success_layout.setVisibility(View.GONE);
             loginButton.setVisibility(View.VISIBLE);
-        }
+        }*/
 
     }
 

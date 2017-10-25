@@ -6,7 +6,7 @@
             <solid android:color="@color/border_color" />
         </shape>
     </item>
-        <item android:drawable="@color/white" android:bottom="1dp" />
+        <item android:drawable="@color/white" android:right="1dp" />
 
 
     </layer-list>

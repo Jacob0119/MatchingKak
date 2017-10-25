@@ -50,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        textView=(TextView)findViewById(R.id.detail_text);
+
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
@@ -174,12 +174,11 @@ public class DetailActivity extends AppCompatActivity {
                 super.onPostExecute(s);
 
             progressDialog.dismiss();
-            textView.setText(s+"0000000000000000\n00000000000000000000\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
             Log.d(TAG,"response-"+s);
 
             if(s==null){
 
-                textView.setText(errorString);
+
             }
             else{
                 mJsonString=s;
