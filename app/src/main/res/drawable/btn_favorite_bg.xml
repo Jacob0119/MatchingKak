@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
     <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-        <item android:drawable="@color/pure_gray"/>
+    <item>
+        <shape
+            android:shape="rectangle">
+            <stroke android:width="@dimen/border_width" android:color="@color/border_color" /> <!--실제 경계 색-->
+            <solid android:color="@color/border_color" />                         <!--경계 메인 색-->
+
+        </shape>
+    </item>
+        <item android:drawable="@color/pure_gray" android:top="1dp"/>
         <item android:drawable="@drawable/btn_favorite" android:gravity="center" android:height="30dp" android:width="30dp"/>
 
     </layer-list>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_margin="@dimen/margin_bottom"
+    android:padding="10dp"
+    android:background="@drawable/layout_view_bg"
+    >
+
+
+    <LinearLayout
+        android:layout_margin="@dimen/margin_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/primary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="경기 날짜" />
+
+            <TextView
+                style="@style/secondary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-12-08 5시 5분 오후" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+          >
+
+            <TextView
+                style="@style/primary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장소" />
+
+            <TextView
+                style="@style/secondary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="세종대학교 운동장" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_margin="@dimen/margin_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="D-Day"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="D-30" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_margin="1dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="날씨"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="맑음"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:id="@+id/map_view"
+        android:layout_width="300dp"
+        android:layout_height="300dp">
+
+
+    </RelativeLayout>
+
+    </LinearLayout>
