@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -30,7 +31,7 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
+            android:value="937bc07ebdf5c1ccf379cb739a1b7ced" />
 
 
         <activity

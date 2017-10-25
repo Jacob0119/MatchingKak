@@ -4,8 +4,12 @@
     <color name="colorPrimary">#009987</color>
     <color name="colorPrimaryDark">#00695c</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
     <color name="bottombar_main">#ffffff</color>
     <color name="bottombar_icon">#757575</color>
-    <color name="pure_gray">#eeeeee</color>
+    <color name="pure_gray">#e7e7e7</color>
     <color name="noti_color">#ffd102</color>
+    <color name="border_color">#bebebe</color>
+    <color name="primary_text">#000000</color>
+    <color name="secondary_text">#b7b7b7</color>
 </resources>

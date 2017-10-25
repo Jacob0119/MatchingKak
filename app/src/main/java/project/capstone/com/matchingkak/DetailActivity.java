@@ -1,18 +1,28 @@
 package project.capstone.com.matchingkak;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import net.daum.mf.map.api.MapView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +33,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
     private static String TAG_JSON="Success";
@@ -32,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     String mJsonString;
     private static  Info info;
     ImageView imageView;
+    private MapView mMapView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +56,71 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         GetData task=new GetData();
         String gm_no=getIntent().getStringExtra("gm_no");
         task.execute(TAG_URL+"?gm_no="+gm_no);
+        //getSupportActionBar().setTitle(info.getString(Info.GM_TITLE));
+      initMap();
+
+
+
      //  showInfo();
+
+    }
+    private void getAppKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                Log.d("Hash key", something);
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            Log.e("name not found", e.toString());
+        }
+    }
+    private void  initMap(){
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(DetailActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
+
+                // MapView 객체생성 및 API Key 설정
+
+                mMapView=new MapView(DetailActivity.this);
+                mMapView.setMapType(MapView.MapType.Standard);
+                ViewGroup mapViewContainer=(ViewGroup) findViewById(R.id.map_view);
+
+                mapViewContainer.addView(mMapView);
+
+
+                // 중심점 변경
+              //  mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
+
+                // 마커 생성 및 설정
+
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                Toast.makeText(DetailActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+        };
+
+
+                 TedPermission.with(this)
+                .setPermissionListener(permissionlistener)
+                .setRationaleMessage("지도 서비스를 사용하기 위해서는 위치 접근 권한이 필요해요")
+                .setDeniedMessage("왜 거부하셨어요...\n하지만 [설정] > [권한] 에서 권한을 허용할 수 있어요.")
+                .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+                .check();
+
+
 
 
     }
@@ -79,6 +153,7 @@ public class DetailActivity extends AppCompatActivity {
 */
 
     }
+
 
     private class GetData extends AsyncTask<String,Void,String>{
 
