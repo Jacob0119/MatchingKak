@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_margin="5dp">
+
+<LinearLayout
+    android:id="@+id/temp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/sumnail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/login_bh" />
+                    <LinearLayout
+
+                        android:orientation="vertical"
+                        android:layout_alignBottom="@id/sumnail"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <TextView
+
+
+                        style="@style/secondary_text"
+                        android:gravity="left"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="제목"/>
+                    <TextView
+                        style="@style/secondary_text"
+                        android:gravity="left"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="팀 명 "/>
+                    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_marginRight="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/calendar"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+                <TextView
+                    style="@style/secondary_text_small"
+                    android:textColor="@color/pretty_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017/4/23"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_marginRight="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/location"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+                    <TextView
+                        style="@style/secondary_text_small"
+                        android:textColor="@color/primary_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="서울특별시 종로구"/>
+
+                </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+    <ImageView
+        android:background="@color/transparent_black"
+        android:padding="10dp"
+        android:src="@drawable/like"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+</android.support.v7.widget.CardView>

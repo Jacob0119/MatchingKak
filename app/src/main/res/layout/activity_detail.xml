@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context="project.capstone.com.matchingkak.DetailActivity">
+    tools:context="project.capstone.com.matchingkak.detail_info.DetailActivity">
     <android.support.design.widget.CoordinatorLayout
 
         android:fitsSystemWindows="true"

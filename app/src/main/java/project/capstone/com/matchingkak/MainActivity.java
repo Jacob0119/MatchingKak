@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import project.capstone.com.matchingkak.detail_info.DetailActivity;
 import project.capstone.com.matchingkak.sns_login.loginActivity;
 
 import static project.capstone.com.matchingkak.R.id.webview;

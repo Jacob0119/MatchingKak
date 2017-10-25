@@ -60,7 +60,7 @@
 
         <activity android:name=".MessageActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".detail_info.DetailActivity" />
         <activity android:name=".sns_login.loginActivity" />
         <activity android:name=".sns_login.SuccessActivity" />
     </application>
