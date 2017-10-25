@@ -7,9 +7,16 @@
     <color name="white">#FFFFFF</color>
     <color name="bottombar_main">#ffffff</color>
     <color name="bottombar_icon">#757575</color>
-    <color name="pure_gray">#e7e7e7</color>
-    <color name="noti_color">#ffd102</color>
-    <color name="border_color">#bebebe</color>
-    <color name="primary_text">#000000</color>
+    <color name="pure_gray">#F0F0F0</color>
+    <color name="noti_color">#c7ffd102</color>
+
+    <color name="border_color">#b7b7b7</color>
+    <color name="primary_text">#4D4D4D</color>
     <color name="secondary_text">#b7b7b7</color>
+    <color name="pretty_red">#F26362</color>
+    <color name="kakao_color">#c7ffd102 </color>
+    <color name="facebook_color">#d53b5998</color>
+    <color name="naver_color">#df00bd38</color>
+    <color name="transparent_white">#b2ffffff</color>
+    <color name="transparent_black">#4b000000</color>
 </resources>

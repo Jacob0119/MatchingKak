@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_margin="@dimen/margin_bottom"
+    android:padding="10dp"
+
+    >
+
+
+    <LinearLayout
+        android:layout_margin="@dimen/margin_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="팀 명"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="카카오"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="작성자"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="jacob"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="유니폼 색"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="빨강"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="경고 횟수"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="100"
+                android:textColor="@color/pretty_red"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="매칭 횟수"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="100"
+                android:textColor="@color/pretty_red"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    </LinearLayout>
+
