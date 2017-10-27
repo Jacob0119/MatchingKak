@@ -2,14 +2,12 @@ package project.capstone.com.matchingkak.detail_info;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,34 +17,37 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.List;
 
 import project.capstone.com.matchingkak.R;
 
 public class DetailActivity extends AppCompatActivity {
-    private static String TAG_JSON="Success";
+    private static String TAG_JSON="Detail_Info";
     private static String TAG="Matchingkak detail";
     private static String TAG_URL="http://matchingkak.com/mobile/detail.php";
-    TextView textView;
+
     String mJsonString;
     private static  Info info;
     ImageView imageView;
     private MapView mMapView;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,39 +64,55 @@ public class DetailActivity extends AppCompatActivity {
         String gm_no=getIntent().getStringExtra("gm_no");
         task.execute(TAG_URL+"?gm_no="+gm_no);
         //getSupportActionBar().setTitle(info.getString(Info.GM_TITLE));
-      initMap();
+
 
 
 
      //  showInfo();
 
     }
-    private void getAppKeyHash() {
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                String something = new String(Base64.encode(md.digest(), 0));
-                Log.d("Hash key", something);
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            Log.e("name not found", e.toString());
-        }
-    }
-    private void  initMap(){
+
+    private void  initMap(final String addr){
         PermissionListener permissionlistener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
-                Toast.makeText(DetailActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
 
+                MapPoint point;
                 // MapView 객체생성 및 API Key 설정
 
                 mMapView=new MapView(DetailActivity.this);
                 mMapView.setMapType(MapView.MapType.Standard);
                 ViewGroup mapViewContainer=(ViewGroup) findViewById(R.id.map_view);
+
+                Geocoder coder=new Geocoder(DetailActivity.this);
+                List<Address> addressList=null;
+                try {
+                    addressList=coder.getFromLocationName(addr,1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(addr!=null){
+
+
+                        Address location=addressList.get(0);
+                        double lat=location.getLatitude();
+                        double lon=location.getLongitude();
+                        point= MapPoint.mapPointWithGeoCoord(lat,lon);
+
+                        mMapView.setMapCenterPoint(point, true);
+
+
+                    MapPOIItem marker = new MapPOIItem();
+                    marker.setItemName("Default Marker");
+                    marker.setTag(0);
+                    marker.setMapPoint(point);
+                    marker.setMarkerType(MapPOIItem.MarkerType.RedPin); // 기본으로 제공하는 BluePin 마커 모양.
+                    marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+                    mMapView.addPOIItem(marker);
+                }
+
+
 
                 mapViewContainer.addView(mMapView);
 
@@ -145,23 +162,51 @@ public class DetailActivity extends AppCompatActivity {
     return true;
     }
 
-    private void showInfo(){
-        String domain="http://matchingkak.com/";
-        imageView=(ImageView) findViewById(R.id.team_img);
-       String imageUrl=domain+info.getString("tm_img");
-       /* Glide.with(this)
-                .load(domain+info.getString(Info.TM_IMG))
+
+
+
+    private void showResult(){
+
+
+            Gson gson =new Gson();
+            Info info=gson.fromJson(mJsonString,Info.class );
+
+            String domain="http://matchingkak.com/";
+
+        TextView gm_memo=(TextView) findViewById(R.id.Detail_gm_memo);
+        gm_memo.setText(info.getGm_memo());
+        TextView gm_date=(TextView )findViewById(R.id.Detail_gm_date );
+        gm_date.setText(info.getGm_date());
+        TextView gm_gym=(TextView)findViewById(R.id.Detail_gm_gym);
+        gm_gym.setText(info.getGm_gym());
+        TextView gm_color=(TextView)findViewById(R.id.Detail_gm_color);
+        gm_color.setText(info.getGm_color());
+        TextView tm_name=(TextView)findViewById(R.id.Detail_tm_name);
+        tm_name.setText(info.getTm_name());
+        TextView mb_nick=(TextView)findViewById(R.id.Detail_mb_nick);
+        mb_nick.setText(info.getMb_nick());
+        TextView match_count=(TextView)findViewById(R.id.Detail_match_count);
+        match_count.setText(info.getTm_match_count());
+
+        imageView=(ImageView) findViewById(R.id.Detail_team_img);
+             Glide.with(this)
+                .load(domain+info.getTm_img())
                 .into(imageView);
-*/
 
-    }
+        initMap(info.getGm_addr());
 
 
-    private class GetData extends AsyncTask<String,Void,String>{
 
+
+
+}
+
+    class GetData extends AsyncTask<String,Void,String> {
 
         ProgressDialog progressDialog;
         String errorString=null;
+
+
 
 
 
@@ -173,10 +218,10 @@ public class DetailActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-                super.onPostExecute(s);
+            super.onPostExecute(s);
 
-            progressDialog.dismiss();
-            Log.d(TAG,"response-"+s);
+
+
 
             if(s==null){
 
@@ -185,6 +230,7 @@ public class DetailActivity extends AppCompatActivity {
             else{
                 mJsonString=s;
                 showResult();
+                progressDialog.dismiss();
             }
 
         }
@@ -192,6 +238,8 @@ public class DetailActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String serverURL=params[0];
+
+
 
             try{
 
@@ -206,7 +254,7 @@ public class DetailActivity extends AppCompatActivity {
                 Log.d(TAG,"response code-"+responseStatusCode);
 
                 InputStream inputStream;
-                if(responseStatusCode==HttpURLConnection.HTTP_OK){
+                if(responseStatusCode== HttpURLConnection.HTTP_OK){
                     inputStream=httpURLConnection.getInputStream();
                 }else{
                     inputStream=httpURLConnection.getErrorStream();
@@ -222,6 +270,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
                 br.close();
+                Log.d(TAG,sb.toString());
                 return sb.toString().trim();
 
             }catch (Exception e){
@@ -237,86 +286,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }  //class Getdata
 
-    private void showResult(){
 
-
-    try{
-
-
-        JSONObject jsonObject=new JSONObject(mJsonString);
-        JSONArray jsonArray=jsonObject.getJSONArray(TAG_JSON);
-
-        Log.d("show", ""+ jsonArray.length());
-        for(int i=0;i<jsonArray.length();i++){
-
-
-            JSONObject item=jsonArray.getJSONObject(i);
-            Log.d("show",item.toString());
-            this.info=new Info(item);
-            String domain="http://matchingkak.com/";
-            imageView=(ImageView) findViewById(R.id.team_img);
-
-             Glide.with(this)
-                .load(domain+info.getString(Info.TM_IMG))
-                .into(imageView);
-
-
-
-
-        }
-    }catch(JSONException e){
-        Log.d(TAG,"showResult:",e);
-    }
-
-
-}
-
-     class Info{
-
-      static final String GM_NO= "gm_no";
-      static final String TM_NO="tm_no";
-      static final String GM_DATA="gm_date";
-      static final String GM_ADDR="gm_addr";
-      static final String GM_GYM="gm_gym";
-      static final String GM_STATE="gm_state";
-      static final String GM_MATCH_MBNO="gm_match_mbno";
-      static final String GM_GAME_TIME="gm_game_time";
-      static final String GM_WRITE_DATE="gm_write_date";
-      static final String GM_TITLE="gm_title";
-      static final String GM_IMG="gm_img";
-      static final String GM_COLOR="gm_color";
-      static final String GM_MEMO="gm_memo";
-      static final String MB_NICK="mb_nick";
-      static final String TM_NAME="tm_name";
-      static final String TM_INFO="tm_info";
-      static final String TM_MATCH_COUNT="tm_match_count";
-      static final String TM_SPORT="tm_sport";
-      static final String TM_IMG="tm_img";
-
-      private JSONObject item;
-    Info(JSONObject item){
-        this.item=item;
-        Log.d("info",item.toString());
-
-    }
-    String getString(String tag){
-
-        try {
-            return item.getString(tag);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-   public String toString(){
-
-        return item.toString();
-    }
-
-
-
-
-  }
 
 
 }

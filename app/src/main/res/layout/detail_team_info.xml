@@ -39,11 +39,13 @@
                 style="@style/primary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <TextView
-                android:text="카카오"
+                android:id="@+id/Detail_tm_name"
                 style="@style/secondary_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="카카오" />
         </LinearLayout>
 
 
@@ -58,11 +60,13 @@
                 style="@style/primary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <TextView
-                android:text="jacob"
+                android:id="@+id/Detail_mb_nick"
                 style="@style/secondary_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="jacob" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -84,11 +88,13 @@
                 style="@style/primary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <TextView
-                android:text="빨강"
+                android:id="@+id/Detail_gm_color"
                 style="@style/secondary_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="빨강" />
         </LinearLayout>
 
 
@@ -120,12 +126,14 @@
                 style="@style/primary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <TextView
-                android:text="100"
-                android:textColor="@color/pretty_red"
+                android:id="@+id/Detail_match_count"
                 style="@style/secondary_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textColor="@color/pretty_red" />
         </LinearLayout>
     </LinearLayout>
 

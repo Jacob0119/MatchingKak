@@ -44,6 +44,7 @@
                 android:text="경기 날짜" />
 
             <TextView
+                android:id="@+id/Detail_gm_date"
                 style="@style/secondary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,6 +68,7 @@
                 android:text="장소" />
 
             <TextView
+                android:id="@+id/Detail_gm_gym"
                 style="@style/secondary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,6 +157,7 @@
             android:text="기타 사항" />
 
         <TextView
+            android:id="@+id/Detail_gm_memo"
             style="@style/secondary_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
