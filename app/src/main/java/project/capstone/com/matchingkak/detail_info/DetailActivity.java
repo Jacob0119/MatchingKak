@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -25,16 +24,13 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import project.capstone.com.matchingkak.R;
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
     private static String TAG_JSON="Detail_Info";
@@ -62,7 +58,7 @@ public class DetailActivity extends AppCompatActivity {
 
         GetData task=new GetData();
         String gm_no=getIntent().getStringExtra("gm_no");
-        task.execute(TAG_URL+"?gm_no="+gm_no);
+        task.execute(gm_no);
         //getSupportActionBar().setTitle(info.getString(Info.GM_TITLE));
 
 
@@ -168,8 +164,8 @@ public class DetailActivity extends AppCompatActivity {
     private void showResult(){
 
 
-            Gson gson =new Gson();
-            Info info=gson.fromJson(mJsonString,Info.class );
+            //Gson gson =new Gson();
+          //  Info info=gson.fromJson(mJsonString,Info.class );
 
             String domain="http://matchingkak.com/";
 
@@ -223,20 +219,33 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-            if(s==null){
-
-
-            }
+                if(info!=null){
+                  showResult();
+                }
             else{
-                mJsonString=s;
-                showResult();
+
+                }
                 progressDialog.dismiss();
-            }
+
 
         }
 
         @Override
         protected String doInBackground(String... params) {
+           String gm_no=params[0];
+            Log.d("doIn",gm_no);
+         Call<Info> call=   DetailService.getRetrofit(DetailActivity.this).requestInfo(gm_no);
+
+            try {
+                Response<Info> response=call.execute();
+                info=response.body();
+                return response.body().toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+           /*
             String serverURL=params[0];
 
 
@@ -283,6 +292,8 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
+*/
+       return null;
         }
     }  //class Getdata
 

@@ -10,8 +10,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -23,16 +24,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-    
-        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity" android:label="OAuth2.0 In-app"/>
-
-
+        <activity
+            android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
+            android:label="OAuth2.0 In-app" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="937bc07ebdf5c1ccf379cb739a1b7ced" />
-
 
         <activity
             android:name=".SplashActivity"
@@ -63,6 +64,7 @@
         <activity android:name=".detail_info.DetailActivity" />
         <activity android:name=".sns_login.loginActivity" />
         <activity android:name=".sns_login.SuccessActivity" />
+        <activity android:name=".Main.Main2Activity"></activity>
     </application>
 
 </manifest>

@@ -11,7 +11,20 @@ import android.util.Log;
 
 import java.security.MessageDigest;
 
+import project.capstone.com.matchingkak.Main.Main2Activity;
+
 public class SplashActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        startActivity(new Intent(SplashActivity.this,Main2Activity.class));
+        finish();
+    }
+
+
     private void getAppKeyHash() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
@@ -26,13 +39,5 @@ public class SplashActivity extends AppCompatActivity {
             // TODO Auto-generated catch block
             Log.e("name not found", e.toString());
         }
-    }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        startActivity(new Intent(SplashActivity.this,MainActivity.class));
-        finish();
     }
 }

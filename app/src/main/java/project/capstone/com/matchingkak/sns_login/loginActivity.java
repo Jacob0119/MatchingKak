@@ -2,17 +2,14 @@ package project.capstone.com.matchingkak.sns_login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,17 +19,17 @@ import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 import com.nhn.android.naverlogin.OAuthLogin;
 
-import java.security.MessageDigest;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import project.capstone.com.matchingkak.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class loginActivity extends AppCompatActivity {
     Context mContext=loginActivity.this;
@@ -41,8 +38,10 @@ public class loginActivity extends AppCompatActivity {
     TextView user_nickname,user_email;
     CircleImageView user_img;
     LinearLayout success_layout;
-    Button logout_btn;
-    Button loginButton;
+
+    private Button login_btn;
+    private EditText login_email_edit,login_pass_edit;
+    private Button login_naver,login_kakao,login_facebook;
 
     AQuery aQuery;
 
@@ -51,7 +50,7 @@ public class loginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-
+        init();
 
         mOAuthLoginModule = OAuthLogin.getInstance();
         mOAuthLoginModule.init(
@@ -154,6 +153,50 @@ public class loginActivity extends AppCompatActivity {
 
     }
 
+    void init(){
+        login_email_edit=(EditText)findViewById(R.id.Login_email);
+        login_pass_edit=(EditText)findViewById(R.id.Login_pass);
+
+
+        login_btn=(Button)findViewById(R.id.Login_btn);
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(loginActivity.this,"로그인 시도",Toast.LENGTH_LONG).show();
+                //login http call
+                SignService.getRetrofit(getApplicationContext())
+                            .in(login_email_edit.getText().toString()
+                                    ,login_pass_edit.getText().toString())
+                            .enqueue(new Callback<ResData>() {
+                                @Override
+                                public void onResponse(Call<ResData> call, Response<ResData> response) {
+                                    if(response.body().res) {
+                                        Toast.makeText(loginActivity.this, response.body().res+"", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(loginActivity.this, response.body().res+"", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResData> call, Throwable t) {
+
+                                }
+                            });
+
+            }
+        });
+
+
+
+        login_naver=(Button)findViewById(R.id.Login_naver);
+        login_kakao=(Button)findViewById(R.id.Login_kakao);
+        login_facebook=(Button)findViewById(R.id.Login_facebook);
+
+    }
+
 
     //인터넷 연결상태 확인
     public boolean isConnected() {
@@ -194,25 +237,11 @@ public class loginActivity extends AppCompatActivity {
         }
     }
 
-    private void requestLogout() {
-        success_layout.setVisibility(View.GONE);
-        loginButton.setVisibility(View.VISIBLE);
-        UserManagement.requestLogout(new LogoutResponseCallback() {
-            @Override
-            public void onCompleteLogout() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(loginActivity.this, "로그아웃 성공", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
+
 
     private void requestMe() {
         success_layout.setVisibility(View.VISIBLE);
-        loginButton.setVisibility(View.GONE);
+        //loginButton.setVisibility(View.GONE);
 
         UserManagement.requestMe(new MeResponseCallback() {
             @Override
@@ -252,19 +281,4 @@ public class loginActivity extends AppCompatActivity {
 
 
 
-    private void getAppKeyHash() {
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                String something = new String(Base64.encode(md.digest(), 0));
-                Log.d("Hash key", something);
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            Log.e("name not found", e.toString());
-        }
-    }
 }

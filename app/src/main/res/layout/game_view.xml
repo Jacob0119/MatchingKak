@@ -15,31 +15,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/sumnail"
+        android:id="@+id/game_view_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:srcCompat="@drawable/login_bh" />
                     <LinearLayout
 
                         android:orientation="vertical"
-                        android:layout_alignBottom="@id/sumnail"
+                        android:layout_alignBottom="@id/game_view_image"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                    <TextView
+
+                        <TextView
 
 
-                        style="@style/secondary_text"
-                        android:gravity="left"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="제목"/>
-                    <TextView
-                        style="@style/secondary_text"
-                        android:gravity="left"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="팀 명 "/>
+                            android:id="@+id/game_view_title"
+                            style="@style/secondary_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="제목" />
+
+                        <TextView
+                            android:id="@+id/game_view_team"
+                            style="@style/secondary_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="팀 명 " />
                     </LinearLayout>
 
 
@@ -62,12 +66,14 @@
                         android:src="@drawable/calendar"
                         android:layout_width="20dp"
                         android:layout_height="20dp" />
-                <TextView
-                    style="@style/secondary_text_small"
-                    android:textColor="@color/pretty_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2017/4/23"/>
+
+                    <TextView
+                        android:id="@+id/game_view_date"
+                        style="@style/secondary_text_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2017/4/23"
+                        android:textColor="@color/pretty_red" />
 
                 </LinearLayout>
 
@@ -83,20 +89,24 @@
                         android:src="@drawable/location"
                         android:layout_width="20dp"
                         android:layout_height="20dp" />
+
                     <TextView
+                        android:id="@+id/game_view_location"
                         style="@style/secondary_text_small"
-                        android:textColor="@color/primary_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="서울특별시 종로구"/>
+                        android:text="서울특별시 종로구"
+                        android:textColor="@color/primary_text" />
 
                 </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+
     <ImageView
+        android:id="@+id/game_view_state"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@color/transparent_black"
         android:padding="10dp"
-        android:src="@drawable/like"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:src="@drawable/like" />
 </android.support.v7.widget.CardView>
