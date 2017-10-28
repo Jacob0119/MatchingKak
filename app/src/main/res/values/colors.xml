@@ -7,9 +7,9 @@
     <color name="white">#FFFFFF</color>
     <color name="bottombar_main">#ffffff</color>
     <color name="bottombar_icon">#757575</color>
-    <color name="pure_gray">#F0F0F0</color>
+    <color name="pure_gray">#ececec</color>
     <color name="noti_color">#c7ffd102</color>
-
+    <color name="noti_back_ok">#FFBA80</color>
     <color name="border_color">#b7b7b7</color>
     <color name="primary_text">#4D4D4D</color>
     <color name="secondary_text">#b7b7b7</color>

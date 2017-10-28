@@ -243,9 +243,9 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
 
         public View game_view;
-        private TextView teamName,date,location,title;
+        private TextView teamName,date,location,title,state_text;
         private ImageView teamLogo,state;
-
+         private TextView sport;
 
 
 
@@ -257,12 +257,12 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             date        =(TextView)v.findViewById(R.id.game_view_date);
             location    =(TextView)v.findViewById(R.id.game_view_location);
             title       =(TextView)v.findViewById(R.id.game_view_title);
-
+            sport       =(TextView)v.findViewById(R.id.game_view_sport);
             teamLogo    =(ImageView)v.findViewById(R.id.game_view_image);
 
 
-            state       =(ImageView)v.findViewById(R.id.game_view_state);
-
+            state       =(ImageView)v.findViewById(R.id.game_view_state_img);
+            state_text =(TextView)v.findViewById(R.id.game_view_state_text );
         }
 
 
@@ -302,9 +302,18 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
         holder.title.setText(datum.getGmTitle());
         holder.date.setText(datum.getGmDate());
         holder.location.setText(datum.getGmGym());
-
+        holder.sport.setText(datum.getTmSport());
         RequestOptions options=new RequestOptions();
 
+        if(datum.getGmState().equals("0"))//성사대기
+        {
+            holder.state.setImageDrawable(context.getDrawable(R.drawable.wait));
+            holder.state_text.setText("요청가능");
+
+        }else{
+            holder.state.setImageDrawable(context.getDrawable(R.drawable.check));
+            holder.state_text.setText("성사완료");
+        }
         Glide.with(context)
 
                 .load(APIUrl.API_BASE_URL+datum.getTmImg())

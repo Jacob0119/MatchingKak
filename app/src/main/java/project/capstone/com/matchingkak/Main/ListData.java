@@ -3,9 +3,9 @@ package project.capstone.com.matchingkak.Main;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
  class Datum {
@@ -76,7 +76,18 @@ import java.util.List;
     }
 
     public String getGmDate() {
-        return gmDate;
+
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = null;
+        try {
+            date = dt.parse(gmDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd");
+
+
+        return dt1.format(date);
     }
 
     public void setGmDate(String gmDate) {
