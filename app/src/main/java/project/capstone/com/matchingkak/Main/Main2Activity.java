@@ -103,19 +103,26 @@ public class Main2Activity extends AppCompatActivity {
  class MyAdapter extends  RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
 
+
     private List<Datum> mDataset;
 
      private Context context;
-    public static class ViewHolder extends  RecyclerView.ViewHolder{
+
+
+     public static class ViewHolder extends  RecyclerView.ViewHolder{
+
 
         public View game_view;
         private TextView teamName,date,location,title;
         private ImageView teamLogo,state;
 
+
+
+
         public ViewHolder(View v){
 
             super(v);
-
+            this.game_view=v;
             teamName    =(TextView)v.findViewById(R.id.game_view_team);
             date        =(TextView)v.findViewById(R.id.game_view_date);
             location    =(TextView)v.findViewById(R.id.game_view_location);
@@ -157,6 +164,8 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+
+
         Datum datum=mDataset.get(position);
 
         holder.teamName.setText(datum.getTmName());
@@ -183,3 +192,12 @@ public class Main2Activity extends AppCompatActivity {
 
 
 }
+
+public class RecyclerViewOnItemClickListener extends RecyclerView.SimpleOnItemTouchListener {
+
+
+
+
+
+}
+
