@@ -5,6 +5,7 @@ package project.capstone.com.matchingkak.restAPI;
  */
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -43,6 +44,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
             // 쿠키 값을 읽어옴
             for (String header : response.headers("Set-Cookie")) {
                 cookies.add(header);
+                Log.d("Intercept",header);
             }
 
             // 쿠키 값을 CookieSharedPreferences에 저장
