@@ -3,7 +3,9 @@ package project.capstone.com.matchingkak.restAPI;
 /**
  * Created by Lee on 2017-10-27.
  */
+
 import android.content.Context;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -45,6 +47,7 @@ public class AddCookiesInterceptor implements Interceptor {
         // 빌더 헤더 영역에 쿠키 값 추가
         for (String cookie : cookies) {
             builder.addHeader("Cookie", cookie);
+            Log.d("add Intercept",cookie);
         }
 
         // 체인에 빌더를 적용 및 반환
