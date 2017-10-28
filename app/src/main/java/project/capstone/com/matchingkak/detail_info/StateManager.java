@@ -1,6 +1,7 @@
 package project.capstone.com.matchingkak.detail_info;
 
 import android.content.Context;
+import android.widget.Button;
 
 /**
  * Created by Lee on 2017-10-28.
@@ -9,41 +10,47 @@ import android.content.Context;
 public class StateManager {
 
     static private StateManager instance;
-    static public final int STATE_NOT_LOGIN=0;
-    static public final int STATE_MINE=1;
-    static public final int STATE_NOT_MINE=2;
-
+   public static final int STATE_ALERT=0;
+    public static final int STATE_MINE=1;
+    public static final int STATE_NORMAL=2;
+    public static final int STATE_COMPLETE=3;
     static State state;
      Context context;
-    static public StateManager getInstance(Context context){
+    static public StateManager getInstance(){
 
         if(instance==null){
 
-            instance=new StateManager(context);
+            instance=new StateManager();
         }
         return instance;
 
     }
 
-    StateManager(Context context){
-    this.context=context;
-}
+        public void setBtn(Button b){
+            state.setSubmitButton(b);
+        }
 
-    public  State getState(int stateCode,Info info){
+
+
+    public  void setState(int stateCode,Info info,Context context){
         switch (stateCode){
 
             case STATE_MINE:
-                state=MineState.getInstance(context);
+                state=new MineState(context );
                  break;
-            case STATE_NOT_LOGIN:
-                state=NotLoginState.getInstance(context);
+            case STATE_ALERT:
+                state= new AlertState(context,info);
                 break;
-            case STATE_NOT_MINE:
-                state=NormalState.getInstance(context,info);
+            case STATE_NORMAL:
+                state=new NormalState(context,info);
                 break;
+            case STATE_COMPLETE:
+                state=new MineState(context);
+                break;
+
         }
 
-        return state;
+
 
     }
 

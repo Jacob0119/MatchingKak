@@ -43,13 +43,13 @@ public class DetailActivity extends AppCompatActivity {
     ImageView imageView;
     private MapView mMapView;
     private State state;
-
+    private StateManager stateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
+        stateManager=StateManager.getInstance();
 
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.detail_toolbar);
@@ -169,31 +169,34 @@ public class DetailActivity extends AppCompatActivity {
           //  Info info=gson.fromJson(mJsonString,Info.class );
 
         String domain="http://matchingkak.com/";
-
+        int btnState=Integer.parseInt(info.getBtnState().getBtnState());
+        Log.d("btnState",btnState+"");
+        stateManager.setState(btnState,info,this);
         Button submit=(Button) findViewById(R.id.Detail_submit_btn);
-        state.setSubmitButton(submit);
+        stateManager.setBtn(submit);
+
 
         TextView gm_memo=(TextView) findViewById(R.id.Detail_gm_memo);
-        gm_memo.setText(info.getGm_memo());
+        gm_memo.setText(info.getGmMemo());
         TextView gm_date=(TextView )findViewById(R.id.Detail_gm_date );
-        gm_date.setText(info.getGm_date());
+        gm_date.setText(info.getGmDate());
         TextView gm_gym=(TextView)findViewById(R.id.Detail_gm_gym);
-        gm_gym.setText(info.getGm_gym());
+        gm_gym.setText(info.getGmGym());
         TextView gm_color=(TextView)findViewById(R.id.Detail_gm_color);
-        gm_color.setText(info.getGm_color());
+        gm_color.setText(info.getGmColor());
         TextView tm_name=(TextView)findViewById(R.id.Detail_tm_name);
-        tm_name.setText(info.getTm_name());
+        tm_name.setText(info.getTmName());
         TextView mb_nick=(TextView)findViewById(R.id.Detail_mb_nick);
-        mb_nick.setText(info.getMb_nick());
+        mb_nick.setText(info.getMbNick());
         TextView match_count=(TextView)findViewById(R.id.Detail_match_count);
-        match_count.setText(info.getTm_match_count());
+        match_count.setText(info.getTmMatchCount());
 
         imageView=(ImageView) findViewById(R.id.Detail_team_img);
              Glide.with(this)
-                .load(domain+info.getTm_img())
+                .load(domain+info.getTmImg())
                 .into(imageView);
 
-        initMap(info.getGm_addr());
+        initMap(info.getGmAddr());
 
 
 
@@ -220,7 +223,7 @@ public class DetailActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            state=StateManager.getInstance(DetailActivity.this).getState(StateManager.STATE_NOT_MINE,info);
+
 
 
                 if(info!=null){

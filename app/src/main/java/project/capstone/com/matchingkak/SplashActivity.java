@@ -12,6 +12,7 @@ import android.util.Log;
 import java.security.MessageDigest;
 
 import project.capstone.com.matchingkak.Main.Main2Activity;
+import project.capstone.com.matchingkak.sns_login.loginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,8 +20,14 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(SharedPreferencesManager.getInstanceOf(this).getLoginState()){
 
-        startActivity(new Intent(SplashActivity.this,Main2Activity.class));
+            startActivity(new Intent(SplashActivity.this,Main2Activity.class));
+        }else{
+
+            startActivity(new Intent(SplashActivity.this,loginActivity.class));
+        }
+
         finish();
     }
 

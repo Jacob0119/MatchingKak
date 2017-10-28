@@ -6,6 +6,7 @@ import project.capstone.com.matchingkak.restAPI.APIAdapter;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -33,6 +34,10 @@ public class MainListService extends APIAdapter {
         Call<ListData> paging(
                 @Query("page") int page
         );
+
+        @POST(APIUrl.LOG_OUT_URL)
+        Call<Boolean> logout();
+
 
 
 

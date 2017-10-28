@@ -11,6 +11,7 @@
     tools:context="project.capstone.com.matchingkak.Main.Main2Activity"
     >
     <LinearLayout
+        android:id="@+id/main_parent"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -39,6 +40,11 @@
 
 
             />
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/main"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize" />
 
     </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -51,18 +57,32 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:layout_above="@+id/main_progress"
+                android:background="@color/pure_gray"
+                android:layout_alignParentStart="true"
             android:id="@+id/main_recyler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
             <ProgressBar
-                android:layout_alignParentBottom="true"
+                android:layout_above="@+id/main_bottom_nav"
                 android:id="@+id/main_progress"
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />
+            <android.support.design.widget.BottomNavigationView
+                android:background="@color/pure_gray"
+
+                android:id="@+id/main_bottom_nav"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                app:menu="@menu/bottom_nav_menu"
+                app:itemIconTint="@drawable/nav_item_color_state"
+                app:itemTextColor="@drawable/nav_item_color_state"
+                android:layout_height="?attr/actionBarSize"/>
         </RelativeLayout>
 
     </LinearLayout>
+
 <include layout="@layout/main_drawer"/>
+
+
 </android.support.v4.widget.DrawerLayout>

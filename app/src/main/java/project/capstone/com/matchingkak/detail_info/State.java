@@ -2,6 +2,8 @@ package project.capstone.com.matchingkak.detail_info;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -58,31 +60,46 @@ class MineState implements State{
 
 
 
-class NotLoginState implements State{
+class AlertState implements State{
 
 
 
-    private static  NotLoginState instance;
+    private static AlertState instance;
 
     Context context;
-    static NotLoginState getInstance(Context context){
+    Info info;
+    static AlertState getInstance(Context context,Info info){
        if(instance==null){
-           instance=new NotLoginState(context);
+           instance=new AlertState(context,info);
 
        }
         return instance;
 
     }
-    public NotLoginState(Context context){
+    public AlertState(Context context){
         this.context=context;
     }
 
+    public AlertState(Context context, Info info){
+        this(context);
+        this.info=info;
+    }
     @TargetApi(23)
     @Override
     public void setSubmitButton(Button button) {
         if(button!=null&&this.context!=null) {
-            button.setText("로그인이 필요합니다.");
-            button.setBackgroundColor(context.getColor(R.color.colorPrimary_light));
+
+            button.setText(info.getBtnState().getContent());
+
+            button.setBackgroundColor(context.getColor(R.color.pretty_red));
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    show(info.getBtnState().getMsg());
+                }
+            });
+
         }
 
 
@@ -91,6 +108,26 @@ class NotLoginState implements State{
     @Override
     public void setMessageButton(Button button) {
 
+    }
+
+    void show(String msg)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("죄송합니다.");
+        builder.setMessage(msg);
+        builder.setPositiveButton("확인",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context,"예를 선택했습니다.",Toast.LENGTH_LONG).show();
+                    }
+                });
+     /*   builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context,"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
+                    }
+                });*/
+        builder.show();
     }
 }
 
@@ -127,7 +164,7 @@ class NormalState implements State{
                 @Override
                 public void onClick(View view) {
 
-                   DetailService.getRetrofit(context).requestMatch(info.getGm_no()).enqueue(new Callback<RequestResult>() {
+                   DetailService.getRetrofit(context).requestMatch(info.getGmNo()).enqueue(new Callback<RequestResult>() {
                       @Override
                       public void onResponse(Call<RequestResult> call, Response<RequestResult> response) {
 

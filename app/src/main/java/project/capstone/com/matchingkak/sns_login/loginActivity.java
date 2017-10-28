@@ -26,6 +26,7 @@ import com.kakao.util.helper.log.Logger;
 import com.nhn.android.naverlogin.OAuthLogin;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import project.capstone.com.matchingkak.Main.Main2Activity;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.SharedPreferencesManager;
 import retrofit2.Call;
@@ -175,6 +176,9 @@ public class loginActivity extends AppCompatActivity {
                                     if(response.body().res) {
                                         Toast.makeText(loginActivity.this, response.body().res+"", Toast.LENGTH_LONG).show();
                                         SharedPreferencesManager.getInstanceOf(loginActivity.this).setLoginState(response.body().res);
+                                        Intent intent=new Intent(loginActivity.this, Main2Activity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }else{
                                         Toast.makeText(loginActivity.this, response.body().res+"", Toast.LENGTH_LONG).show();
 
