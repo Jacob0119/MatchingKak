@@ -27,6 +27,7 @@ import com.nhn.android.naverlogin.OAuthLogin;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.SharedPreferencesManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -173,6 +174,7 @@ public class loginActivity extends AppCompatActivity {
                                 public void onResponse(Call<ResData> call, Response<ResData> response) {
                                     if(response.body().res) {
                                         Toast.makeText(loginActivity.this, response.body().res+"", Toast.LENGTH_LONG).show();
+                                        SharedPreferencesManager.getInstanceOf(loginActivity.this).setLoginState(response.body().res);
                                     }else{
                                         Toast.makeText(loginActivity.this, response.body().res+"", Toast.LENGTH_LONG).show();
 

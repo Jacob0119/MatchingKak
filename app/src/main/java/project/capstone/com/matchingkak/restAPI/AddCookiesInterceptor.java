@@ -13,6 +13,7 @@ import java.util.HashSet;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+import project.capstone.com.matchingkak.SharedPreferencesManager;
 
 /**
  * AddCookiesInterceptor 클래스
@@ -21,7 +22,7 @@ import okhttp3.Response;
  */
 public class AddCookiesInterceptor implements Interceptor {
     // CookieSharedReferences 객체
-    private CookieSharedPreferences cookieSharedPreferences;
+    private SharedPreferencesManager cookieSharedPreferences;
 
     /**
      * 생성자
@@ -30,7 +31,7 @@ public class AddCookiesInterceptor implements Interceptor {
      */
     public AddCookiesInterceptor(Context context){
         // CookieSharedReferences 객체 초기화
-        cookieSharedPreferences = CookieSharedPreferences.getInstanceOf(context);
+        cookieSharedPreferences = SharedPreferencesManager.getInstanceOf(context);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class AddCookiesInterceptor implements Interceptor {
 
         // CookieSharedPreferences에 저장되어있는 쿠키 값을 가져옴
         HashSet<String> cookies = (HashSet) cookieSharedPreferences.getHashSet(
-                CookieSharedPreferences.COOKIE_SHARED_PREFERENCES_KEY,
+                SharedPreferencesManager.COOKIE_SHARED_PREFERENCES_KEY,
                 new HashSet<String>()
         );
 

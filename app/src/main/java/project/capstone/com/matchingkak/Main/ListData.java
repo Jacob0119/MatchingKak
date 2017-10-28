@@ -107,6 +107,9 @@ public class ListData {
     @SerializedName("response")
     @Expose
     private String response;
+    @SerializedName("isLogin")
+    @Expose
+    private boolean isLogin;
     @SerializedName("page")
     @Expose
     private String page;
@@ -121,6 +124,10 @@ public class ListData {
     public void setResponse(String response) {
         this.response = response;
     }
+
+    public boolean getIsLogin(){return isLogin;}
+
+    public void setIsLogin(boolean isLogin){this.isLogin=isLogin;}
 
     public String getPage() {
         return page;

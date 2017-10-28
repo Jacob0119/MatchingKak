@@ -10,6 +10,6 @@ public class APIUrl {
     public static final String MAIN_URL="mobile/main.php";
     public static final String LOG_IN_URL="mobile/login.php";
     public static final String DETAIL_URL="mobile/detail.php";
-
+    public static final String REQUEST_MATCH_URL="mobile/request_match.php";
 
 }
