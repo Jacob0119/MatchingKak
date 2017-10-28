@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class DetailActivity extends AppCompatActivity {
     private static  Info info;
     ImageView imageView;
     private MapView mMapView;
-
+    private State state;
 
 
     @Override
@@ -167,7 +168,10 @@ public class DetailActivity extends AppCompatActivity {
             //Gson gson =new Gson();
           //  Info info=gson.fromJson(mJsonString,Info.class );
 
-            String domain="http://matchingkak.com/";
+        String domain="http://matchingkak.com/";
+
+        Button submit=(Button) findViewById(R.id.Detail_submit_btn);
+        state.setSubmitButton(submit);
 
         TextView gm_memo=(TextView) findViewById(R.id.Detail_gm_memo);
         gm_memo.setText(info.getGm_memo());
@@ -216,7 +220,7 @@ public class DetailActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-
+            state=StateManager.getInstance(DetailActivity.this).getState(StateManager.STATE_NOT_MINE,info);
 
 
                 if(info!=null){

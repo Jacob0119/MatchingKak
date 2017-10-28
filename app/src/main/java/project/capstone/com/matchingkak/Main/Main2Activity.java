@@ -52,6 +52,9 @@ public class Main2Activity extends AppCompatActivity {
         getData(page);
         init();
 
+        //Toast.makeText(this,"Login state:"+ SharedPreferencesManager.getInstanceOf(this).getLoginState()+"",Toast.LENGTH_SHORT).show();
+
+
 
 
     }
@@ -65,6 +68,7 @@ public class Main2Activity extends AppCompatActivity {
                     public void onResponse(Call<ListData> call, Response<ListData> response) {
                         if(response.isSuccessful()) {
 
+                            Toast.makeText(Main2Activity.this,response.body().getIsLogin()+"",Toast.LENGTH_SHORT).show();
                             list.addAll(response.body().getData());
                             mAdapter.notifyDataSetChanged();
                             mProgress.stopNestedScroll();
@@ -242,11 +246,4 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
 }
 
-public class RecyclerViewOnItemClickListener extends RecyclerView.SimpleOnItemTouchListener {
-
-
-
-
-
-}
 

@@ -5,7 +5,10 @@ import android.content.Context;
 import project.capstone.com.matchingkak.restAPI.APIAdapter;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -32,6 +35,12 @@ public class DetailService extends APIAdapter {
         @GET(APIUrl.DETAIL_URL)
         Call<Info> requestInfo(
                 @Query("gm_no") String gm_no
+
+        );
+        @FormUrlEncoded
+        @POST(APIUrl.REQUEST_MATCH_URL)
+        Call<RequestResult> requestMatch(
+                            @Field("gm_no") String gm_no
 
         );
 

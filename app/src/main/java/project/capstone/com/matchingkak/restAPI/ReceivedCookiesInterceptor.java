@@ -12,6 +12,7 @@ import java.util.HashSet;
 
 import okhttp3.Interceptor;
 import okhttp3.Response;
+import project.capstone.com.matchingkak.SharedPreferencesManager;
 
 /**
  * ReceivedCookiesInterceptor 클래스
@@ -20,7 +21,7 @@ import okhttp3.Response;
  */
 public class ReceivedCookiesInterceptor implements Interceptor {
     // CookieSharedReferences 객체
-    private CookieSharedPreferences cookieSharedPreferences;
+    private SharedPreferencesManager cookieSharedPreferences;
 
     /**
      * 생성자
@@ -29,7 +30,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
      */
     public ReceivedCookiesInterceptor(Context context){
         // CookieSharedReferences 객체 초기화
-        cookieSharedPreferences = CookieSharedPreferences.getInstanceOf(context);
+        cookieSharedPreferences = SharedPreferencesManager.getInstanceOf(context);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
             }
 
             // 쿠키 값을 CookieSharedPreferences에 저장
-            cookieSharedPreferences.putHashSet(CookieSharedPreferences.COOKIE_SHARED_PREFERENCES_KEY, cookies);
+            cookieSharedPreferences.putHashSet(SharedPreferencesManager.COOKIE_SHARED_PREFERENCES_KEY, cookies);
         }
 
         // 리스폰스 객체 반환
