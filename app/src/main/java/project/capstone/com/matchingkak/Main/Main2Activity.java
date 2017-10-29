@@ -142,7 +142,7 @@ public class Main2Activity extends AppCompatActivity {
 
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
+       getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close)
        {
            @Override

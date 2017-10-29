@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
+
+    android:layout_margin="5dp"
     android:background="@drawable/layout_view_bg"
     android:layout_marginBottom="1dp"
    >
@@ -27,7 +28,9 @@
         android:paddingBottom="1dp"
         app:srcCompat="@drawable/login_bh" />
     <LinearLayout
-
+   android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -38,9 +41,8 @@
             android:id="@+id/game_view_sport"
             android:text="농구"
             android:textStyle="bold"
-            android:textColor="@color/primary_text"
-
-            android:layout_marginLeft="10dp"
+            style="@style/primary_text"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             android:layout_width="55dp"
             android:layout_height="55dp"
@@ -54,43 +56,37 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <TextView
+            <TextView
 
-                            android:layout_weight="1"
-                            android:id="@+id/game_view_title"
-                            style="@style/primary_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="left|center_vertical"
-                            android:text="제목" />
+                android:id="@+id/game_view_title"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="제목" />
 
-                        <TextView
-                            android:layout_weight="1"
-                            android:id="@+id/game_view_team"
-                            style="@style/secondary_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:text="팀 명 " />
-
-                    </LinearLayout>
+            <LinearLayout
 
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:paddingLeft="10dp"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/game_view_team"
+                    style="@style/secondary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="팀 명 " />
                 <LinearLayout
                     android:gravity="center_vertical|right"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
 
@@ -102,21 +98,29 @@
                         android:text="서울특별시 종로구"
                         android:textColor="@color/primary_text" />
 
-            <TextView
-                android:id="@+id/game_view_date"
-                style="@style/secondary_text_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2017/4/23"
-                android:textColor="@color/pretty_red" />
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/game_view_date"
+                        style="@style/secondary_text_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2017/4/23"
+                        android:textColor="@color/pretty_red" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+                    </LinearLayout>
+
+
     </LinearLayout>
+
 </LinearLayout>
 
 
     <LinearLayout
     android:gravity="center"
-    android:background="@color/transparent_black"
+    android:background="@color/transparent_white"
     android:orientation="vertical"
     android:layout_width="60dp"
     android:layout_height="60dp">
@@ -131,7 +135,7 @@
                 android:id="@+id/game_view_state_text"
                 android:paddingBottom="5dp"
                 android:gravity="center"
-                android:textColor="@color/white"
+             android:textColor="@color/primary_text"
                 android:textSize="10dp"
                 android:text="성사완료"
                 android:layout_width="50dp"
