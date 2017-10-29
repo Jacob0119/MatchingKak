@@ -57,7 +57,7 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:background="@color/pure_gray"
+                android:background="@drawable/login_bh"
                 android:layout_alignParentStart="true"
             android:id="@+id/main_recyler"
             android:layout_width="match_parent"
