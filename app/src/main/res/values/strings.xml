@@ -3,7 +3,8 @@
     <string name="text_back">Back</string>
     <string name="text_wirte">Write</string>
     <string name="text_message">Message</string>
-<string name="open">open</string>
+    <string name="open">open</string>
     <string name="close">close</string>
     <string name="kakao_app_key">937bc07ebdf5c1ccf379cb739a1b7ced</string>
+    <string name="send">Send</string>
 </resources>

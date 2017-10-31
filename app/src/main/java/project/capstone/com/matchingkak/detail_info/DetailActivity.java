@@ -2,6 +2,7 @@ package project.capstone.com.matchingkak.detail_info;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.Message.Message2Activity;
 import project.capstone.com.matchingkak.R;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -147,6 +149,9 @@ public class DetailActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.detail_message:
+                Intent intent=new Intent(this,Message2Activity.class);
+                intent.putExtra("mb_nick",info.getMbNick());
+                startActivity(intent);
                 Toast.makeText(this,"message",Toast.LENGTH_LONG).show();
                 break;
         }

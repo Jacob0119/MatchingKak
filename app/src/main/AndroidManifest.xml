@@ -64,7 +64,8 @@
         <activity android:name=".detail_info.DetailActivity" />
         <activity android:name=".sns_login.loginActivity" />
         <activity android:name=".sns_login.SuccessActivity" />
-        <activity android:name=".Main.Main2Activity"></activity>
+        <activity android:name=".Main.Main2Activity" />
+        <activity android:name=".Message.Message2Activity"></activity>
     </application>
 
 </manifest>

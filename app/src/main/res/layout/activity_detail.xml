@@ -87,26 +87,24 @@
 
         android:orientation="horizontal"
        android:layout_width="match_parent"
-       android:layout_height="60dp">
+       android:layout_height="@dimen/btn_height">
 
 
         <Button
             android:id="@+id/Detail_submit_btn"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/btn_height"
             android:layout_gravity="center"
             android:layout_weight="8"
             android:background="#69A098"
             android:text="submit"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            style="@style/btn_Text_white" />
 
         <ToggleButton
 
             android:id="@+id/toggleButton2"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/btn_height"
             android:layout_gravity="center"
             android:background="@drawable/btn_favorite_bg"
             android:textOff=""
