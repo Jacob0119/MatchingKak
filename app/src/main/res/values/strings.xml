@@ -7,4 +7,7 @@
     <string name="close">close</string>
     <string name="kakao_app_key">937bc07ebdf5c1ccf379cb739a1b7ced</string>
     <string name="send">Send</string>
+    <string name="facebook_app_id">119527265352902</string>
+    <string name="fb_login_protocol_scheme">fb119527265352902</string>
+
 </resources>

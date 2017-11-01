@@ -157,3 +157,10 @@ public class ListData {
     }
 
 }
+
+
+class ImageList{
+
+    List <String> images;
+
+}

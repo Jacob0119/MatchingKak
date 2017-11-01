@@ -48,7 +48,8 @@ public class SignService extends APIAdapter {
         @POST(APIUrl.LOG_IN_URL)
         Call<ResData> in(
                 @Field("mail") String email,
-                @Field("pw") String pw
+                @Field("pw") String pw,
+                @Field("mb_token") String token
         );
 
 

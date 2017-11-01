@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,16 +51,21 @@ public class Main2Activity extends AppCompatActivity {
     private MyAdapter mAdapter;
     private ProgressBar mProgress;
     private Button login_btn,logout_btn,close_drawer_btn;
+    private ViewPager pager;
+    private  pagerAdapter pAdapter;
     private LinearLayout main_parent; SwipeRefreshLayout swipeRefreshLayout;
-    ArrayList<Datum> list=new ArrayList<Datum>();
+    NestedScrollView nestedScrollView;
+
     static int page=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        mProgress=(ProgressBar)findViewById(R.id.main_progress);
+        mProgress=findViewById(R.id.main_progress);
         getData(page,false);
         init();
+
+
 
         //Toast.makeText(this,"Login state:"+ SharedPreferencesManager.getInstanceOf(this).getLoginState()+"",Toast.LENGTH_SHORT).show();
 
@@ -72,6 +79,22 @@ public class Main2Activity extends AppCompatActivity {
             mProgress.setVisibility(View.VISIBLE);
             mProgress.startNestedScroll(3);
         }
+
+      MainListService.getRetrofit(this).getBanner()
+                .enqueue(new Callback<List<String>>() {
+                    @Override
+                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                        Log.d("Main2Activity",response.code()+"");
+                        pAdapter.setList(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<String>> call, Throwable t) {
+                        Log.d("Main2Activity",t.toString());
+
+                    }
+                });
+
 
         MainListService.getRetrofit(this).paging(page)
                 .enqueue(new Callback<ListData>() {
@@ -88,7 +111,7 @@ public class Main2Activity extends AppCompatActivity {
                                 mProgress.setVisibility(View.GONE);
                             }
 
-                            mAdapter.notifyDataSetChanged();
+
 
                         }
 
@@ -106,6 +129,10 @@ public class Main2Activity extends AppCompatActivity {
 
    void init(){
 
+
+       pAdapter=new pagerAdapter(this);
+       pager =findViewById(R.id.main_view_pager);
+       pager.setAdapter(pAdapter);
        swipeRefreshLayout=findViewById(R.id.main_swipe_refresh);
        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
            @Override
@@ -126,13 +153,10 @@ public class Main2Activity extends AppCompatActivity {
               switch (item.getItemId()){
 
                   case R.id.b_nav_1:
-                 //     Snackbar.make(mRecyclerView,"1",Snackbar.LENGTH_SHORT).show();
                       break;
                   case R.id.b_nav_2:
-                    //  Snackbar.make(mRecyclerView,"3",Snackbar.LENGTH_SHORT).show();
                       break;
                   case R.id.b_nav_3:
-                    //  Snackbar.make(mRecyclerView,"3",Snackbar.LENGTH_SHORT).show();
                       break;
               }
               return true;
@@ -141,7 +165,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-       close_drawer_btn=(Button)findViewById(R.id.drawer_close_btn);
+       close_drawer_btn=findViewById(R.id.drawer_close_btn);
        close_drawer_btn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -151,35 +175,20 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-       mDrawer=(RelativeLayout)findViewById(R.id.main_drawer);
-       mDrawerLayout=(DrawerLayout)findViewById(R.id.main_drawerLayout);
+       mDrawer=findViewById(R.id.main_drawer);
+       mDrawerLayout=findViewById(R.id.main_drawerLayout);
 
 
-       main_parent=(LinearLayout) findViewById(R.id.main_parent);
+       main_parent= findViewById(R.id.main_parent);
 
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-       ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close)
-       {
-           @Override
-           public void onDrawerClosed(View drawerView) {
-               super.onDrawerClosed(drawerView);
-               invalidateOptionsMenu();
-           }
+       ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close);
 
-           @Override
-           public void onDrawerOpened(View drawerView) {
-               super.onDrawerOpened(drawerView);
-               mRecyclerView.setClickable(false);
-               mRecyclerView.setEnabled(false);
-               Log.d("d","open");
-               invalidateOptionsMenu();
-           }
-       };
 
        mDrawerLayout.addDrawerListener(toggle);
-       logout_btn=(Button)findViewById(R.id.main_logout_btn);
+       logout_btn=findViewById(R.id.main_logout_btn);
        logout_btn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(final View v) {
@@ -206,18 +215,20 @@ public class Main2Activity extends AppCompatActivity {
        });
 
 
-       mRecyclerView=(RecyclerView )findViewById(R.id.main_recyler);
-       mAdapter=new MyAdapter(this,list);
+       mRecyclerView=findViewById(R.id.main_recyler);
+       mRecyclerView.setNestedScrollingEnabled(false);
+       mAdapter=new MyAdapter(this);
+
        this.mLayoutManager=new LinearLayoutManager(this);
+       mLayoutManager.setAutoMeasureEnabled(true);
        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
+        mRecyclerView.setHasFixedSize(false);
 mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
     @Override
     public void onItemClick(View view, int position) {
-      //  Toast.makeText(getApplicationContext(),position+"번 째 아이템 클릭",Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(Main2Activity.this, DetailActivity.class);
-        intent.putExtra("gm_no",list.get(position).getGmNo());
+        intent.putExtra("gm_no",mAdapter.getItem(position).getGmNo());
         startActivity(intent);
     }
 
@@ -226,11 +237,20 @@ mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicatio
 
     }
 }));
+
+       /*
 mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        if(dy>0){
+        LinearLayoutManager linearManager=
+                (LinearLayoutManager)recyclerView.getLayoutManager();
+
+        int totalItemCount=linearManager.getItemCount();
+        int lastVisibleItem=linearManager.findLastVisibleItemPosition();
+
+        Log.d("onScroll","total"+totalItemCount+"::item"+lastVisibleItem);
+        if(totalItemCount<=lastVisibleItem){
             if(!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN))
                 getData(++page,false);
 
@@ -238,6 +258,23 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
         }
     }
 });
+
+*/
+
+        nestedScrollView=findViewById(R.id.main_nested);
+
+       nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+           @Override
+           public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+               if(v.getChildAt(v.getChildCount() - 1) != null) {
+                   if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
+                           scrollY > oldScrollY) {
+                       getData(++page,false);
+                   }
+               }
+           }
+       });
+
 
 
 
@@ -285,6 +322,10 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
     }
 
+    public MyAdapter(Context context){
+        this.context=context;
+        mDataset=new ArrayList<>();
+    }
     public MyAdapter(List myDataSet){
 
         mDataset=myDataSet;
@@ -298,13 +339,19 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
      public void setList(List list){
 
          mDataset=list;
+         notifyDataSetChanged();
      }
      public void addList(List list){
          mDataset.addAll(list);
+         notifyDataSetChanged();
      }
-    @Override
+
+
+     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         // create a new view
+
+
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.game_view, parent, false);
 
@@ -351,6 +398,10 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
         return mDataset.size();
     }
 
+    public Datum getItem(int position){
+
+        return mDataset.get(position );
+    }
 
 
 }

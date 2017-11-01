@@ -13,5 +13,6 @@ public class APIUrl {
     public static final String REQUEST_MATCH_URL="mobile/request_match.php";
     public  static final String LOG_OUT_URL="mobile/logout.php";
     public static final String SEND_MESSAGE="mobile/send_msg.php";
+    public static final String GET_BANNER="mobile/banner_image.php";
 
 }

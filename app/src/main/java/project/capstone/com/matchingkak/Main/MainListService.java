@@ -2,6 +2,8 @@ package project.capstone.com.matchingkak.Main;
 
 import android.content.Context;
 
+import java.util.List;
+
 import project.capstone.com.matchingkak.restAPI.APIAdapter;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 import retrofit2.Call;
@@ -39,11 +41,15 @@ public class MainListService extends APIAdapter {
         Call<Boolean> logout();
 
 
-
+        @POST(APIUrl.GET_BANNER)
+        Call<List<String>> getBanner();
 
 
 
 
     }
+
+
+
 
 }

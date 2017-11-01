@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -164,12 +165,13 @@ public class loginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String token= FirebaseInstanceId.getInstance().getToken();
+                Toast.makeText(loginActivity.this,token,Toast.LENGTH_LONG).show();
 
-                Toast.makeText(loginActivity.this,"로그인 시도",Toast.LENGTH_LONG).show();
-                //login http call
                 SignService.getRetrofit(getApplicationContext())
                             .in(login_email_edit.getText().toString()
-                                    ,login_pass_edit.getText().toString())
+                                    ,login_pass_edit.getText().toString()
+                            ,         token  )
                             .enqueue(new Callback<ResData>() {
                                 @Override
                                 public void onResponse(Call<ResData> call, Response<ResData> response) {

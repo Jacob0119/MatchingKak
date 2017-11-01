@@ -1,7 +1,6 @@
 package project.capstone.com.matchingkak.detail_info;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -36,9 +35,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
-    private static String TAG_JSON="Detail_Info";
-    private static String TAG="Matchingkak detail";
-    private static String TAG_URL="http://matchingkak.com/mobile/detail.php";
+
 
     String mJsonString;
     private static  Info info;
@@ -211,7 +208,7 @@ public class DetailActivity extends AppCompatActivity {
 
     class GetData extends AsyncTask<String,Void,String> {
 
-        ProgressDialog progressDialog;
+
         String errorString=null;
 
 
@@ -221,7 +218,7 @@ public class DetailActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog=ProgressDialog.show(DetailActivity.this,"Please Wait",null,true,true);
+
         }
 
         @Override
@@ -237,7 +234,7 @@ public class DetailActivity extends AppCompatActivity {
             else{
 
                 }
-                progressDialog.dismiss();
+
 
 
         }

@@ -30,12 +30,15 @@
         app:titleEnabled="false"
         >
 
+
         <android.support.v7.widget.Toolbar
             android:background="#CA9E41"
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
+
+
 
 
 
@@ -50,29 +53,61 @@
 
 </android.support.design.widget.AppBarLayout>
 
-        <RelativeLayout
 
-            android:background="@color/pure_gray"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/main_swipe_refresh"
+
+<LinearLayout
+
+android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-            <android.support.v7.widget.RecyclerView
-                android:background="@drawable/login_bh"
-                android:layout_alignParentStart="true"
-            android:id="@+id/main_recyler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-</android.support.v4.widget.SwipeRefreshLayout>
-            <ProgressBar
-                android:layout_alignParentBottom="true"
-                android:id="@+id/main_progress"
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
 
-        </RelativeLayout>
+            <android.support.v4.widget.SwipeRefreshLayout
+
+                android:id="@+id/main_swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+<android.support.v4.widget.NestedScrollView
+
+    android:id="@+id/main_nested"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+                <android.support.v4.view.ViewPager
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="parallax"
+
+                    android:id="@+id/main_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+
+
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:background="@drawable/login_bh"
+                            android:id="@+id/main_recyler"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+
+                        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
+
+                    </android.support.v4.widget.SwipeRefreshLayout>
+                        <ProgressBar
+
+                            android:id="@+id/main_progress"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" />
+            </LinearLayout>
+
 
     </LinearLayout>
 
