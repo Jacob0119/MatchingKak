@@ -2,11 +2,12 @@ package project.capstone.com.matchingkak.detail_info;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import project.capstone.com.matchingkak.R;
 import retrofit2.Call;
@@ -112,22 +113,20 @@ class AlertState implements State{
 
     void show(String msg)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("죄송합니다.");
-        builder.setMessage(msg);
-        builder.setPositiveButton("확인",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context,"예를 선택했습니다.",Toast.LENGTH_LONG).show();
-                    }
-                });
-     /*   builder.setNegativeButton("아니오",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context,"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
-                    }
-                });*/
-        builder.show();
+final MaterialDialog dialog=
+        new MaterialDialog.Builder(context)
+                .customView(R.layout.dialog,false)
+                .show();
+
+        TextView text=(TextView)dialog.getCustomView().findViewById(R.id.text_dialog);
+        text.setText(msg);
+        Button btn=(Button)dialog.getCustomView().findViewById(R.id.btn_dialog);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }
 

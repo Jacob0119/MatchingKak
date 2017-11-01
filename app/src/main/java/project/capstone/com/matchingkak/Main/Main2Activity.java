@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,10 +46,10 @@ public class Main2Activity extends AppCompatActivity {
     private RelativeLayout mDrawer;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView.Adapter mAdapter;
+    private MyAdapter mAdapter;
     private ProgressBar mProgress;
     private Button login_btn,logout_btn,close_drawer_btn;
-    private LinearLayout main_parent;
+    private LinearLayout main_parent; SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<Datum> list=new ArrayList<Datum>();
     static int page=1;
     @Override
@@ -56,7 +57,7 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         mProgress=(ProgressBar)findViewById(R.id.main_progress);
-        getData(page);
+        getData(page,false);
         init();
 
         //Toast.makeText(this,"Login state:"+ SharedPreferencesManager.getInstanceOf(this).getLoginState()+"",Toast.LENGTH_SHORT).show();
@@ -66,28 +67,37 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-    void getData(int page){
-        mProgress.setVisibility(View.VISIBLE);
-        mProgress.startNestedScroll(3);
-
+    void getData(int page, final boolean isUpper){
+        if(!isUpper) {
+            mProgress.setVisibility(View.VISIBLE);
+            mProgress.startNestedScroll(3);
+        }
 
         MainListService.getRetrofit(this).paging(page)
                 .enqueue(new Callback<ListData>() {
                     @Override
                     public void onResponse(Call<ListData> call, Response<ListData> response) {
                         if(response.isSuccessful()) {
+                            if(isUpper){
+                                mAdapter.setList(response.body().getData());
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+                            else {
+                                mAdapter.addList(response.body().getData());
+                                mProgress.stopNestedScroll();
+                                mProgress.setVisibility(View.GONE);
+                            }
 
-
-                            list.addAll(response.body().getData());
                             mAdapter.notifyDataSetChanged();
-                            mProgress.stopNestedScroll();
-                            mProgress.setVisibility(View.GONE);
+
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<ListData> call, Throwable t) {
+
+                        if(swipeRefreshLayout!=null)swipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(Main2Activity.this, "failed to load", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -96,7 +106,14 @@ public class Main2Activity extends AppCompatActivity {
 
    void init(){
 
-
+       swipeRefreshLayout=findViewById(R.id.main_swipe_refresh);
+       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+           @Override
+           public void onRefresh() {
+               page=1;
+               getData(page,true);
+           }
+       });
        Toolbar toolbar =(Toolbar) findViewById(R.id.main_toolbar);
      //toolbar.setLogo(R.drawable.main);
        setSupportActionBar(toolbar);
@@ -215,7 +232,7 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
         super.onScrolled(recyclerView, dx, dy);
         if(dy>0){
             if(!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN))
-                getData(++page);
+                getData(++page,false);
 
 
         }
@@ -278,7 +295,13 @@ mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
          mDataset=myDataSet;
      }
 
+     public void setList(List list){
 
+         mDataset=list;
+     }
+     public void addList(List list){
+         mDataset.addAll(list);
+     }
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         // create a new view

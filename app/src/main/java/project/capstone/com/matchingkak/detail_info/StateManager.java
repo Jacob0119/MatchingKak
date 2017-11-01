@@ -45,7 +45,7 @@ public class StateManager {
                 state=new NormalState(context,info);
                 break;
             case STATE_COMPLETE:
-                state=new MineState(context);
+                state=new AlertState(context,info);
                 break;
 
         }
