@@ -55,16 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 </LinearLayout>
-        <android.support.design.widget.BottomNavigationView
-            android:background="@color/pure_gray"
 
-            android:id="@+id/main_bottom_nav"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemIconTint="@drawable/nav_item_color_state"
-            app:itemTextColor="@drawable/nav_item_color_state"
-            android:layout_height="?attr/actionBarSize"/>
 <LinearLayout
     android:background="@android:color/transparent"
     android:orientation="vertical"

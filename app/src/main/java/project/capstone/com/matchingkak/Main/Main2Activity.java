@@ -3,30 +3,25 @@ package project.capstone.com.matchingkak.Main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -36,7 +31,6 @@ import java.util.List;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.detail_info.DetailActivity;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
-import project.capstone.com.matchingkak.sns_login.loginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,17 +38,15 @@ import retrofit2.Response;
 public class Main2Activity extends AppCompatActivity {
 
 
-    private DrawerLayout mDrawerLayout;
-    private RelativeLayout mDrawer;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private MyAdapter mAdapter;
     private ProgressBar mProgress;
-    private Button login_btn,logout_btn,close_drawer_btn;
     private ViewPager pager;
     private  pagerAdapter pAdapter;
-    private LinearLayout main_parent; SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
     NestedScrollView nestedScrollView;
+    private BottomNavigationView navigationView;
 
     static int page=1;
     @Override
@@ -64,11 +56,6 @@ public class Main2Activity extends AppCompatActivity {
         mProgress=findViewById(R.id.main_progress);
         getData(page,false);
         init();
-
-
-
-        //Toast.makeText(this,"Login state:"+ SharedPreferencesManager.getInstanceOf(this).getLoginState()+"",Toast.LENGTH_SHORT).show();
-
 
 
 
@@ -141,12 +128,21 @@ public class Main2Activity extends AppCompatActivity {
                getData(page,true);
            }
        });
-       Toolbar toolbar =(Toolbar) findViewById(R.id.main_toolbar);
-     //toolbar.setLogo(R.drawable.main);
+       Toolbar toolbar = findViewById(R.id.main_toolbar);
+
        setSupportActionBar(toolbar);
        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-       final BottomNavigationView bottomNavigationView=(BottomNavigationView)findViewById(R.id.main_bottom_nav);
+       final BottomNavigationBar bottomNavigationView=findViewById(R.id.main_bottom_nav);
+
+        bottomNavigationView.addItem(new BottomNavigationItem(R.drawable.home,"home"))
+                .addItem(new BottomNavigationItem(R.drawable.like,"like"))
+                .addItem(new BottomNavigationItem(R.drawable.me,"me"))
+                .addItem(new BottomNavigationItem(R.drawable.mail,"message"))
+                .addItem(new BottomNavigationItem(R.drawable.edit,"new"))
+                .initialise();
+
+                /*
        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
            @Override
            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -163,56 +159,17 @@ public class Main2Activity extends AppCompatActivity {
            }
        });
 
-
-
-       close_drawer_btn=findViewById(R.id.drawer_close_btn);
-       close_drawer_btn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               mDrawerLayout.closeDrawer(mDrawer);
-           }
-       });
+*/
 
 
 
-       mDrawer=findViewById(R.id.main_drawer);
-       mDrawerLayout=findViewById(R.id.main_drawerLayout);
 
 
-       main_parent= findViewById(R.id.main_parent);
 
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-       ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close);
 
-
-       mDrawerLayout.addDrawerListener(toggle);
-       logout_btn=findViewById(R.id.main_logout_btn);
-       logout_btn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(final View v) {
-
-               MainListService.getRetrofit(Main2Activity.this).logout().enqueue(new Callback<Boolean>() {
-                   @Override
-                   public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                       if(response.body()){
-
-                           Intent intent=new Intent(Main2Activity.this,loginActivity.class);
-                           startActivity(intent);
-                           finish();
-
-                       }
-                   }
-
-                   @Override
-                   public void onFailure(Call<Boolean> call, Throwable t) {
-
-                   }
-               });
-
-           }
-       });
 
 
        mRecyclerView=findViewById(R.id.main_recyler);
@@ -238,28 +195,7 @@ mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicatio
     }
 }));
 
-       /*
-mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-    @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        super.onScrolled(recyclerView, dx, dy);
-        LinearLayoutManager linearManager=
-                (LinearLayoutManager)recyclerView.getLayoutManager();
 
-        int totalItemCount=linearManager.getItemCount();
-        int lastVisibleItem=linearManager.findLastVisibleItemPosition();
-
-        Log.d("onScroll","total"+totalItemCount+"::item"+lastVisibleItem);
-        if(totalItemCount<=lastVisibleItem){
-            if(!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN))
-                getData(++page,false);
-
-
-        }
-    }
-});
-
-*/
 
         nestedScrollView=findViewById(R.id.main_nested);
 

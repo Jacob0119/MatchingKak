@@ -50,6 +50,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
     compile 'com.afollestad.material-dialogs:core:0.9.5.0'
     compile 'com.facebook.android:facebook-login:[4,5)'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.3'
 
 }
 apply plugin: 'com.google.gms.google-services'
