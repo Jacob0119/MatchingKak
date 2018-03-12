@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+    android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+
+            android:id="@+id/main_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v4.widget.NestedScrollView
+                android:background="@drawable/gra_bg2"
+                android:id="@+id/main_nested"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <android.support.v4.view.ViewPager
+                        android:fitsSystemWindows="true"
+                        app:layout_collapseMode="parallax"
+
+                        android:id="@+id/main_view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
+                    <android.support.v7.widget.RecyclerView
+
+                        android:id="@+id/main_recyler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <ProgressBar
+
+            android:layout_alignBottom="@id/main_swipe_refresh"
+            android:id="@+id/main_progress"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+
+    </RelativeLayout>
+<com.ashokvarma.bottomnavigation.BottomNavigationBar
+    app:bnbBackgroundColor="@color/pure_gray"
+    app:bnbActiveColor="@color/colorPrimary_light"
+    app:bnbInactiveColor="@color/primary_text"
+    android:id="@+id/main_bottom_nav"
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    app:bnbMode="mode_fixed"
+    android:layout_height="wrap_content"/>
+
+</LinearLayout>

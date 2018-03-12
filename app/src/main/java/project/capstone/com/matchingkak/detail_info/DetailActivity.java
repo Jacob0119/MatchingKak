@@ -174,26 +174,26 @@ public class DetailActivity extends AppCompatActivity {
         int btnState=Integer.parseInt(info.getBtnState().getBtnState());
         Log.d("btnState",btnState+"");
         stateManager.setState(btnState,info,this);
-        Button submit=(Button) findViewById(R.id.Detail_submit_btn);
+        Button submit= findViewById(R.id.Detail_submit_btn);
         stateManager.setBtn(submit);
 
 
-        TextView gm_memo=(TextView) findViewById(R.id.Detail_gm_memo);
+        TextView gm_memo= findViewById(R.id.Detail_gm_memo);
         gm_memo.setText(info.getGmMemo());
-        TextView gm_date=(TextView )findViewById(R.id.Detail_gm_date );
+        TextView gm_date= findViewById(R.id.Detail_gm_date );
         gm_date.setText(info.getGmDate());
-        TextView gm_gym=(TextView)findViewById(R.id.Detail_gm_gym);
+        TextView gm_gym=findViewById(R.id.Detail_gm_gym);
         gm_gym.setText(info.getGmGym());
-        TextView gm_color=(TextView)findViewById(R.id.Detail_gm_color);
+        TextView gm_color=findViewById(R.id.Detail_gm_color);
         gm_color.setText(info.getGmColor());
-        TextView tm_name=(TextView)findViewById(R.id.Detail_tm_name);
+        TextView tm_name=findViewById(R.id.Detail_tm_name);
         tm_name.setText(info.getTmName());
-        TextView mb_nick=(TextView)findViewById(R.id.Detail_mb_nick);
+        TextView mb_nick=findViewById(R.id.Detail_mb_nick);
         mb_nick.setText(info.getMbNick());
-        TextView match_count=(TextView)findViewById(R.id.Detail_match_count);
+        TextView match_count=findViewById(R.id.Detail_match_count);
         match_count.setText(info.getTmMatchCount());
 
-        imageView=(ImageView) findViewById(R.id.Detail_team_img);
+        imageView= findViewById(R.id.Detail_team_img);
              Glide.with(this)
                 .load(domain+info.getTmImg())
                 .into(imageView);

@@ -12,7 +12,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/appBarLayout">
     <android.support.v7.widget.Toolbar
-        android:background="@drawable/gra_bh"
+        android:background="@drawable/gra_bg"
         android:id="@+id/message_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -104,7 +104,7 @@
     </ScrollView>
     <LinearLayout
         android:gravity="center"
-        android:background="@drawable/gra_bh"
+        android:background="@drawable/gra_bg"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:id="@+id/message_send_btn"
