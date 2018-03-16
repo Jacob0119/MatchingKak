@@ -8,6 +8,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
+import java.net.HttpCookie;
 import java.util.HashSet;
 
 import okhttp3.Interceptor;
@@ -48,8 +49,16 @@ public class AddCookiesInterceptor implements Interceptor {
         // 빌더 헤더 영역에 쿠키 값 추가
         for (String cookie : cookies) {
             builder.addHeader("Cookie", cookie);
+            String cookieName = HttpCookie.parse(cookie).get(0).getName();
+            String cookieValue = HttpCookie.parse(cookie).get(0).getValue();
+
+            String cookieString = cookieName + "=" + cookieValue;
+
+
+
             Log.d("add Intercept",cookie);
         }
+
 
         // 체인에 빌더를 적용 및 반환
         return chain.proceed(builder.build());

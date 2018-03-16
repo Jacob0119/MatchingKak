@@ -30,6 +30,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
      */
     public ReceivedCookiesInterceptor(Context context){
         // CookieSharedReferences 객체 초기화
+
         cookieSharedPreferences = SharedPreferencesManager.getInstanceOf(context);
     }
 
@@ -42,6 +43,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
         if (!response.headers("Set-Cookie").isEmpty()) {
             HashSet<String> cookies = new HashSet<>();
 
+            Log.d("Intercept",response.headers().toString());
             // 쿠키 값을 읽어옴
             for (String header : response.headers("Set-Cookie")) {
                 cookies.add(header);

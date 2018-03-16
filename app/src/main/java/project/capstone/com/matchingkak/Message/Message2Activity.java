@@ -41,9 +41,9 @@ private String mb_nick;
 
         Intent intent=getIntent();
         mb_nick=intent.getStringExtra("mb_nick");
-        receiver=(TextView)findViewById(R.id.message_reciever_text);
+        receiver=findViewById(R.id.message_reciever_text);
         receiver.setText(mb_nick);
-        toolbar=(Toolbar)findViewById(R.id.message_toolbar);
+        toolbar=findViewById(R.id.message_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("메시지 보내기");
@@ -58,12 +58,12 @@ private String mb_nick;
         });
 
 
-        title=(EditText)findViewById(R.id.message_title_edit);
-        content=(EditText)findViewById(R.id.message_edit);
+        title=findViewById(R.id.message_title_edit);
+        content=findViewById(R.id.message_edit);
 
 
 
-        send_btn=(LinearLayout) findViewById(R.id.message_send_btn);
+        send_btn= findViewById(R.id.message_send_btn);
 
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override

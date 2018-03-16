@@ -1,148 +1,150 @@
 package project.capstone.com.matchingkak.Main;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.util.AttributeSet;
+import android.util.SparseArray;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.Main.alarm.alarmFragment;
+import project.capstone.com.matchingkak.Main.home.HomeFragment;
+import project.capstone.com.matchingkak.Main.me.meFragment;
+import project.capstone.com.matchingkak.Main.message.MessageFragment;
+import project.capstone.com.matchingkak.MessageActivity;
 import project.capstone.com.matchingkak.R;
-import project.capstone.com.matchingkak.detail_info.DetailActivity;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
+import static project.capstone.com.matchingkak.R.drawable.alarm;
+
 
 public class Main2Activity extends AppCompatActivity {
 
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private MyAdapter mAdapter;
-    private ProgressBar mProgress;
-    private ViewPager pager;
-    private  pagerAdapter pAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    NestedScrollView nestedScrollView;
+    private CustomViewPager mViewPager;
+    private ViewPagerAdapter mAdapter;
     private BottomNavigationView navigationView;
+    Fragment[] frag=new Fragment[5];
 
-    static int page=1;
+    private int selectedTab=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        mProgress=findViewById(R.id.main_progress);
-        getData(page,false);
+
         init();
 
 
+        if (savedInstanceState == null) {
 
-    }
-
-    void getData(int page, final boolean isUpper){
-        if(!isUpper) {
-            mProgress.setVisibility(View.VISIBLE);
-            mProgress.startNestedScroll(3);
+            mViewPager.setCurrentItem(selectedTab);
         }
 
-      MainListService.getRetrofit(this).getBanner()
-                .enqueue(new Callback<List<String>>() {
-                    @Override
-                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                        Log.d("Main2Activity",response.code()+"");
-                        pAdapter.setList(response.body());
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<String>> call, Throwable t) {
-                        Log.d("Main2Activity",t.toString());
-
-                    }
-                });
-
-
-        MainListService.getRetrofit(this).paging(page)
-                .enqueue(new Callback<ListData>() {
-                    @Override
-                    public void onResponse(Call<ListData> call, Response<ListData> response) {
-                        if(response.isSuccessful()) {
-                            if(isUpper){
-                                mAdapter.setList(response.body().getData());
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-                            else {
-                                mAdapter.addList(response.body().getData());
-                                mProgress.stopNestedScroll();
-                                mProgress.setVisibility(View.GONE);
-                            }
-
-
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ListData> call, Throwable t) {
-
-                        if(swipeRefreshLayout!=null)swipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(Main2Activity.this, "failed to load", Toast.LENGTH_LONG).show();
-                    }
-                });
 
     }
 
+    private void loadFragment(int i) {
+
+        if(frag[i]==null)
+            frag[i] = getFrament(i);
+
+        FragmentTransaction ft=getFragmentManager().beginTransaction();
+
+        ft.replace(R.id.main_view_pager, frag[i]);
+        ft.commit();
+    }
+
+    Fragment getFrament(int i){
+
+        switch (i){
+            case 0:return HomeFragment.newInstance();
+            case 1: return HomeFragment.newInstance();
+            case 2:return meFragment.newInstance();
+            case 3:return MessageFragment.newInstance();
+            case 4:return HomeFragment.newInstance();
+            default:return HomeFragment.newInstance();
+        }
+
+    }
    void init(){
 
 
-       pAdapter=new pagerAdapter(this);
-       pager =findViewById(R.id.main_view_pager);
-       pager.setAdapter(pAdapter);
-       swipeRefreshLayout=findViewById(R.id.main_swipe_refresh);
-       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+
+
+
+
+
+        mViewPager =  findViewById(R.id.main_view_pager);
+       mViewPager.setOnTouchListener(new View.OnTouchListener() {
            @Override
-           public void onRefresh() {
-               page=1;
-               getData(page,true);
+           public boolean onTouch(View v, MotionEvent event) {
+               return false;
            }
        });
-       Toolbar toolbar = findViewById(R.id.main_toolbar);
+        mAdapter = new ViewPagerAdapter (this.getFragmentManager());
+       mAdapter.addFragment(HomeFragment.newInstance(), "home");
+       mAdapter.addFragment(alarmFragment.newInstance(), "alarm");
+       mAdapter.addFragment(meFragment.newInstance(), "me");
+       mAdapter.addFragment(MessageFragment.newInstance(), "message");
+       mAdapter.addFragment(HomeFragment.newInstance(), "new");
+       mViewPager.setAdapter(mAdapter);
+       mViewPager.setOffscreenPageLimit(mAdapter.getCount() - 1);
 
-       setSupportActionBar(toolbar);
-       getSupportActionBar().setDisplayShowTitleEnabled(false);
 
        final BottomNavigationBar bottomNavigationView=findViewById(R.id.main_bottom_nav);
 
-        bottomNavigationView.addItem(new BottomNavigationItem(R.drawable.home,"home"))
-                .addItem(new BottomNavigationItem(R.drawable.like,"like"))
-                .addItem(new BottomNavigationItem(R.drawable.me,"me"))
-                .addItem(new BottomNavigationItem(R.drawable.mail,"message"))
-                .addItem(new BottomNavigationItem(R.drawable.edit,"new"))
+        bottomNavigationView.addItem(new BottomNavigationItem(R.drawable.home,"홈"))
+                .addItem(new BottomNavigationItem(alarm,"알림"))
+                .addItem(new BottomNavigationItem(R.drawable.me,"나"))
+                .addItem(new BottomNavigationItem(R.drawable.mail,"쪽지"))
+                .addItem(new BottomNavigationItem(R.drawable.edit,"글쓰기"))
                 .initialise();
 
-                /*
+     bottomNavigationView.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+         @Override
+         public void onTabSelected(int i) {
+                  if(i!=4) {
+                      mViewPager.setCurrentItem(i, false);
+                        selectedTab=i;
+                  }
+                  else {
+                      Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+                      intent.putExtra("url", APIUrl.API_BASE_URL+APIUrl.EDITOR_URL);
+                      startActivity(intent);
+                      bottomNavigationView.selectTab(selectedTab);
+                  }
+         }
+
+         @Override
+         public void onTabUnselected(int i) {
+
+         }
+
+         @Override
+         public void onTabReselected(int i) {
+            onTabSelected(i);
+         }
+     });
+/*
        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
            @Override
            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -158,7 +160,6 @@ public class Main2Activity extends AppCompatActivity {
               return true;
            }
        });
-
 */
 
 
@@ -166,180 +167,108 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-       getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+
+     //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+     //   getSupportActionBar().setHomeButtonEnabled(true);
+     //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
 
 
-       mRecyclerView=findViewById(R.id.main_recyler);
-       mRecyclerView.setNestedScrollingEnabled(false);
-       mAdapter=new MyAdapter(this);
 
-       this.mLayoutManager=new LinearLayoutManager(this);
-       mLayoutManager.setAutoMeasureEnabled(true);
-       mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setHasFixedSize(false);
-mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-    @Override
-    public void onItemClick(View view, int position) {
-        Intent intent=new Intent(Main2Activity.this, DetailActivity.class);
-        intent.putExtra("gm_no",mAdapter.getItem(position).getGmNo());
-        startActivity(intent);
-    }
-
-    @Override
-    public void onLongItemClick(View view, int position) {
-
-    }
-}));
-
-
-
-        nestedScrollView=findViewById(R.id.main_nested);
-
-       nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-           @Override
-           public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-               if(v.getChildAt(v.getChildCount() - 1) != null) {
-                   if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
-                           scrollY > oldScrollY) {
-                       getData(++page,false);
-                   }
-               }
-           }
-       });
 
 
 
 
    }
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            final Fragment fragment = (Fragment) super.instantiateItem(container, position);
+            instantiatedFragments.put(position, new WeakReference<>(fragment));
+            return fragment;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            instantiatedFragments.remove(position);
+            super.destroyItem(container, position, object);
+        }
+
+        @Nullable
+        Fragment getFragment(final int position) {
+            final WeakReference<Fragment> wr = instantiatedFragments.get(position);
+            if (wr != null) {
+                return wr.get();
+            } else {
+                return null;
+            }
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
 
 }
 
 
- class MyAdapter extends  RecyclerView.Adapter<MyAdapter.ViewHolder>{
+class CustomViewPager extends ViewPager {
 
+    private boolean isPagingEnabled;
 
-
-    private List<Datum> mDataset;
-
-     private Context context;
-
-
-     public static class ViewHolder extends  RecyclerView.ViewHolder{
-
-
-        public View game_view;
-        private TextView teamName,date,location,title,state_text;
-        private ImageView teamLogo,state;
-         private TextView sport;
-
-
-
-        public ViewHolder(View v){
-
-            super(v);
-            this.game_view=v;
-            teamName    =(TextView)v.findViewById(R.id.game_view_team);
-            date        =(TextView)v.findViewById(R.id.game_view_date);
-            location    =(TextView)v.findViewById(R.id.game_view_location);
-            title       =(TextView)v.findViewById(R.id.game_view_title);
-            sport       =(TextView)v.findViewById(R.id.game_view_sport);
-            teamLogo    =(ImageView)v.findViewById(R.id.game_view_image);
-
-
-            state       =(ImageView)v.findViewById(R.id.game_view_state_img);
-            state_text =(TextView)v.findViewById(R.id.game_view_state_text );
-        }
-
-
+    public CustomViewPager(Context context) {
+        super(context);
+        this.isPagingEnabled = true;
     }
 
-    public MyAdapter(Context context){
-        this.context=context;
-        mDataset=new ArrayList<>();
-    }
-    public MyAdapter(List myDataSet){
-
-        mDataset=myDataSet;
+    public CustomViewPager(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        this.isPagingEnabled = true;
     }
 
-     public MyAdapter(Context context,List myDataSet){
-            this.context=context;
-         mDataset=myDataSet;
-     }
-
-     public void setList(List list){
-
-         mDataset=list;
-         notifyDataSetChanged();
-     }
-     public void addList(List list){
-         mDataset.addAll(list);
-         notifyDataSetChanged();
-     }
-
-
-     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
-        // create a new view
-
-
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.game_view, parent, false);
-
-
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-
-
-        Datum datum=mDataset.get(position);
-
-        holder.teamName.setText(datum.getTmName());
-        holder.title.setText(datum.getGmTitle());
-        holder.date.setText(datum.getGmDate());
-        holder.location.setText(datum.getGmGym());
-        holder.sport.setText(datum.getTmSport());
-        RequestOptions options=new RequestOptions();
-
-        if(datum.getGmState().equals("0"))//성사대기
-        {
-            holder.state.setImageDrawable(context.getDrawable(R.drawable.wait));
-            holder.state_text.setText("요청가능");
-
-        }else{
-            holder.state.setImageDrawable(context.getDrawable(R.drawable.check));
-            holder.state_text.setText("성사완료");
-        }
-        Glide.with(context)
-
-                .load(APIUrl.API_BASE_URL+datum.getTmImg())
-                .apply(options.centerCrop())
-                    .into(holder.teamLogo);
-
+    public boolean onTouchEvent(MotionEvent event) {
+        return this.isPagingEnabled && super.onTouchEvent(event);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    //for samsung phones to prevent tab switching keys to show on keyboard
     @Override
-    public int getItemCount() {
-        return mDataset.size();
+    public boolean executeKeyEvent(KeyEvent event) {
+        return isPagingEnabled && super.executeKeyEvent(event);
     }
 
-    public Datum getItem(int position){
-
-        return mDataset.get(position );
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        return this.isPagingEnabled && super.onInterceptTouchEvent(event);
     }
 
-
+    public void setPagingEnabled(boolean enabled) {
+        this.isPagingEnabled = enabled;
+    }
 }
 
 
