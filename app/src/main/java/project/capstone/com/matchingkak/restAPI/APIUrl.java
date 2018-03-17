@@ -16,5 +16,7 @@ public class APIUrl {
     public static final String SEND_MESSAGE="mobile/send_msg.php";
     public static final String GET_BANNER="mobile/banner_image.php";
     public static final String EDITOR_URL="match_editor.php";
-public static final String USER_AGENT="MatchingkakApp";
+    public static final String ALARM_URL="mobile/alarm.php";
+    public static final String messageDetail_URL="r_message.php";
+    public static final String USER_AGENT="MatchingkakApp";
 }

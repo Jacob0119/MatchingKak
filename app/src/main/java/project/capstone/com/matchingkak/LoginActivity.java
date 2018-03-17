@@ -42,6 +42,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
+
 import static android.os.Build.VERSION_CODES.M;
 
 public class LoginActivity extends AppCompatActivity {
@@ -328,7 +330,7 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
             }else if(url.contains("list_message_")||url.contains("mypage.php")){
 
-                Intent intent=new Intent(getApplicationContext(),MessageActivity.class);
+                Intent intent=new Intent(getApplicationContext(),EditorActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("url",url);
                 startActivity(intent);

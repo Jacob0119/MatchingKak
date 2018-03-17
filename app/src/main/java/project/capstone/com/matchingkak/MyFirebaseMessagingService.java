@@ -11,6 +11,8 @@ import android.support.v4.app.TaskStackBuilder;
 
 import com.google.firebase.messaging.RemoteMessage;
 
+import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
+
 /**
  * Created by Lee on 2017-05-27.
  */
@@ -35,7 +37,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         String url="http://matchingkak.com";
         Intent intent=new Intent(this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Intent intent2=new Intent(this,MessageActivity.class);
+        Intent intent2=new Intent(this,EditorActivity.class);
 
         switch(type){
 

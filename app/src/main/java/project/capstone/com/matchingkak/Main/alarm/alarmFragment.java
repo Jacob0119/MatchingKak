@@ -12,27 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.request.RequestOptions;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import project.capstone.com.matchingkak.Main.alarm.adapter.alarmAdapter;
+import project.capstone.com.matchingkak.Main.alarm.presenter.alarmPresenter;
 import project.capstone.com.matchingkak.Main.home.RecyclerItemClickListener;
-import project.capstone.com.matchingkak.Main.message.MSGListData;
-import project.capstone.com.matchingkak.Main.message.MessageListService;
 import project.capstone.com.matchingkak.R;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class alarmFragment extends Fragment {
+public class alarmFragment extends Fragment implements Contract.View{
 
+    private Contract.Presenter presenter;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private alarmAdapter mAdapter;
@@ -56,21 +48,38 @@ public static alarmFragment newInstance(){
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.alarm_content, container, false);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        init();
+        getData(1,true);
+    }
+
     void init(){
+        mAdapter=new alarmAdapter(getContext());
+        presenter=new alarmPresenter();
+        presenter.attatchView(this);
+        presenter.setAdapterModel(mAdapter);
+        presenter.setAdapterView(mAdapter);
+
+        ////Layout view setting
         mProgress=getView().findViewById(R.id.message_progress);
         context=getContext();
         swipeRefreshLayout=getView().findViewById(R.id.message_swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                page=1;
-                getData(page,true);
+
+                getData(1,true);
+                //getData(page,true);
             }
         });
 
         mRecyclerView=getView().findViewById(R.id.message_recycler);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mAdapter=new alarmAdapter(context);
+
 
         this.mLayoutManager=new LinearLayoutManager(context);
         mLayoutManager.setAutoMeasureEnabled(true);
@@ -83,7 +92,7 @@ public static alarmFragment newInstance(){
                 //Intent intent=new Intent(context, DetailActivity.class);
                 //intent.putExtra("gm_no",mAdapter.getItem(position).getGmNo());
                 //startActivity(intent);
-                Toast.makeText(context,mAdapter.getItem(position).getMs_content(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,mAdapter.getItem(position).getMs_content(),Toast.LENGTH_SHORT).show();
 
             }
 
@@ -114,132 +123,19 @@ public static alarmFragment newInstance(){
             mProgress.setVisibility(View.VISIBLE);
             mProgress.startNestedScroll(3);
         }
+        //현재페이지에 맞는 리스트 데이터 가져오기
+       presenter.loadItems(context,page,isUpper);
 
-
-
-//현재페이지에 맞는 리스트 데이터 가져오기
-        MessageListService.getRetrofit(context).paging(page)
-                .enqueue(new Callback<MSGListData>() {
-                    @Override
-                    public void onResponse(Call<MSGListData> call, Response<MSGListData> response) {
-                        if(response.isSuccessful()) {
-                            if(isUpper){
-                                mAdapter.setList(response.body().getData());
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-                            else {
-                                //addList로 데이터 이어서 추가
-                                mAdapter.addList(response.body().getData());
-                                mProgress.stopNestedScroll();
-                                mProgress.setVisibility(View.GONE);
-                            }
-
-
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<MSGListData> call, Throwable t) {
-
-                        if(swipeRefreshLayout!=null)swipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(context, "failed to load", Toast.LENGTH_LONG).show();
-                    }
-                });
 
     }
+@Override
+public void done(String res){
+    mProgress.setVisibility(View.GONE);
+    swipeRefreshLayout.setRefreshing(false);
+
+    Toast.makeText(context,res,Toast.LENGTH_SHORT).show();
 }
 
-class alarmAdapter extends  RecyclerView.Adapter<alarmAdapter.ViewHolder>{
+}
 
 
-
-    private List<alarmData> mDataset;
-
-    private Context context;
-
-
-    public static class ViewHolder extends  RecyclerView.ViewHolder{
-
-        View msg_view;
-        private TextView ms_title,date,mb_nick;
-
-        public ViewHolder(View v){
-
-            super(v);
-            this.msg_view=v;
-            ms_title    =v.findViewById(R.id.message_list_title);
-            date        =v.findViewById(R.id.message_list_date);
-            mb_nick    =v.findViewById(R.id.message_list_sender);
-
-        }
-
-
-    }
-
-    public alarmAdapter(Context context){
-        this.context=context;
-        mDataset=new ArrayList<>();
-    }
-    public alarmAdapter(List MSGDataSet){
-
-        mDataset=MSGDataSet;
-    }
-
-    public alarmAdapter(Context context,List MSGDataSet){
-        this.context=context;
-        mDataset=MSGDataSet;
-    }
-
-    public void setList(List list){
-
-        mDataset=list;
-        notifyDataSetChanged();
-    }
-    public void addList(List list){
-        mDataset.addAll(list);
-        notifyDataSetChanged();
-    }
-
-
-    @Override
-    public alarmAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
-        // create a new view
-
-
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.alarm_list_view, parent, false);
-
-
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-
-
-        alarmData datum=mDataset.get(position);
-
-        holder.ms_title.setText(datum.getMs_title());
-
-        holder.date.setText(datum.getMs_send_date());
-        holder.mb_nick.setText(datum.getMb_nick());
-        RequestOptions options=new RequestOptions();
-
-
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
-    }
-
-    public alarmData getItem(int position){
-
-        return mDataset.get(position );
-    }}

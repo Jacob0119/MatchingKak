@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="1dp"
+  >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_margin="@dimen/margin_bottom"
+
+
+    >
+
+<ImageView
+    android:id="@+id/alarm_image"
+    android:layout_gravity="center_vertical|right"
+    android:layout_width="50dp"
+    android:layout_height="50dp" />
+
+
+
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:layout_margin="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+          >
+
+            <TextView
+                android:gravity="left"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:id="@+id/alarm_list_title"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="장소" />
+
+            <TextView
+                android:gravity="left"
+                    android:id="@+id/alarm_list_date"
+                    style="@style/secondary_text_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2017/4/23"
+                    android:textColor="@color/pretty_red" />
+
+
+        </LinearLayout>
+
+</LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

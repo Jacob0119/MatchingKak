@@ -25,11 +25,11 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
 import project.capstone.com.matchingkak.Main.alarm.alarmFragment;
 import project.capstone.com.matchingkak.Main.home.HomeFragment;
 import project.capstone.com.matchingkak.Main.me.meFragment;
 import project.capstone.com.matchingkak.Main.message.MessageFragment;
-import project.capstone.com.matchingkak.MessageActivity;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 
@@ -105,7 +105,7 @@ public class Main2Activity extends AppCompatActivity {
        mAdapter.addFragment(alarmFragment.newInstance(), "alarm");
        mAdapter.addFragment(meFragment.newInstance(), "me");
        mAdapter.addFragment(MessageFragment.newInstance(), "message");
-       mAdapter.addFragment(HomeFragment.newInstance(), "new");
+
        mViewPager.setAdapter(mAdapter);
        mViewPager.setOffscreenPageLimit(mAdapter.getCount() - 1);
 
@@ -127,7 +127,7 @@ public class Main2Activity extends AppCompatActivity {
                         selectedTab=i;
                   }
                   else {
-                      Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+                      Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
                       intent.putExtra("url", APIUrl.API_BASE_URL+APIUrl.EDITOR_URL);
                       startActivity(intent);
                       bottomNavigationView.selectTab(selectedTab);

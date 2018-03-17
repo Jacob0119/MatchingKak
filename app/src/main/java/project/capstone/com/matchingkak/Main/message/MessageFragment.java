@@ -2,6 +2,7 @@ package project.capstone.com.matchingkak.Main.message;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -82,7 +83,10 @@ public class MessageFragment extends Fragment {
                 //intent.putExtra("gm_no",mAdapter.getItem(position).getGmNo());
                 //startActivity(intent);
                 Toast.makeText(context,mAdapter.getItem(position).getMs_content(),Toast.LENGTH_SHORT).show();
-
+                Intent intent=new Intent(getContext(),MessageDetail.class);
+                intent.putExtra("ms_no",mAdapter.getItem(position).getMs_no());
+                intent.putExtra("type","receive");
+                startActivity(intent);
             }
 
             @Override

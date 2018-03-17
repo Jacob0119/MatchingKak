@@ -79,8 +79,15 @@ public class MSGListData {
     @Expose
     private String ms_read;
 
+     @SerializedName("ms_no")
+     @Expose
+     private String ms_no;
 
-    public String getMs_title() {
+     public String getMs_no() {
+         return ms_no;
+     }
+
+     public String getMs_title() {
         return ms_title;
     }
 
