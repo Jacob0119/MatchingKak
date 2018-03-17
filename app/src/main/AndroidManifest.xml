@@ -58,8 +58,8 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <activity android:name=".MessageActivity" />
+    <activity android:name=".Main.message.MessageDetail"/>
+        <activity android:name=".Main.Editor.EditorActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".detail_info.DetailActivity" />
         <activity android:name=".sns_login.loginActivity" />

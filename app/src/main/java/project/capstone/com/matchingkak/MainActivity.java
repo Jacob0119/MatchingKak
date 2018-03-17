@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
 import project.capstone.com.matchingkak.detail_info.DetailActivity;
 import project.capstone.com.matchingkak.sns_login.loginActivity;
 
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             public void startMessage(){
 
 
-                Intent i=new Intent(MainActivity.this,MessageActivity.class);
+                Intent i=new Intent(MainActivity.this,EditorActivity.class);
                 startActivity(i);
             }
 
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
 
             } else{
-                Intent intent=new Intent(MainActivity.this,MessageActivity.class);
+                Intent intent=new Intent(MainActivity.this,EditorActivity.class);
                 intent.putExtra("url",url);
                 startActivity(intent);
                 return true;
