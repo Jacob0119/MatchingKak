@@ -17,15 +17,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import project.capstone.com.matchingkak.Main.home.RecyclerItemClickListener;
 import project.capstone.com.matchingkak.R;
-import project.capstone.com.matchingkak.restAPI.APIUrl;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -234,12 +230,7 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
 
         holder.date.setText(datum.getMs_send_date());
         holder.mb_nick.setText(datum.getMb_nick());
-        RequestOptions options=new RequestOptions();
-        Glide.with(context)
-                .load(APIUrl.API_BASE_URL+datum.get)
-                .apply(options.centerCrop())
-                .into(profile);
-        RequestOptions options=new RequestOptions();
+       
 
 
     }
