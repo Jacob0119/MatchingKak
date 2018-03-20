@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.v4.widget.NestedScrollView
-                android:background="@drawable/gra_bg2"
+                android:background="#D3D9DB"
                 android:id="@+id/message_nested"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

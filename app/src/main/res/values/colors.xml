@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary_light">#4db6ac</color>
     <color name="colorPrimary">#009987</color>
     <color name="colorPrimaryDark">#00695c</color>
@@ -19,5 +20,5 @@
     <color name="naver_color">#df00bd38</color>
     <color name="transparent_white">#b2ffffff</color>
     <color name="transparent_black">#4b000000</color>
-    <color name="pretty_blue">#42A5F5</color>
+    <color name="pretty_blue">#4ca2cd</color>
 </resources>
