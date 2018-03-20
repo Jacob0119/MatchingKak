@@ -230,7 +230,7 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
 
         holder.date.setText(datum.getMs_send_date());
         holder.mb_nick.setText(datum.getMb_nick());
-       
+
 
 
     }

@@ -22,13 +22,13 @@ public class AlarmViewHolderToComplete extends ViewHolder {
     private TextView alarm_title,alarm_date;
     private ImageView profile;
     private OnClickListener listener;
-  //  private Button message_btn;
+    private View message_btn;
     public AlarmViewHolderToComplete(View v) {
         super(v);
         alarm_title         =v.findViewById(R.id.alarm_list_title);
         alarm_date          =v.findViewById(R.id.alarm_list_date);
         profile             =v.findViewById(R.id.alarm_image);
-        //message_btn         =v.findViewById(R.id.alarm_send);
+        message_btn         =v.findViewById(R.id.alarm_send);
     }
 
     @Override
@@ -40,13 +40,13 @@ public class AlarmViewHolderToComplete extends ViewHolder {
                 .load(APIUrl.API_BASE_URL+item.getTm_img())
                 .apply(options.centerCrop())
                 .into(profile);
-       /* message_btn.setOnClickListener(new View.OnClickListener() {
+        message_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.OnClick(view,pos);
             }
         });
-*/
+
 
 
 

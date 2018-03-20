@@ -113,15 +113,12 @@ public class alarmItem {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 
         return dt1.format(date);
     }
 
-    public void setAlarm_send_date(String ms_send_date) {
-        this.time = ms_send_date;
-    }
 
 
 

@@ -6,10 +6,11 @@
     style="@style/alarm_CardView"
 
     >
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -18,45 +19,38 @@
 
 
             >
-
-
             <ImageView
 
                 android:id="@+id/alarm_image"
-                style="@style/image_in_list" />
-
+                style="@style/image_in_list"
+                />
 
             <LinearLayout
-                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical"
-        >
+                android:padding="8dp">
 
                 <TextView
-
                     android:id="@+id/alarm_list_title"
                     style="@style/primary_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:text="수락 되었습니다."
-                    android:textSize="15dp" />
+                    android:text="수락 되었습니다." />
 
                 <TextView
+
                     android:id="@+id/alarm_list_date"
                     style="@style/date_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2017/4/23"
-                  />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="2017/4/23" />
 
 
             </LinearLayout>
         </LinearLayout>
- <!--   <Button
+        <!--   <Button
         android:padding="10dp"
         android:src="@drawable/send"
         android:textSize="15dp"
@@ -78,7 +72,27 @@
         android:backgroundTint="@color/pure_gray"
         android:text="메시지 보내기" />
 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="right">
+
+            <Button
+                android:id="@+id/alarm_info"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
+                android:backgroundTint="@color/pretty_blue"
+                android:text="정보" />
+
+            <Button
+                android:id="@+id/alarm_send"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
+                android:backgroundTint="@color/pretty_red"
+                android:text="연락" />
+        </LinearLayout>
     </LinearLayout>
+
 
 
 </android.support.v7.widget.CardView>

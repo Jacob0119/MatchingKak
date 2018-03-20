@@ -2,7 +2,6 @@ package project.capstone.com.matchingkak.Main.alarm.adapter.holder;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ public  class AlarmViewHolderToSubmit extends  ViewHolder {
 
 
     private TextView alarm_title,alarm_date;
-    private Button submit,reject;
+    private View submit,reject;
     private ImageView profile;
     private OnClickListener listener;
     public AlarmViewHolderToSubmit(View v){
@@ -60,7 +59,7 @@ public  class AlarmViewHolderToSubmit extends  ViewHolder {
 
     }
 
-    void setOnClickListener(Button v,final int pos){
+    void setOnClickListener(View v,final int pos){
 
 
         v.setOnClickListener(new View.OnClickListener() {

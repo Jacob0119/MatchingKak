@@ -123,13 +123,13 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
                        }
                );
                 break;
-/*
+
             case R.id.alarm_send:
                 String[] input={temp.getUser()};
                 view.done(view.MAKE_MESSAGE,input);
 
                 break;
-*/
+
         }
 
     }
