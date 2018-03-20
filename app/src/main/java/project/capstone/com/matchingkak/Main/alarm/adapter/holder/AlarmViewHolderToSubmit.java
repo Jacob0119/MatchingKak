@@ -31,7 +31,7 @@ public  class AlarmViewHolderToSubmit extends  ViewHolder {
         alarm_title         =v.findViewById(R.id.alarm_list_title);
         alarm_date          =v.findViewById(R.id.alarm_list_date);
         submit              =v.findViewById(R.id.alarm_submit);
-        reject              =v.findViewById(R.id.alarm_resect);
+        reject              =v.findViewById(R.id.alarm_reject);
         profile             =v.findViewById(R.id.alarm_image);
     }
 

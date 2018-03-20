@@ -12,11 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +81,7 @@ public class MessageFragment extends Fragment {
                 //Intent intent=new Intent(context, DetailActivity.class);
                 //intent.putExtra("gm_no",mAdapter.getItem(position).getGmNo());
                 //startActivity(intent);
-                Toast.makeText(context,mAdapter.getItem(position).getMs_content(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,mAdapter.getItem(position).getMs_content(),Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getContext(),MessageDetail.class);
                 intent.putExtra("ms_no",mAdapter.getItem(position).getMs_no());
                 intent.putExtra("type","receive");
@@ -166,7 +165,7 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
 
         View msg_view;
         private TextView ms_title,date,mb_nick;
-
+        ImageView mb_image;
 
         public ViewHolder(View v){
 
@@ -175,7 +174,7 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
             ms_title    =v.findViewById(R.id.message_list_title);
             date        =v.findViewById(R.id.message_list_date);
             mb_nick    =v.findViewById(R.id.message_list_sender);
-
+            mb_image       =v.findViewById(R.id.message_list_image);
         }
 
 
@@ -231,7 +230,7 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
 
         holder.date.setText(datum.getMs_send_date());
         holder.mb_nick.setText(datum.getMb_nick());
-        RequestOptions options=new RequestOptions();
+       
 
 
     }

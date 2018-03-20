@@ -3,6 +3,7 @@ package project.capstone.com.matchingkak.Main.alarm;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,11 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import project.capstone.com.matchingkak.Main.alarm.adapter.alarmAdapter;
 import project.capstone.com.matchingkak.Main.alarm.presenter.alarmPresenter;
 import project.capstone.com.matchingkak.Main.home.RecyclerItemClickListener;
+import project.capstone.com.matchingkak.Message.Message2Activity;
 import project.capstone.com.matchingkak.R;
 
 /**
@@ -129,11 +130,19 @@ public static alarmFragment newInstance(){
 
     }
 @Override
-public void done(String res){
+public void done(int resultCode,String[] input){
+    if(resultCode==MAKE_MESSAGE){
+        Intent intent=new Intent(getContext(), Message2Activity.class);
+        intent.putExtra("mb_nick",input[0]);
+        startActivity(intent);
+
+    }
     mProgress.setVisibility(View.GONE);
     swipeRefreshLayout.setRefreshing(false);
 
-    Toast.makeText(context,res,Toast.LENGTH_SHORT).show();
+
+
+    //Toast.makeText(context,input[0],Toast.LENGTH_SHORT).show();
 }
 
 }

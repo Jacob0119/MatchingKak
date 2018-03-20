@@ -9,7 +9,7 @@
   >
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
@@ -17,7 +17,10 @@
 
 
     >
-
+<ImageView
+    android:id="@+id/message_list_image"
+    android:layout_width="55dp"
+    android:layout_height="55dp" />
 
 
 

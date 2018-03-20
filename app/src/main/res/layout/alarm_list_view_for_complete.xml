@@ -26,7 +26,8 @@
 
 
 
-        <LinearLayout
+
+    <LinearLayout
             android:paddingLeft="10dp"
             android:layout_margin="1dp"
             android:layout_marginBottom="5dp"
@@ -56,8 +57,24 @@
                     android:textColor="@color/pretty_red" />
 
 
-        </LinearLayout>
-
+    </LinearLayout>
+    <ImageButton
+        android:padding="12dp"
+        android:src="@drawable/send"
+        android:textSize="15dp"
+        android:clickable="true"
+        android:background="@color/pretty_blue"
+android:scaleType="fitCenter"
+        android:gravity="center"
+        android:id="@+id/alarm_send"
+        android:text="거절"
+        android:textStyle="bold"
+        style="@style/primary_text"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
 </LinearLayout>
 
 

@@ -11,8 +11,9 @@ import project.capstone.com.matchingkak.restAPI.APIAdapter;
 public interface Contract {
 
 interface View{
-
-    void done(String res);
+    static final int MAKE_MESSAGE=0;
+    static final int NORMAL=10000;
+    void done(int resultCode,String[] res);
 
 }
 

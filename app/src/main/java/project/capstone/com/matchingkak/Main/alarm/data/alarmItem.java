@@ -44,7 +44,13 @@ public class alarmItem {
     @SerializedName("rq_count_no")
     @Expose
     private String rq_count_no;
+    @SerializedName("rq_type")
+    @Expose
+    private String rq_type;
 
+    public String getRq_type() {
+        return rq_type;
+    }
 
     public void setUser(String user) {
         this.user = user;
@@ -107,7 +113,7 @@ public class alarmItem {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
 
         return dt1.format(date);
