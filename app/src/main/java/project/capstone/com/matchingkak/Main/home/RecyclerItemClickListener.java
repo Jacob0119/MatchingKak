@@ -2,7 +2,6 @@ package project.capstone.com.matchingkak.Main.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,7 +32,7 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
             public void onLongPress(MotionEvent e) {
                 View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                 if (child != null && mListener != null) {
-                    Log.d("long","press");
+                  // Log.d("long","press");
                     mListener.onLongItemClick(child, recyclerView.getChildAdapterPosition(child));
                 }
             }

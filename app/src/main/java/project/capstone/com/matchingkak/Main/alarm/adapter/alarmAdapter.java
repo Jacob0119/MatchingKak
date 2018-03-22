@@ -26,7 +26,8 @@ import project.capstone.com.matchingkak.R;
 public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements AdapterContract.model,AdapterContract.view {
 
 
-    private int lastPosition=-1; //for use of animation
+    private int lastPosition=-1;
+    private int firstPosition=-1;//for use of animation
     private List<alarmItem> mDataset;
     private OnClickListener clicklistener;
     private Context context;
