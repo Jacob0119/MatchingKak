@@ -36,6 +36,38 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
+    public void getData(int id) {
+        final  HomeAdapterContract.Model model=this.adapterModelMap.get(id);
+        final HomeAdapterContract.View view=this.adapterViewMap.get(id);
+        Call<ListData> call=null;
+        switch (id) {
+            case RECOMMEND_GAMELIST:
+                call= HomeListService.getRetrofit().getRecommendation();
+                break;
+            case MAIN_GAMELIST:
+                call=HomeListService.getRetrofit().paging(1);
+                break;
+
+
+        }
+       if(call!=null)
+       call.enqueue(new Callback<ListData>() {
+            @Override
+            public void onResponse(Call<ListData> call, Response<ListData> response) {
+                model.set(response.body().getData());
+                view.setUpdate();   //해당 어댑터 업데이트
+                MainView.finishUpdatePage();
+
+            }
+
+            @Override
+            public void onFailure(Call<ListData> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
     public void showFirstPage() {
             getPage(page=1);
     }

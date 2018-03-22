@@ -16,12 +16,18 @@ import retrofit2.http.Query;
 public class HomeListService extends APIAdapter {
 
 
-    public static MainListAPI getRetrofit(){
+    public static HomeListAPI getRetrofit(){
 
-        return (MainListAPI) retrofit(MainListAPI.class);
+        return (HomeListAPI) retrofit(HomeListAPI.class);
 
     }
-    public interface MainListAPI {
+    public interface HomeListAPI {
+
+
+        @POST(APIUrl.MAIN_RECOMMENDATION)
+        Call<ListData> getRecommendation();
+
+
         /**
          * 게임 목록 가져오기 메소드
          *
@@ -29,7 +35,6 @@ public class HomeListService extends APIAdapter {
 
          * @return
          */
-
         @GET(APIUrl.MAIN_URL)
         Call<ListData> paging(@Query("page") int page);
 

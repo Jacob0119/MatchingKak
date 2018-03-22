@@ -10,11 +10,12 @@ public interface HomeContract {
 
         int BANNER_ADATER=1;
         int MAIN_GAMELIST=2;
-        int RECOMMAND_GAMELIST=3;
+        int RECOMMEND_GAMELIST=3;
 
 
         void attachView(HomeContract.View view);
         void detachView(HomeContract.View view);
+        void getData(int id);
         void showFirstPage();
         void showNextPage();
         void showBanner();

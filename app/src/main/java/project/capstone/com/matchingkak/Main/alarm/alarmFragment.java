@@ -96,20 +96,26 @@ public static alarmFragment newInstance(){
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager layoutManager=LinearLayoutManager.class.cast(recyclerView.getLayoutManager());
-                int totalItemCount=layoutManager.getItemCount();
                 int lastVisible=layoutManager.findLastVisibleItemPosition();
-                boolean endHasBeenReadched=lastVisible+5>=totalItemCount;
+                int firstVisible=layoutManager.findFirstVisibleItemPosition();
+
                 int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
                 int itemTotalCount = recyclerView.getAdapter().getItemCount() - 1;
                 if (lastVisibleItemPosition == itemTotalCount) {
+                    //끝에 도달
                     getData(++page,false);
-                    return;
+                     return;
+                }else if(firstPosition>firstVisible){
+                    View item= layoutManager.findViewByPosition(firstVisible);
+                    setAnimation(item,R.anim.item_animation_fall_down);
+                    lastPosition=lastVisible;
+                    firstPosition=firstVisible;
                 }
                else if(lastPosition<lastVisible){
                     View item= layoutManager.findViewByPosition(lastVisible);
-                    Animation animation= AnimationUtils.loadAnimation(context,R.anim.item_animation_fall_down);
-                    item.startAnimation(animation);
+                   setAnimation(item,R.anim.item_animation_fall_up);
                     lastPosition=lastVisible;
+                    firstPosition=firstVisible;
                 }
 
             }
@@ -145,6 +151,15 @@ public static alarmFragment newInstance(){
                 }
             }
         });*/
+    }
+
+    void setAnimation(View item,int Rid){
+
+
+        Animation animation= AnimationUtils.loadAnimation(context,Rid);
+        item.startAnimation(animation);
+
+
     }
     void getData(int page, final boolean isUpper){
         if(!isUpper) {
