@@ -2,18 +2,21 @@ package project.capstone.com.matchingkak.Main.alarm.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import project.capstone.com.matchingkak.Main.alarm.AdapterContract;
-import project.capstone.com.matchingkak.Main.alarm.OnClickListener;
+import project.capstone.com.matchingkak.Main.AdapterContract;
+import project.capstone.com.matchingkak.Main.OnClickListener;
+import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.alarm.adapter.holder.AlarmViewHolderToComplete;
 import project.capstone.com.matchingkak.Main.alarm.adapter.holder.AlarmViewHolderToSubmit;
-import project.capstone.com.matchingkak.Main.alarm.adapter.holder.ViewHolder;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmItem;
 import project.capstone.com.matchingkak.R;
 
@@ -23,7 +26,7 @@ import project.capstone.com.matchingkak.R;
 public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements AdapterContract.model,AdapterContract.view {
 
 
-
+    private int lastPosition=-1; //for use of animation
     private List<alarmItem> mDataset;
     private OnClickListener clicklistener;
     private Context context;
@@ -85,12 +88,22 @@ private final int SUBMIT=0;
             return new AlarmViewHolderToComplete(v);
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if(holder==null)return;
         holder.bind(context,getItem(position),position,clicklistener);
+        setAnimation(holder.itemView,position);
+        //Log.d("holder",position+"");
     }
+    private void setAnimation(View viewToAnimate,int position){
+        Log.d("alarmAdapter","anim!");
+            Animation animation= AnimationUtils.loadAnimation(context,R.anim.item_animation_fall_down);
 
+            viewToAnimate.startAnimation(animation);
+            lastPosition=position;
+
+    }
     // Replace the contents of a view (invoked by the layout manager)
 
 

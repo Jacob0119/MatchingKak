@@ -16,7 +16,7 @@ public class MessageListService extends APIAdapter {
 
     public static MessageListAPI getRetrofit(Context context){
 
-       return   (MessageListAPI)retrofit(context,MessageListAPI.class);
+       return   (MessageListAPI)retrofit(MessageListAPI.class);
 
     }
 

@@ -1,7 +1,5 @@
 package project.capstone.com.matchingkak.detail_info;
 
-import android.content.Context;
-
 import project.capstone.com.matchingkak.restAPI.APIAdapter;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 import retrofit2.Call;
@@ -18,9 +16,9 @@ import retrofit2.http.Query;
 public class DetailService extends APIAdapter {
 
 
-    public static DetailAPI getRetrofit(Context context){
+    public static DetailAPI getRetrofit(){
 
-        return (DetailAPI) retrofit(context,DetailAPI.class);
+        return (DetailAPI) retrofit(DetailAPI.class);
 
     }
     public interface DetailAPI {

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_weight="1"
@@ -14,11 +15,7 @@
             android:id="@+id/message_swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v4.widget.NestedScrollView
-                android:background="#D3D9DB"
-                android:id="@+id/message_nested"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
 
                 <LinearLayout
                     android:focusableInTouchMode="true"
@@ -26,15 +23,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <android.support.v7.widget.RecyclerView
-
-                        android:id="@+id/message_recycler"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+
 
         </android.support.v4.widget.SwipeRefreshLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/message_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutAnimation="@anim/layout_animation_fall_down" />
+
         <ProgressBar
 
             android:layout_alignBottom="@id/message_swipe_refresh"

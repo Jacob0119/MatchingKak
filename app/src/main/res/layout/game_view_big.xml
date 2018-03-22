@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/small_CardView"
+
+   >
+
+<LinearLayout
+
+    android:id="@+id/temp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+
+        android:layout_gravity="center"
+        android:id="@+id/game_view_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/small_size"
+        android:paddingBottom="1dp"
+        app:srcCompat="@drawable/login_bh" />
+    <LinearLayout
+       android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:gravity="center"
+            android:id="@+id/game_view_sport"
+            android:text="농구"
+            android:textStyle="bold"
+            style="@style/primary_text"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          />
+
+        <LinearLayout
+
+                        android:orientation="vertical"
+                        android:layout_alignBottom="@id/game_view_image"
+                        android:paddingLeft="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+            <TextView
+
+                android:id="@+id/game_view_title"
+                style="@style/primary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="제목" />
+
+            <LinearLayout
+
+
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/game_view_team"
+                    style="@style/secondary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="팀 명 " />
+                <LinearLayout
+                    android:gravity="center_vertical|right"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/game_view_location"
+                        style="@style/secondary_text_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="서울특별시 종로구"
+                        android:textColor="@color/primary_text" />
+
+                    <TextView
+                        android:id="@+id/game_view_date"
+                        style="@style/date_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2017/4/23"
+                    />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+    <LinearLayout
+    android:gravity="center"
+    android:background="@color/transparent_white"
+    android:orientation="vertical"
+    android:layout_width="60dp"
+    android:layout_height="60dp">
+            <ImageView
+                android:backgroundTint="@color/white"
+                android:id="@+id/game_view_state_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
+                android:src="@drawable/wait" />
+
+        <TextView
+            android:id="@+id/game_view_state_text"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:text="성사완료"
+            android:textColor="@color/primary_text"
+            android:textSize="10dp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

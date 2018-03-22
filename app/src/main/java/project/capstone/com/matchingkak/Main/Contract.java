@@ -1,4 +1,4 @@
-package project.capstone.com.matchingkak.Main.alarm;
+package project.capstone.com.matchingkak.Main;
 
 import android.content.Context;
 
@@ -20,7 +20,6 @@ interface View{
     interface Presenter {
 
         void attatchView(View view);
-
         void detachView();
 
         void setAdapterModel(AdapterContract.model model);

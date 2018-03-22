@@ -163,7 +163,7 @@ class NormalState implements State{
                 @Override
                 public void onClick(View view) {
 
-                   DetailService.getRetrofit(context).requestMatch(info.getGmNo()).enqueue(new Callback<RequestResult>() {
+                   DetailService.getRetrofit().requestMatch(info.getGmNo()).enqueue(new Callback<RequestResult>() {
                       @Override
                       public void onResponse(Call<RequestResult> call, Response<RequestResult> response) {
 

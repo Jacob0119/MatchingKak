@@ -17,7 +17,7 @@ public class SignService extends APIAdapter {
 
     public static SignAPI getRetrofit(Context context){
 
-        return (SignAPI) retrofit(context,SignAPI.class);
+        return (SignAPI) retrofit(SignAPI.class);
 
     }
     public interface SignAPI {

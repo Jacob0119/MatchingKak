@@ -1,6 +1,4 @@
-package project.capstone.com.matchingkak.Main.home;
-
-import android.content.Context;
+package project.capstone.com.matchingkak.Main.home.data;
 
 import java.util.List;
 
@@ -15,12 +13,12 @@ import retrofit2.http.Query;
  * Created by Lee on 2017-10-27.
  */
 
-public class MainListService extends APIAdapter {
+public class HomeListService extends APIAdapter {
 
 
-    public static MainListAPI getRetrofit(Context context){
+    public static MainListAPI getRetrofit(){
 
-        return (MainListAPI) retrofit(context,MainListAPI.class);
+        return (MainListAPI) retrofit(MainListAPI.class);
 
     }
     public interface MainListAPI {
@@ -33,7 +31,7 @@ public class MainListService extends APIAdapter {
          */
 
         @GET(APIUrl.MAIN_URL)
-        Call<ListData> paging( @Query("page") int page);
+        Call<ListData> paging(@Query("page") int page);
 
         @POST(APIUrl.LOG_OUT_URL)
         Call<Boolean> logout();

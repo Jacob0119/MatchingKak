@@ -1,4 +1,4 @@
-package project.capstone.com.matchingkak.Main.alarm;
+package project.capstone.com.matchingkak.Main;
 
 import java.util.List;
 

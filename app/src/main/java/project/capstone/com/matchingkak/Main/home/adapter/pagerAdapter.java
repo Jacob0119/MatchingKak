@@ -1,4 +1,4 @@
-package project.capstone.com.matchingkak.Main.home;
+package project.capstone.com.matchingkak.Main.home.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 
@@ -22,7 +23,7 @@ import project.capstone.com.matchingkak.restAPI.APIUrl;
  * Created by Lee on 2017-11-01.
  */
 
-public class pagerAdapter extends PagerAdapter {
+public class pagerAdapter extends PagerAdapter implements HomeAdapterContract.View,HomeAdapterContract.Model {
 
     List<String> list;
     private Context context;
@@ -74,5 +75,21 @@ public class pagerAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view==object;
+    }
+
+    @Override
+    public void setUpdate() {
+
+    }
+
+    @Override
+    public void set(List data) {
+        this.setList(data);
+    }
+
+    @Override
+    public void add(List data) {
+            list.clear();
+            this.setList(data);
     }
 }

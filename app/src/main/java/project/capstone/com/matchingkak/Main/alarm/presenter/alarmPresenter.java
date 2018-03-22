@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import project.capstone.com.matchingkak.Main.alarm.AdapterContract;
-import project.capstone.com.matchingkak.Main.alarm.Contract;
-import project.capstone.com.matchingkak.Main.alarm.OnClickListener;
+import project.capstone.com.matchingkak.Main.AdapterContract;
+import project.capstone.com.matchingkak.Main.Contract;
+import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.alarm.data.AlarmListData;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmItem;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmListService;
@@ -60,7 +60,7 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
     @Override
     public void loadItems(Context context,int page,final boolean isUpper) {
 
-        service.getRetrofit(context).paging(page).enqueue(new Callback<AlarmListData>() {
+        service.getRetrofit().paging(page).enqueue(new Callback<AlarmListData>() {
             @Override
             public void onResponse(Call<AlarmListData> call, Response<AlarmListData> response) {
 
@@ -87,7 +87,7 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
 
             case R.id.alarm_submit:
                 Toast.makeText(v.getContext(),temp.getRq_type(),Toast.LENGTH_SHORT).show();
-                service.getRetrofit(v.getContext()).matching(temp.getRq_no()
+                service.getRetrofit().matching(temp.getRq_no()
                         ,temp.getRq_type()
                         ,temp.getRq_count_no()
                         ,temp.getMb_no()).enqueue(new Callback<Void>() {
@@ -107,7 +107,7 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
                 });
                 break;
             case R.id.alarm_reject:
-               service.getRetrofit(v.getContext()).matching_reject(temp.getRq_no()).enqueue(
+               service.getRetrofit().matching_reject(temp.getRq_no()).enqueue(
                        new Callback<Void>() {
                            @Override
                            public void onResponse(Call<Void> call, Response<Void> response) {

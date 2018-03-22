@@ -18,7 +18,7 @@ public class MessageService extends APIAdapter {
 
     public static MessageAPI getRetrofit(Context context){
 
-        return (MessageAPI) retrofit(context,MessageAPI.class);
+        return (MessageAPI) retrofit(MessageAPI.class);
 
     }
     public interface MessageAPI {

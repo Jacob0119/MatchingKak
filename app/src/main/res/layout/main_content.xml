@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <android.support.v4.widget.SwipeRefreshLayout
 
@@ -19,7 +20,7 @@
             android:id="@+id/main_nested"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gra_bg2"
+            android:background="@color/white"
 
            >
 
@@ -32,17 +33,11 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/main_view_pager"
                     android:layout_width="match_parent"
-
                     android:layout_height="166dp"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_weight="1"
-                    android:id="@+id/main_recyler"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
+              <include layout="@layout/home_content1"/>
+                <include layout="@layout/home_content2"/>
                 <ProgressBar
 
                     android:layout_gravity="bottom"

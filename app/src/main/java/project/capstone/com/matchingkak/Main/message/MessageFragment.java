@@ -17,6 +17,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,6 +235,9 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
         holder.date.setText(datum.getMs_send_date());
         holder.mb_nick.setText(datum.getMb_nick());
 
+        Glide.with(context).load("http://www.matchingkak.com/images/temp.png")
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(holder.mb_image);
 
 
     }

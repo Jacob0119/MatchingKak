@@ -1,7 +1,5 @@
 package project.capstone.com.matchingkak.Main.alarm.data;
 
-import android.content.Context;
-
 import project.capstone.com.matchingkak.restAPI.APIAdapter;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 import retrofit2.Call;
@@ -16,9 +14,9 @@ import retrofit2.http.Query;
  */
 
 public class alarmListService extends APIAdapter {
-    public static alarmAPI getRetrofit(Context context){
+    public static alarmAPI getRetrofit(){
 
-        return   (alarmAPI)retrofit(context,alarmAPI.class);
+        return   (alarmAPI)retrofit(alarmAPI.class);
 
     }
 

@@ -243,7 +243,7 @@ public class DetailActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
            String gm_no=params[0];
             Log.d("doIn",gm_no);
-         Call<Info> call=   DetailService.getRetrofit(DetailActivity.this).requestInfo(gm_no);
+         Call<Info> call=   DetailService.getRetrofit().requestInfo(gm_no);
 
             try {
                 Response<Info> response=call.execute();

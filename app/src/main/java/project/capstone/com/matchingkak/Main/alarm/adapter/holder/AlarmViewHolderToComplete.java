@@ -8,7 +8,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import project.capstone.com.matchingkak.Main.alarm.OnClickListener;
+import project.capstone.com.matchingkak.Main.OnClickListener;
+import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmItem;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
@@ -25,6 +26,7 @@ public class AlarmViewHolderToComplete extends ViewHolder {
     private View message_btn;
     public AlarmViewHolderToComplete(View v) {
         super(v);
+
         alarm_title         =v.findViewById(R.id.alarm_list_title);
         alarm_date          =v.findViewById(R.id.alarm_list_date);
         profile             =v.findViewById(R.id.alarm_image);
@@ -32,8 +34,9 @@ public class AlarmViewHolderToComplete extends ViewHolder {
     }
 
     @Override
-    public void bind(Context context, alarmItem item, final int pos, final OnClickListener listener) {
-        alarm_title.setText(item.getUser()+"님과 경기 성사 완료");
+    public void bind(Context context, Object data, final int pos, final OnClickListener listener) {
+        alarmItem item=(alarmItem)data;
+        alarm_title.setText(pos+"."+item.getUser()+"님과 경기 성사 완료");
         alarm_date.setText(item.getAlarm_send_date());
         RequestOptions options=new RequestOptions();
         Glide.with(context)

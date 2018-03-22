@@ -1,6 +1,5 @@
 package project.capstone.com.matchingkak.restAPI;
 
-import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIAdapter {
 
-    protected static Object retrofit(Context context, Class<?> serviceName){
+    protected static Object retrofit(Class<?> serviceName){
 
 
         OkHttpClient client = new OkHttpClient.Builder()

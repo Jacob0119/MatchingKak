@@ -12,8 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
+import project.capstone.com.matchingkak.Main.Contract;
 import project.capstone.com.matchingkak.Main.alarm.adapter.alarmAdapter;
 import project.capstone.com.matchingkak.Main.alarm.presenter.alarmPresenter;
 import project.capstone.com.matchingkak.Main.home.RecyclerItemClickListener;
@@ -24,7 +27,8 @@ import project.capstone.com.matchingkak.R;
  * A simple {@link Fragment} subclass.
  */
 public class alarmFragment extends Fragment implements Contract.View{
-
+    private int lastPosition=-1;
+    private int firstPosition=-1;
     private Contract.Presenter presenter;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -73,20 +77,43 @@ public static alarmFragment newInstance(){
             @Override
             public void onRefresh() {
 
-                getData(1,true);
+                getData(page=1,true);
                 //getData(page,true);
             }
         });
 
         mRecyclerView=getView().findViewById(R.id.message_recycler);
         mRecyclerView.setNestedScrollingEnabled(false);
-
+       // AnimationManager.runLayoutAnimation(mRecyclerView);
 
         this.mLayoutManager=new LinearLayoutManager(context);
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(false);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager=LinearLayoutManager.class.cast(recyclerView.getLayoutManager());
+                int totalItemCount=layoutManager.getItemCount();
+                int lastVisible=layoutManager.findLastVisibleItemPosition();
+                boolean endHasBeenReadched=lastVisible+5>=totalItemCount;
+                int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int itemTotalCount = recyclerView.getAdapter().getItemCount() - 1;
+                if (lastVisibleItemPosition == itemTotalCount) {
+                    getData(++page,false);
+                    return;
+                }
+               else if(lastPosition<lastVisible){
+                    View item= layoutManager.findViewByPosition(lastVisible);
+                    Animation animation= AnimationUtils.loadAnimation(context,R.anim.item_animation_fall_down);
+                    item.startAnimation(animation);
+                    lastPosition=lastVisible;
+                }
+
+            }
+        });
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -104,7 +131,7 @@ public static alarmFragment newInstance(){
         }));
 
 
-
+/*
         nestedScrollView=getView().findViewById(R.id.message_nested);
 
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -117,7 +144,7 @@ public static alarmFragment newInstance(){
                     }
                 }
             }
-        });
+        });*/
     }
     void getData(int page, final boolean isUpper){
         if(!isUpper) {
@@ -126,6 +153,7 @@ public static alarmFragment newInstance(){
         }
         //현재페이지에 맞는 리스트 데이터 가져오기
        presenter.loadItems(context,page,isUpper);
+        //mRecyclerView.scheduleLayoutAnimation();
 
 
     }
