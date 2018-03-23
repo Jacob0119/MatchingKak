@@ -169,7 +169,7 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
 
         View msg_view;
         private TextView ms_title,date,mb_nick;
-        ImageView mb_image;
+        ImageView mb_image,ms_new;
 
         public ViewHolder(View v){
 
@@ -179,6 +179,7 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
             date        =v.findViewById(R.id.message_list_date);
             mb_nick    =v.findViewById(R.id.message_list_sender);
             mb_image       =v.findViewById(R.id.message_list_image);
+            ms_new  =v.findViewById(R.id.message_new);
         }
 
 
@@ -234,6 +235,8 @@ class MSGAdapter extends  RecyclerView.Adapter<MSGAdapter.ViewHolder>{
 
         holder.date.setText(datum.getMs_send_date());
         holder.mb_nick.setText(datum.getMb_nick());
+
+        if(datum.getMs_read())holder.ms_new.setVisibility(View.VISIBLE);
 
         Glide.with(context).load("http://www.matchingkak.com/images/temp.png")
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))

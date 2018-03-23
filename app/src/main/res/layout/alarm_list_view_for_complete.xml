@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v7.widget.CardView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/alarm_CardView"
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
+    <ImageView
+        android:src="@drawable/alarm_submit_img"
+        android:scaleType="centerInside"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        />
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+        android:orientation="horizontal">
 
 
-            >
+
             <ImageView
 
                 android:id="@+id/alarm_image"
@@ -32,11 +32,11 @@
                 android:padding="8dp">
 
                 <TextView
-                    android:layout_weight="1"
                     android:id="@+id/alarm_list_title"
                     style="@style/primary_text_for_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="수락 되었습니다." />
 
                 <TextView
@@ -48,28 +48,32 @@
                     android:text="2017/4/23" />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:gravity="center">
+                    android:gravity="left">
 
-                    <Button
+                    <ImageView
+                        android:src="@drawable/info2"
+                        android:scaleType="centerInside"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:id="@+id/alarm_info"
-                        style="@style/AppTheme.RoundedCornerMaterialButton"
-                        android:backgroundTint="@color/pretty_blue"
-                        android:text="정보" />
+                         />
 
-                    <Button
-
+                    <ImageView
+                        android:src="@drawable/mail"
+                        android:scaleType="centerInside"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:id="@+id/alarm_send"
-                        style="@style/AppTheme.RoundedCornerMaterialButton"
-                        android:backgroundTint="@color/pretty_red"
-                        android:text="연락" />
+                        />
                 </LinearLayout>
 
 
             </LinearLayout>
-        </LinearLayout>
+
         <!--   <Button
         android:padding="10dp"
         android:src="@drawable/send"
@@ -95,6 +99,5 @@
 
     </LinearLayout>
 
-
-
 </android.support.v7.widget.CardView>
+

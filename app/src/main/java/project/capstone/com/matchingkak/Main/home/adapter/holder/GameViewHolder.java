@@ -54,13 +54,14 @@ public class GameViewHolder extends ViewHolder{
         this.location.setText(item.getGmGym());
         this.sport.setText(item.getTmSport());
         RequestOptions options=new RequestOptions();
-
+        View state_back=itemView.findViewById(R.id.game_view_state_back);
         if(item.getGmState().equals("0"))//성사대기
-        {
+        {   state_back.setBackgroundColor(context.getColor(R.color.pretty_red));
             this.state.setImageDrawable(context.getDrawable(R.drawable.wait));
             this.state_text.setText("요청가능");
 
         }else{
+            state_back.setBackgroundColor(context.getColor(R.color.pretty_blue));
             this.state.setImageDrawable(context.getDrawable(R.drawable.check));
             this.state_text.setText("성사완료");
         }

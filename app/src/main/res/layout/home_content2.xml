@@ -10,27 +10,29 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <RelativeLayout
 
-<TextView
-    android:gravity="center"
-    android:textStyle="bold"
-    android:textSize="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="회원님을 위한 추천 경기"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/home_cardview_title"
+
+                    android:text=""/>
+                <TextView
+                    android:gravity="end|center_vertical"
+                    android:layout_centerInParent="true"
+                    style="@style/primary_text_for_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="more>"
+                    />
+            </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_weight="1"
                 android:id="@+id/home_recyler2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
-            <TextView
-                android:gravity="center"
-                android:padding="5dp"
-                style="@style/primary_text_for_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="더보기"
-                />
+
         </LinearLayout>
     </android.support.v7.widget.CardView>

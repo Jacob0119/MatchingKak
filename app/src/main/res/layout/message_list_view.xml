@@ -7,12 +7,19 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:background="#ff000000"
-
+    app:cardCornerRadius="5dp"
     app:cardElevation="0dp"
-
+    android:layout_margin="6dp"
+    app:contentPadding="10dp"
   >
+<ImageView
+    android:visibility="invisible"
+    android:id="@+id/message_new"
+    android:scaleType="centerInside"
+    android:layout_width="10dp"
+    android:layout_height="10dp"
+    android:src="@drawable/new_bubble"/>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -43,8 +50,8 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/gra_bg2"
                 android:id="@+id/message_list_image"
-                android:layout_height="60dp"
-                android:layout_width="60dp"/>
+                android:layout_height="50dp"
+                android:layout_width="50dp"/>
 
 
 

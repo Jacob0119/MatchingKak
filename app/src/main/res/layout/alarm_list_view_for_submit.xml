@@ -53,13 +53,13 @@
                      android:layout_height="wrap_content"
                      android:gravity="right">
 
-                     <Button
-
+                     <ImageView
+                         android:scaleType="centerInside"
+                        android:layout_height="50dp"
+                         android:layout_width="50dp"
                          android:id="@+id/alarm_submit"
-                         style="@style/AppTheme.RoundedCornerMaterialButton"
-
-                         android:backgroundTint="@color/colorPrimary"
-                         android:text="수락" />
+                            android:src="@drawable/submit"
+                         />
 
                      <Button
                          android:id="@+id/alarm_reject"
