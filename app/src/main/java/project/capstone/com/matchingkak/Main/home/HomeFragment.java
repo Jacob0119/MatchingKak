@@ -18,6 +18,7 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
 
 import project.capstone.com.matchingkak.Main.home.adapter.HomeAdapter;
+import project.capstone.com.matchingkak.Main.home.adapter.menuAdapter;
 import project.capstone.com.matchingkak.Main.home.adapter.pagerAdapter;
 import project.capstone.com.matchingkak.Main.home.presenter.HomePresenter;
 import project.capstone.com.matchingkak.R;
@@ -36,9 +37,10 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     private HomeContract.Presenter presenter;
 
-    private RecyclerView mRecyclerView1,mRecyclerView2;
-    private RecyclerView.LayoutManager mLayoutManager1,mLayoutManager2;
+    private RecyclerView mRecyclerView1,mRecyclerView2,mRecyclerView3;
+    private RecyclerView.LayoutManager mLayoutManager1,mLayoutManager2,mLayoutManager3;
     private HomeAdapter mAdapter1,mAdapter2;
+    private menuAdapter mAdapter3;
     private ProgressBar mProgress;
     private ViewPager pager;
     private pagerAdapter pAdapter;
@@ -80,12 +82,16 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
 
        init();
+
+    loadAll();
+    }
+
+    void loadAll(){
         presenter.showBanner();
         presenter.getData(presenter.MAIN_GAMELIST);
         presenter.getData(presenter.RECOMMEND_GAMELIST);
-
+        presenter.getMenu();
     }
-
     void init(){
 
 
@@ -102,11 +108,15 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
         ////main list
         mAdapter1=new HomeAdapter(context);
+
         mAdapter2=new HomeAdapter(context);
+        mAdapter3=new menuAdapter(context);
         presenter.setAdapterView(mAdapter1,presenter.RECOMMEND_GAMELIST);
         presenter.setAdapterModel(mAdapter1,presenter.RECOMMEND_GAMELIST);
         presenter.setAdapterView(mAdapter2,presenter.MAIN_GAMELIST);
         presenter.setAdapterModel(mAdapter2,presenter.MAIN_GAMELIST);
+        presenter.setAdapterView(mAdapter3,presenter.MENU_LIST);
+        presenter.setAdapterModel(mAdapter3,presenter.MENU_LIST);
 
         this.mLayoutManager1=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         mLayoutManager1.setAutoMeasureEnabled(true);
@@ -129,6 +139,14 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         LayoutAnimationController controller= AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_up);
         mRecyclerView2.setLayoutAnimation(controller);
 
+        this.mLayoutManager3=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
+        mLayoutManager3.setAutoMeasureEnabled(true);
+        mRecyclerView3=getView().findViewById(R.id.home_recyler3);
+        mRecyclerView3.setNestedScrollingEnabled(false);
+        mRecyclerView3.setLayoutManager(mLayoutManager3);
+        mRecyclerView3.setAdapter(mAdapter3);
+        mRecyclerView3.setHasFixedSize(false);
+
 
 
         mRecyclerView2.addOnItemTouchListener(new RecyclerItemClickListener(context, mRecyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
@@ -150,7 +168,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-               getFirstPage();
+              loadAll();
             }
         });
 

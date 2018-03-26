@@ -46,7 +46,8 @@ public class HomeListService extends APIAdapter {
         Call<List<String>> getBanner();
 
 
-
+        @POST(APIUrl.HOME_MENU_URL)
+        Call<List<MenuData>> getMenu();
 
     }
 

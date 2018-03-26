@@ -2,7 +2,6 @@ package project.capstone.com.matchingkak.Main.alarm.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,7 +97,7 @@ private final int SUBMIT=0;
         //Log.d("holder",position+"");
     }
     private void setAnimation(View viewToAnimate,int position){
-        Log.d("alarmAdapter","anim!");
+        //Log.d("alarmAdapter","anim!");
             Animation animation= AnimationUtils.loadAnimation(context,R.anim.item_animation_fall_down);
 
             viewToAnimate.startAnimation(animation);

@@ -20,8 +20,9 @@ import project.capstone.com.matchingkak.R;
  * Created by amco1 on 2018-03-21.
  */
 public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements HomeAdapterContract.Model,HomeAdapterContract.View{
-
-
+    static int GRID=1;
+    static int LINEAR=2;
+    private int type;
 
     private List<HomeData> mDataset;
 
@@ -51,18 +52,26 @@ public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements Ho
     }
 
 
-
+    public HomeAdapter(Context context ,int type){
+        this.type=type;
+        this.context=context;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-
-
-        View v = LayoutInflater.from(parent.getContext())
+    View v=null;
+    if(type==GRID) {
+         v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.game_view_for_grid, parent, false);
+    }else{
+         v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.game_view, parent, false);
+    }
 
         ViewHolder vh = new GameViewHolder(v);
-        return vh;
+            return vh;
+
     }
 
     // Replace the contents of a view (invoked by the layout manager)

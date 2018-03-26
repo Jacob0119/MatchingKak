@@ -102,9 +102,9 @@ public class Main2Activity extends AppCompatActivity {
        });
         mAdapter = new ViewPagerAdapter (this.getFragmentManager());
        mAdapter.addFragment(HomeFragment.newInstance(), "home");
-       mAdapter.addFragment(alarmFragment.newInstance(), "alarm");
-       mAdapter.addFragment(meFragment.newInstance(), "me");
        mAdapter.addFragment(MessageFragment.newInstance(), "message");
+       mAdapter.addFragment(meFragment.newInstance(), "me");
+       mAdapter.addFragment(alarmFragment.newInstance(), "alarm");
 
        mViewPager.setAdapter(mAdapter);
        mViewPager.setOffscreenPageLimit(mAdapter.getCount() - 1);
@@ -113,9 +113,9 @@ public class Main2Activity extends AppCompatActivity {
        final BottomNavigationBar bottomNavigationView=findViewById(R.id.main_bottom_nav);
 
         bottomNavigationView.addItem(new BottomNavigationItem(R.drawable.home,"홈"))
-                .addItem(new BottomNavigationItem(alarm,"알림"))
-                .addItem(new BottomNavigationItem(R.drawable.me,"나"))
                 .addItem(new BottomNavigationItem(R.drawable.mail,"쪽지"))
+                .addItem(new BottomNavigationItem(R.drawable.me,"나"))
+                .addItem(new BottomNavigationItem(alarm,"알림"))
                 .addItem(new BottomNavigationItem(R.drawable.edit,"글쓰기"))
                 .initialise();
 

@@ -12,6 +12,10 @@
 
 
     </style>
+    <style name="home_cardview">
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
     <style name="home_cardview_title" >
         <item name="android:fontFamily">@font/main_font</item>
         <item name="android:layout_width">match_parent</item>
@@ -44,16 +48,15 @@
     <style name="small_CardView">
         <item name="cardCornerRadius">2dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">@dimen/small_size</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_margin">4dp</item>
-        <item name="android:padding">15dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardElevation">0dp</item>
-        <item name="contentPadding">0dp</item>
+
     </style>
     <style name="alarm_CardView">
         <item name="cardCornerRadius">2dp</item>
-        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_margin">4dp</item>
         <item name="android:padding">15dp</item>
