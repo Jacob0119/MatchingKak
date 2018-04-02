@@ -28,7 +28,7 @@
     <item
         android:id="@+id/b_nav_4"
         android:enabled="true"
-        android:icon="@drawable/edit"
+        android:icon="@drawable/edit_button"
         android:title="new"
         app:showAsAction="always" />
 

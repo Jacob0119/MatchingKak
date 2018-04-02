@@ -11,7 +11,11 @@ import android.webkit.CookieManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import project.capstone.com.matchingkak.MainActivity;
 import project.capstone.com.matchingkak.R;
@@ -53,10 +57,12 @@ public class meFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+        ImageView edit=getView().findViewById(R.id.edit_image);
+        ImageView profile_picture=getView().findViewById(R.id.me_picture);
         //init();
 
-
+        Glide.with(this).load(R.drawable.edit_profile).apply(RequestOptions.circleCropTransform()).into(edit);
+        Glide.with(this ).load(R.drawable.main_icon2).apply(RequestOptions.circleCropTransform()).into(profile_picture);
     }
 
 
