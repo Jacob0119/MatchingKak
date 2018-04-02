@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
             <android.support.design.widget.CollapsingToolbarLayout
-                android:background="@color/pure_gray"
+
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -33,7 +33,7 @@
                 >
 
                 <android.support.v7.widget.Toolbar
-                    android:background="#CA9E41"
+                    android:background="@drawable/background_toolbar_transparent"
                     android:id="@+id/detail_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
