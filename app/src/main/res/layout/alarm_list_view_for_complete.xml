@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/alarm_CardView"
-
+    android:layout_marginLeft="30dp"
     android:layout_height="wrap_content">
 
     <LinearLayout

@@ -15,7 +15,6 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -30,6 +29,7 @@ import project.capstone.com.matchingkak.Main.alarm.alarmFragment;
 import project.capstone.com.matchingkak.Main.home.HomeFragment;
 import project.capstone.com.matchingkak.Main.me.meFragment;
 import project.capstone.com.matchingkak.Main.message.MessageFragment;
+import project.capstone.com.matchingkak.Main.message.MessageParentFragment;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 
@@ -88,62 +88,72 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+       final BottomNavigationBar bottomNavigationView=findViewById(R.id.main_bottom_nav);
 
+       bottomNavigationView.addItem(new BottomNavigationItem(R.drawable.home,"홈"))
+               .addItem(new BottomNavigationItem(R.drawable.mail,"쪽지"))
+               .addItem(new BottomNavigationItem(R.drawable.me,"나"))
+               .addItem(new BottomNavigationItem(alarm,"알림"))
+               .addItem(new BottomNavigationItem(R.drawable.edit,"글쓰기"))
+               .initialise();
+
+       bottomNavigationView.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+           @Override
+           public void onTabSelected(int i) {
+               if(i!=4) {
+                   mViewPager.setCurrentItem(i, false);
+                   selectedTab=i;
+               }
+               else {
+                   Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
+                   intent.putExtra("url", APIUrl.API_BASE_URL+APIUrl.EDITOR_URL);
+                   startActivity(intent);
+                   bottomNavigationView.selectTab(selectedTab);
+               }
+           }
+
+           @Override
+           public void onTabUnselected(int i) {
+
+           }
+
+           @Override
+           public void onTabReselected(int i) {
+               onTabSelected(i);
+           }
+       });
 
 
 
 
         mViewPager =  findViewById(R.id.main_view_pager);
-       mViewPager.setOnTouchListener(new View.OnTouchListener() {
-           @Override
-           public boolean onTouch(View v, MotionEvent event) {
-               return false;
-           }
-       });
+
         mAdapter = new ViewPagerAdapter (this.getFragmentManager());
        mAdapter.addFragment(HomeFragment.newInstance(), "home");
-       mAdapter.addFragment(MessageFragment.newInstance(), "message");
+       mAdapter.addFragment(MessageParentFragment.newInstance(), "message");
        mAdapter.addFragment(meFragment.newInstance(), "me");
        mAdapter.addFragment(alarmFragment.newInstance(), "alarm");
 
        mViewPager.setAdapter(mAdapter);
        mViewPager.setOffscreenPageLimit(mAdapter.getCount() - 1);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                    bottomNavigationView.selectTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
-       final BottomNavigationBar bottomNavigationView=findViewById(R.id.main_bottom_nav);
-
-        bottomNavigationView.addItem(new BottomNavigationItem(R.drawable.home,"홈"))
-                .addItem(new BottomNavigationItem(R.drawable.mail,"쪽지"))
-                .addItem(new BottomNavigationItem(R.drawable.me,"나"))
-                .addItem(new BottomNavigationItem(alarm,"알림"))
-                .addItem(new BottomNavigationItem(R.drawable.edit,"글쓰기"))
-                .initialise();
-
-     bottomNavigationView.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-         @Override
-         public void onTabSelected(int i) {
-                  if(i!=4) {
-                      mViewPager.setCurrentItem(i, false);
-                        selectedTab=i;
-                  }
-                  else {
-                      Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
-                      intent.putExtra("url", APIUrl.API_BASE_URL+APIUrl.EDITOR_URL);
-                      startActivity(intent);
-                      bottomNavigationView.selectTab(selectedTab);
-                  }
-         }
-
-         @Override
-         public void onTabUnselected(int i) {
-
-         }
-
-         @Override
-         public void onTabReselected(int i) {
-            onTabSelected(i);
-         }
-     });
 /*
        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
            @Override

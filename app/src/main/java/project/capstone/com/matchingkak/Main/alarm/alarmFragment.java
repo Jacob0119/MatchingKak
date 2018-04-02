@@ -16,7 +16,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
-import project.capstone.com.matchingkak.Main.Contract;
 import project.capstone.com.matchingkak.Main.alarm.adapter.alarmAdapter;
 import project.capstone.com.matchingkak.Main.alarm.presenter.alarmPresenter;
 import project.capstone.com.matchingkak.Main.home.RecyclerItemClickListener;
@@ -26,10 +25,12 @@ import project.capstone.com.matchingkak.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class alarmFragment extends Fragment implements Contract.View{
+public class alarmFragment extends Fragment implements alarmContract.View{
+
+
     private int lastPosition=-1;
     private int firstPosition=-1;
-    private Contract.Presenter presenter;
+    private alarmContract.Presenter presenter;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private alarmAdapter mAdapter;

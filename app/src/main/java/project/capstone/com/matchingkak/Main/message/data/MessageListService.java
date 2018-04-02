@@ -1,6 +1,4 @@
-package project.capstone.com.matchingkak.Main.message;
-
-import android.content.Context;
+package project.capstone.com.matchingkak.Main.message.data;
 
 import project.capstone.com.matchingkak.restAPI.APIAdapter;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
@@ -14,7 +12,7 @@ import retrofit2.http.Query;
 
 public class MessageListService extends APIAdapter {
 
-    public static MessageListAPI getRetrofit(Context context){
+    public static MessageListAPI getRetrofit(){
 
        return   (MessageListAPI)retrofit(MessageListAPI.class);
 

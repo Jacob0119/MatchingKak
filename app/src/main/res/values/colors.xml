@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="colorPrimary_light">#4db6ac</color>
-    <color name="colorPrimary">#009987</color>
-    <color name="colorPrimaryDark">#00695c</color>
+    <color name="pretty_gray">#717171</color>
+    <color name="colorPrimary_light">#c205705e</color>
+    <color name="colorPrimary">#3CAE8C</color>
+    <color name="colorPrimaryDark">#1D91A1</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <color name="bottombar_main">#ffffff</color>

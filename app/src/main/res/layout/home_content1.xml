@@ -14,14 +14,12 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-    <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
              <TextView
                 style="@style/home_cardview_title"
                 android:text="추천 경기"/>
 
-</RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
 
                 android:id="@+id/home_recyler1"

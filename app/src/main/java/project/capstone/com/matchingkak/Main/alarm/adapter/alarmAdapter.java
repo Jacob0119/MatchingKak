@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.capstone.com.matchingkak.Main.AdapterContract;
+import project.capstone.com.matchingkak.Main.alarm.alarmAdapterContract;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.alarm.adapter.holder.AlarmViewHolderToComplete;
@@ -22,7 +22,7 @@ import project.capstone.com.matchingkak.R;
 /**
  * Created by amco1 on 2018-03-16.
  */
-public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements AdapterContract.model,AdapterContract.view {
+public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements alarmAdapterContract.model,alarmAdapterContract.view {
 
 
     private int lastPosition=-1;

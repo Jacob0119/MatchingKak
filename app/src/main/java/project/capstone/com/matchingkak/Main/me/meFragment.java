@@ -9,14 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import project.capstone.com.matchingkak.MainActivity;
 import project.capstone.com.matchingkak.R;
-import project.capstone.com.matchingkak.restAPI.APIUrl;
 
 
 public class meFragment extends Fragment {
@@ -49,34 +47,19 @@ public class meFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.me_content, container, false);
+        return inflater.inflate(R.layout.me_content_temp, container, false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        init();
+        //init();
 
 
     }
 
-    void init(){
 
-
-
-        myWebView= getView().findViewById(R.id.me_webview);
-        myWebView.setHorizontalScrollbarOverlay(false);
-        WebSettings webSettings= myWebView.getSettings();
-        webSettings.setUserAgentString(APIUrl.USER_AGENT);
-        webSettings.setJavaScriptEnabled(true);
-         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        myWebView.loadUrl(APIUrl.API_BASE_URL+"mypage.php");
-        myWebView.setWebViewClient(new myWebViewClient());
-       // backPressCloseSystem = new BackPressCloseSystem(getActivity());
-       // CookieManager.getInstance().setAcceptThirdPartyCookies(myWebView, true);
-
-    }
     private class myWebViewClient extends WebViewClient {
 
 

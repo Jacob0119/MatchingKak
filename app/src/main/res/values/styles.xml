@@ -6,25 +6,38 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
-
     </style>
+
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+        <item name="android:homeAsUpIndicator">@drawable/back_button_white</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+
     <style name="home_cardview">
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_marginTop">5dp</item>
     </style>
-    <style name="home_cardview_title" >
+
+    <style name="home_cardview_title">
+        <item name="android:background">#00ffffff</item>
         <item name="android:fontFamily">@font/main_font</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">15dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
     </style>
+
     <style name="AppTheme.RoundedCornerMaterialButton">
 
         <item name="android:layout_gravity">center_vertical</item>
@@ -34,10 +47,11 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_height">40dp</item>
-        <item name="android:layout_margin">1dp </item>
+        <item name="android:layout_margin">1dp</item>
         <item name="android:layout_weight">1</item>
 
     </style>
+
     <style name="image_in_list">
         <item name="android:padding">5dp</item>
         <item name="android:layout_width">70dp</item>
@@ -45,6 +59,7 @@
         <item name="android:layout_gravity">start|right</item>
 
     </style>
+
     <style name="small_CardView">
         <item name="cardCornerRadius">2dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -54,6 +69,7 @@
         <item name="cardElevation">0dp</item>
 
     </style>
+
     <style name="alarm_CardView">
         <item name="cardCornerRadius">2dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -63,9 +79,11 @@
         <item name="cardPreventCornerOverlap">false</item>
         <item name="contentPadding">0dp</item>
     </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/bg_login_button</item>
@@ -79,6 +97,7 @@
         <item name="android:layout_margin">2dp</item>
         <item name="android:fontFamily">@font/main_font</item>
     </style>
+
     <style name="primary_text" parent="@android:style/Widget.TextView">
         <item name="android:gravity">center</item>
         <item name="android:textSize">13dp</item>
@@ -89,6 +108,7 @@
 
 
     </style>
+
     <style name="primary_text_for_list" parent="@android:style/Widget.TextView">
         <item name="android:gravity">center|left</item>
         <item name="android:textSize">13dp</item>
@@ -99,6 +119,7 @@
 
 
     </style>
+
     <style name="secondary_text" parent="@android:style/Widget.TextView">
         <item name="android:gravity">center</item>
         <item name="android:textSize">12dp</item>
@@ -126,19 +147,20 @@
         <item name="android:textColor">@color/pretty_red</item>
         <item name="android:layout_margin">2dp</item>
     </style>
-<style name="login_btn">
-    <item name="android:textAllCaps">false</item>
-<item name="android:textSize">15dp</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:layout_width">300dp</item>
-    <item name="android:layout_height">50dp</item>
-    <item name="android:textColor">@color/white</item>
 
-</style>
+    <style name="login_btn">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
 
     <style name="edit_style">
 
-       <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingLeft">30dp</item>
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">43dp</item>
         <item name="android:textColorHint">@color/transparent_black</item>
@@ -151,4 +173,6 @@
         <item name="android:textSize">20dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
