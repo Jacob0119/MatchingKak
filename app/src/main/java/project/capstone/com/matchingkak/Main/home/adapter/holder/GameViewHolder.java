@@ -33,23 +33,16 @@ public class GameViewHolder extends ViewHolder{
 
         super(v);
         this.game_view=v;
-        teamName    =v.findViewById(R.id.game_view_team);
         date        =v.findViewById(R.id.game_view_date);
         location    =v.findViewById(R.id.game_view_location);
-        title       =v.findViewById(R.id.game_view_title);
         sport       =v.findViewById(R.id.game_view_sport);
         teamLogo    =v.findViewById(R.id.game_view_image);
-
-
-        state       =v.findViewById(R.id.game_view_state_img);
         state_text =v.findViewById(R.id.game_view_state_text );
     }
 
     @Override
     public void bind(Context context, Object data, int pos, OnClickListener listener) {
         HomeData item=(HomeData) data;
-        this.teamName.setText(item.getTmName());
-        this.title.setText(item.getGmTitle());
         this.date.setText(item.getGmDate());
         this.location.setText(item.getGmGym());
         this.sport.setText(item.getTmSport());
@@ -57,12 +50,12 @@ public class GameViewHolder extends ViewHolder{
         View state_back=itemView.findViewById(R.id.game_view_state_back);
         if(item.getGmState().equals("0"))//성사대기
         {   state_back.setBackgroundColor(context.getColor(R.color.pretty_red));
-            this.state.setImageDrawable(context.getDrawable(R.drawable.wait));
+
             this.state_text.setText("요청가능");
 
         }else{
             state_back.setBackgroundColor(context.getColor(R.color.pretty_blue));
-            this.state.setImageDrawable(context.getDrawable(R.drawable.check));
+
             this.state_text.setText("성사완료");
         }
         Glide.with(context)

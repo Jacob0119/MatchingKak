@@ -11,6 +11,7 @@ public interface HomeContract {
         int BANNER_ADATER=1;
         int MAIN_GAMELIST=2;
         int RECOMMEND_GAMELIST=3;
+        int MENU_LIST=4;
 
 
         void attachView(HomeContract.View view);
@@ -21,6 +22,7 @@ public interface HomeContract {
         void showBanner();
         void setAdapterView(HomeAdapterContract.View view,int AdapterNumber);
         void setAdapterModel(HomeAdapterContract.Model model,int AdapterNumber);
+        void getMenu();
     }
 
     interface View{

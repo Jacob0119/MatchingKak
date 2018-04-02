@@ -1,4 +1,4 @@
-package project.capstone.com.matchingkak.Main.message;
+package project.capstone.com.matchingkak.Main.message.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,61 +6,12 @@ import com.google.gson.annotations.SerializedName;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
- * Created by amco1 on 2018-03-13.
+ * Created by amco1 on 2018-03-28.
  */
 
-public class MSGListData {
-
-        @SerializedName("response")
-        @Expose
-        private String response;
-        @SerializedName("isLogin")
-        @Expose
-        private boolean isLogin;
-        @SerializedName("page")
-        @Expose
-        private String page;
-        @SerializedName("data")
-        @Expose
-        private List<MSGData> data = null;
-
-        public String getResponse() {
-            return response;
-        }
-
-        public void setResponse(String response) {
-            this.response = response;
-        }
-
-        public boolean getIsLogin(){return isLogin;}
-
-        public void setIsLogin(boolean isLogin){this.isLogin=isLogin;}
-
-        public String getPage() {
-            return page;
-        }
-
-        public void setPage(String page) {
-            this.page = page;
-        }
-
-        public List<MSGData> getData() {
-            return data;
-        }
-
-        public void setData(List<MSGData> data) {
-            this.data = data;
-        }
-
-
-
-
-
-}
- class MSGData {
+public class MSGData {
 
     @SerializedName("ms_title")
     @Expose
@@ -79,15 +30,15 @@ public class MSGListData {
     @Expose
     private String ms_read;
 
-     @SerializedName("ms_no")
-     @Expose
-     private String ms_no;
+    @SerializedName("ms_no")
+    @Expose
+    private String ms_no;
 
-     public String getMs_no() {
-         return ms_no;
-     }
+    public String getMs_no() {
+        return ms_no;
+    }
 
-     public String getMs_title() {
+    public String getMs_title() {
         return ms_title;
     }
 

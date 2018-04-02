@@ -6,8 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import project.capstone.com.matchingkak.Main.AdapterContract;
-import project.capstone.com.matchingkak.Main.Contract;
+import project.capstone.com.matchingkak.BaseContract;
+import project.capstone.com.matchingkak.Main.alarm.alarmAdapterContract;
+import project.capstone.com.matchingkak.Main.alarm.alarmContract;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.alarm.data.AlarmListData;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmItem;
@@ -22,14 +23,16 @@ import retrofit2.Response;
  * Created by amco1 on 2018-03-16.
  */
 
-public class alarmPresenter implements Contract.Presenter,OnClickListener {
-    private Contract.View view;
+public class alarmPresenter implements alarmContract.Presenter,OnClickListener {
+    private alarmContract.View view;
     private alarmListService service;
-    AdapterContract.model adapterModel;
-    AdapterContract.view adapterView;
+    alarmAdapterContract.model adapterModel;
+    alarmAdapterContract.view adapterView;
+
+
     @Override
-    public void attatchView(Contract.View view) {
-        this.view=view;
+    public void attatchView(BaseContract.View view) {
+        this.view=(alarmContract.View)view;
     }
 
     @Override
@@ -38,13 +41,13 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
     }
 
     @Override
-    public void setAdapterModel(AdapterContract.model model) {
+    public void setAdapterModel(alarmAdapterContract.model model) {
         adapterModel=model;
 
     }
 
     @Override
-    public void setAdapterView(AdapterContract.view view) {
+    public void setAdapterView(alarmAdapterContract.view view) {
         adapterView=view;
         adapterView.setOnClickListener(this);
     }
@@ -66,7 +69,7 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
 
                 if(response.body().getData()!=null)
                    adapterModel.addItems(response.body().getData(),isUpper);
-                    view.done(Contract.View.NORMAL,null);
+                    view.done(alarmContract.View.NORMAL,null);
 
             }
 
@@ -82,7 +85,7 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
 
     @Override
     public void OnClick(final View v, int position) {
-        alarmItem temp=adapterModel.getItem(position);
+        alarmItem temp=(alarmItem)adapterModel.getItem(position);
         switch (v.getId()){
 
             case R.id.alarm_submit:
@@ -95,7 +98,7 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
                     public void onResponse(Call<Void> call, Response<Void> response) {
 
                             loadItems(v.getContext(), 1, true);
-                         view.done(Contract.View.NORMAL,null);
+                         view.done(alarmContract.View.NORMAL,null);
 
 
                     }
@@ -113,7 +116,7 @@ public class alarmPresenter implements Contract.Presenter,OnClickListener {
                            public void onResponse(Call<Void> call, Response<Void> response) {
 
                                loadItems(v.getContext(), 1, true);
-                               view.done(Contract.View.NORMAL,null);
+                               view.done(alarmContract.View.NORMAL,null);
                            }
 
                            @Override

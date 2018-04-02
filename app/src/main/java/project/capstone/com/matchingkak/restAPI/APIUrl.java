@@ -17,6 +17,7 @@ public class APIUrl {
     public static final String SEND_MESSAGE="mobile/send_msg.php";
     public static final String GET_BANNER="mobile/banner_image.php";
     public static final String EDITOR_URL="match_editor.php";
+    public static final String HOME_MENU_URL="mobile/menuInfo.php";
     public static final String ALARM_URL="mobile/alarm.php";
     public static final String MATCHING_TRANSACTION_URL="ajax/matching.php";
     public static final String MATCHING_REJECT_TRANSACTION_URL="ajax/matching_reject.php";

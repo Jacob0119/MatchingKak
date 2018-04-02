@@ -5,5 +5,4 @@
         <integer name="anim_duration_long">400</integer>
         <integer name="anim_transition_weak">20</integer>
 
-
 </resources>

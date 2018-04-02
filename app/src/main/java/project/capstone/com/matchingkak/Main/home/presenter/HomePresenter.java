@@ -1,5 +1,7 @@
 package project.capstone.com.matchingkak.Main.home.presenter;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
 import project.capstone.com.matchingkak.Main.home.HomeContract;
 import project.capstone.com.matchingkak.Main.home.data.HomeListService;
 import project.capstone.com.matchingkak.Main.home.data.ListData;
+import project.capstone.com.matchingkak.Main.home.data.MenuData;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -122,6 +125,38 @@ public class HomePresenter implements HomeContract.Presenter {
     @Override
     public void setAdapterModel(HomeAdapterContract.Model model,int AdapterNumber) {
                 adapterModelMap.put(AdapterNumber,model);
+    }
+
+    @Override
+    public void getMenu() {
+        try{
+
+           final HomeAdapterContract.Model model=adapterModelMap.get(MENU_LIST);
+           final HomeAdapterContract.View view=adapterViewMap.get(MENU_LIST);
+        HomeListService.getRetrofit().getMenu().enqueue(new Callback<List<MenuData>>() {
+
+
+            @Override
+            public void onResponse(Call<List<MenuData>> call, Response<List<MenuData>> response) {
+               // Log.d("Presenter",      response.body().get(0).getSport_img());
+
+
+                model.set(response.body());
+                view.setUpdate();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<MenuData>> call, Throwable t) {
+
+                Log.d("Presenter","Failed to get menu");
+            }
+        });
+
+
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 
 

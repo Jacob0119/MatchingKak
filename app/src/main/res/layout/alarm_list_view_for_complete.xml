@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/alarm_CardView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    android:layout_marginLeft="30dp"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:src="@drawable/alarm_submit_img"
-        android:scaleType="centerInside"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-
-        />
     <LinearLayout
 
         android:layout_width="match_parent"
@@ -18,61 +11,56 @@
         android:orientation="horizontal">
 
 
+        <ImageView
 
-            <ImageView
+            android:id="@+id/alarm_image"
+            style="@style/image_in_list" />
 
-                android:id="@+id/alarm_image"
-                style="@style/image_in_list"
-                />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/alarm_list_title"
+                style="@style/primary_text_for_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="수락 되었습니다." />
+
+            <TextView
+
+                android:id="@+id/alarm_list_date"
+                style="@style/date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2017/4/23" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="right">
 
-                <TextView
-                    android:id="@+id/alarm_list_title"
-                    style="@style/primary_text_for_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="수락 되었습니다." />
+                <ImageView
+                    android:id="@+id/alarm_info"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/info2" />
 
-                <TextView
-
-                    android:id="@+id/alarm_list_date"
-                    style="@style/date_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2017/4/23" />
-
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="left">
-
-                    <ImageView
-                        android:src="@drawable/info2"
-                        android:scaleType="centerInside"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/alarm_info"
-                         />
-
-                    <ImageView
-                        android:src="@drawable/mail"
-                        android:scaleType="centerInside"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/alarm_send"
-                        />
-                </LinearLayout>
-
-
+                <ImageView
+                    android:id="@+id/alarm_send"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mail" />
             </LinearLayout>
+
+
+        </LinearLayout>
 
         <!--   <Button
         android:padding="10dp"
