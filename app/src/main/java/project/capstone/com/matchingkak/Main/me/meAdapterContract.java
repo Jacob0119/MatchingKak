@@ -1,4 +1,7 @@
 package project.capstone.com.matchingkak.Main.me;
 
-public interface meAdapterContract {
+import project.capstone.com.matchingkak.BaseAdapterContract;
+
+public interface meAdapterContract extends BaseAdapterContract {
+
 }

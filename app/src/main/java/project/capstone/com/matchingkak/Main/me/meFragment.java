@@ -21,7 +21,7 @@ import project.capstone.com.matchingkak.MainActivity;
 import project.capstone.com.matchingkak.R;
 
 
-public class meFragment extends Fragment {
+public class meFragment extends Fragment implements meContract.View{
 
     private MainActivity.BackPressCloseSystem backPressCloseSystem;
     // TODO: Rename and change types of parameters
@@ -63,6 +63,11 @@ public class meFragment extends Fragment {
 
         Glide.with(this).load(R.drawable.edit_profile).apply(RequestOptions.circleCropTransform()).into(edit);
         Glide.with(this ).load(R.drawable.main_icon2).apply(RequestOptions.circleCropTransform()).into(profile_picture);
+    }
+
+    @Override
+    public void done(int resultCode, String[] input) {
+
     }
 
 

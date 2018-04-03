@@ -20,7 +20,8 @@ public interface BaseContract {
 
         void setAdapterModel(BaseAdapterContract.model model);
         void setAdapterView(BaseAdapterContract.view view);
-        void setData(APIAdapter adapter);}
+        void setData(APIAdapter adapter);
+    }
 
 
 }
