@@ -2,6 +2,8 @@ package project.capstone.com.matchingkak.detail_info;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ import java.util.List;
 
 import project.capstone.com.matchingkak.Message.Message2Activity;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.config;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -43,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
     private MapView mMapView;
     private State state;
     private StateManager stateManager;
-
+private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +55,11 @@ public class DetailActivity extends AppCompatActivity {
         stateManager=StateManager.getInstance();
 
 
-        Toolbar toolbar=(Toolbar)findViewById(R.id.detail_toolbar);
+         toolbar=findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         GetData task=new GetData();
         String gm_no=getIntent().getStringExtra("gm_no");
@@ -147,9 +152,9 @@ public class DetailActivity extends AppCompatActivity {
                 return true;
             case R.id.detail_message:
                 Intent intent=new Intent(this,Message2Activity.class);
-                intent.putExtra("mb_nick",info.getMbNick());
+                intent.putExtra(config.MB_NICK,info.getMbNick());
                 startActivity(intent);
-                Toast.makeText(this,"message",Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,"message",Toast.LENGTH_LONG).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -177,6 +182,7 @@ public class DetailActivity extends AppCompatActivity {
         Button submit= findViewById(R.id.Detail_submit_btn);
         stateManager.setBtn(submit);
 
+        toolbar.setTitle(info.getGmTitle());
 
         TextView gm_memo= findViewById(R.id.Detail_gm_memo);
         gm_memo.setText(info.getGmMemo());

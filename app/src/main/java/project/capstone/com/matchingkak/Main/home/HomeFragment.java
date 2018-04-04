@@ -95,7 +95,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     void init(){
 
 
-
         mProgress=getView().findViewById(R.id.main_progress);
 
 
@@ -149,7 +148,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
 
 
-        mRecyclerView2.addOnItemTouchListener(new RecyclerItemClickListener(context, mRecyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
+        RecyclerItemClickListener listener2=new RecyclerItemClickListener(context, mRecyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(context, DetailActivity.class);
@@ -161,8 +160,22 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             public void onLongItemClick(View view, int position) {
 
             }
-        }));
+        });
+        RecyclerItemClickListener listener1=new RecyclerItemClickListener(context, mRecyclerView1, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent=new Intent(context, DetailActivity.class);
+                intent.putExtra("gm_no",mAdapter1.getItem(position).getGmNo());
+                startActivity(intent);
+            }
 
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        });
+        mRecyclerView2.addOnItemTouchListener(listener2);
+        mRecyclerView1.addOnItemTouchListener(listener1);
 
         swipeRefreshLayout=getView().findViewById(R.id.main_swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

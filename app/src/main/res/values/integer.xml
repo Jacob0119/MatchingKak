@@ -3,6 +3,7 @@
         <integer name="anim_duration_short">100</integer>
         <integer name="anim_duration_medium">250</integer>
         <integer name="anim_duration_long">400</integer>
+        <integer name="anim_duration_very_long">600</integer>
         <integer name="anim_transition_weak">20</integer>
 
 </resources>

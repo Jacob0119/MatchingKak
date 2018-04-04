@@ -120,6 +120,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/send"
+        android:tint="@color/white"
         android:layout_gravity="right|center_vertical"
         />
 
