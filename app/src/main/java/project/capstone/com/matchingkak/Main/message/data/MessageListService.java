@@ -22,6 +22,8 @@ public class MessageListService extends APIAdapter {
         @GET(APIUrl.MSG_URL)
         Call<MSGListData> paging(@Query("page") int page);
 
+        @GET(APIUrl.MSG_URL)
+        Call<MSGListData> paging(@Query("page") int page,@Query("type") String type);
     }
 
 

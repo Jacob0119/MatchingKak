@@ -19,7 +19,9 @@ public class MSGData {
     @SerializedName("ms_content")
     @Expose
     private String ms_content;
-
+    @SerializedName("tm_img")
+    @Expose
+    private String tm_img;
     @SerializedName("mb_nick")
     @Expose
     private String mb_nick;
@@ -55,6 +57,11 @@ public class MSGData {
     }
 
     public String getMb_nick() {return mb_nick;
+    }
+    public String getTm_img(){return tm_img;}
+
+    public void setTm_img(String tm_img) {
+        this.tm_img = tm_img;
     }
 
     public void setMb_nick(String mb_nick) {

@@ -24,8 +24,10 @@ import project.capstone.com.matchingkak.R;
 public class MessageFragment extends Fragment implements messageContract.View{
     private static MessageFragment instance;
     private messageContract.Presenter presenter;
-
-
+    final public static String RECEIVED="R";
+    final public static String SENT="S";
+    final private static String TYPE="TYPE";
+    private String type;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private MSGAdapter mAdapter;
@@ -37,8 +39,20 @@ public class MessageFragment extends Fragment implements messageContract.View{
     Context context;
     public static MessageFragment newInstance() {
 
-        return new MessageFragment();
+        return newInstance(RECEIVED);
+
     }
+    public static MessageFragment newInstance(String type){
+        MessageFragment f=new MessageFragment();
+        Bundle args=new Bundle();
+        args.putString(TYPE,type);
+        f.setArguments(args);
+
+        return f;
+
+    }
+
+
 
     @Nullable
     @Override
@@ -117,8 +131,8 @@ public class MessageFragment extends Fragment implements messageContract.View{
             mProgress.setVisibility(View.VISIBLE);
             mProgress.startNestedScroll(3);
         }
-
-        presenter.loadData(context,page);
+    String type=getArguments().getString(TYPE);
+        presenter.loadData(context,page,type);
 
 
 //현재페이지에 맞는 리스트 데이터 가져오기

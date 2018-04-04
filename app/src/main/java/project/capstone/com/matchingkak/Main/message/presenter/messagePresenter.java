@@ -2,6 +2,8 @@ package project.capstone.com.matchingkak.Main.message.presenter;
 
 import android.content.Context;
 
+import java.util.List;
+
 import project.capstone.com.matchingkak.BaseAdapterContract;
 import project.capstone.com.matchingkak.BaseContract;
 import project.capstone.com.matchingkak.Main.message.data.MSGListData;
@@ -80,5 +82,30 @@ public class messagePresenter implements messageContract.Presenter {
                     }
                 });
 
+    }
+
+    @Override
+    public void loadData(Context context,final int page, String type) {
+
+
+        MessageListService.getRetrofit().paging(page,type).enqueue(new Callback<MSGListData>() {
+            @Override
+            public void onResponse(Call<MSGListData> call, Response<MSGListData> response) {
+                List data=response.body().getData();
+                if(page==1){
+                    adapterModel.addItems(data,true);
+                    adapterView.notifyAdapter();
+                }else{
+                    adapterModel.addItems(data,false);
+                    adapterView.notifyAdapter();
+                }
+                view.done(view.SUCCESS,null);
+            }
+
+            @Override
+            public void onFailure(Call<MSGListData> call, Throwable t) {
+
+            }
+        });
     }
 }

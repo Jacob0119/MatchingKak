@@ -17,6 +17,7 @@ public interface messageContract {
         static int RECEIVE=2;
 
         void loadData(Context context,int page);
+        void loadData(Context context,int page,String type);
 
     }
     interface View extends BaseContract.View{

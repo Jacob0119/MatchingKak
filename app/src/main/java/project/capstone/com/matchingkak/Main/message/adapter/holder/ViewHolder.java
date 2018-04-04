@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.message.data.MSGData;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.restAPI.APIUrl;
 
 /**
  * Created by amco1 on 2018-03-28.
@@ -44,7 +45,8 @@ public  class ViewHolder extends   project.capstone.com.matchingkak.Main.ViewHol
         if(datum.getMs_read())ms_new.setVisibility(View.VISIBLE);
         else ms_new.setVisibility(View.GONE);
 
-        Glide.with(context).load("http://www.matchingkak.com/images/temp.png")
+      //  Log.d("Viewholder_ms",APIUrl.API_BASE_URL+datum.getTm_img());
+        Glide.with(context).load(APIUrl.API_BASE_URL+datum.getTm_img())
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .into(mb_image);
     }

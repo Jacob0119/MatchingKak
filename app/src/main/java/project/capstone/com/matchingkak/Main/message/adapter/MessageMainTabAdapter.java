@@ -14,6 +14,8 @@ import project.capstone.com.matchingkak.Main.message.MessageFragment;
 public class MessageMainTabAdapter extends FragmentStatePagerAdapter {
     private static int TAB_COUNT=2;
     private String[] title={"received","sent"};
+    private MessageFragment m0=MessageFragment.newInstance(MessageFragment.RECEIVED);
+    private MessageFragment m1=MessageFragment.newInstance(MessageFragment.SENT);
     public MessageMainTabAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -23,10 +25,10 @@ public class MessageMainTabAdapter extends FragmentStatePagerAdapter {
 
         switch (position){
             case 0:
-               return MessageFragment.newInstance();
+               return m0;
 
             case  1:
-                return MessageFragment.newInstance();
+                return m1;
 
 
         }
