@@ -23,5 +23,7 @@ public class APIUrl {
     public static final String MATCHING_REJECT_TRANSACTION_URL="ajax/matching_reject.php";
     public static final String messageDetail_URL="r_message.php";
     public static final String USER_AGENT="MatchingkakApp";
+    public static final String MYPAGE_REQUEST="mobile/mypage_my_request.php";
+    public static final String MYPAGE_POST="mobile/mypage_my_post.php";
 
 }
