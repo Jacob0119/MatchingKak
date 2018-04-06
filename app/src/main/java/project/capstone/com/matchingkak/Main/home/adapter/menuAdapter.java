@@ -1,6 +1,7 @@
 package project.capstone.com.matchingkak.Main.home.adapter;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
 import project.capstone.com.matchingkak.Main.home.adapter.holder.MenuViewHolder;
@@ -19,11 +21,16 @@ import project.capstone.com.matchingkak.R;
  * Created by amco1 on 2018-03-25.
  */
 
-public class menuAdapter extends RecyclerView.Adapter<ViewHolder> implements HomeAdapterContract.View,HomeAdapterContract.Model {
+public class menuAdapter extends RecyclerView.Adapter<ViewHolder> implements HomeAdapterContract.View,HomeAdapterContract.Model,OnClickListener {
     private Context context;
     List<MenuData> menuList;
+    private OnClickListener listener;
+   public menuAdapter(Context context){
+       this.context=context;
+       setOnItemClickListenter(this);
+       menuList=new ArrayList();
 
-   public menuAdapter(Context context){this.context=context;menuList=new ArrayList();}
+   }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +45,7 @@ public class menuAdapter extends RecyclerView.Adapter<ViewHolder> implements Hom
     public void onBindViewHolder(ViewHolder holder, int position) {
 
       //  Log.d("menuAdapter",position+"");
-       holder.bind(context,menuList.get(position),position,null);
+       holder.bind(context,menuList.get(position),position,listener);
 
 
 
@@ -55,6 +62,11 @@ public class menuAdapter extends RecyclerView.Adapter<ViewHolder> implements Hom
     }
 
     @Override
+    public void setOnItemClickListenter(OnClickListener listenter) {
+        this.listener=listenter;
+    }
+
+    @Override
     public void set(List data) {
         menuList=data;
 
@@ -63,5 +75,10 @@ public class menuAdapter extends RecyclerView.Adapter<ViewHolder> implements Hom
     @Override
     public void add(List data) {
         menuList.addAll(data);
+    }
+
+    @Override
+    public void OnClick(View v, int position) {
+        Snackbar.make(v,menuList.get(position).getSport_index()+"",Snackbar.LENGTH_SHORT).show();
     }
 }

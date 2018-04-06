@@ -2,6 +2,7 @@ package project.capstone.com.matchingkak.Main.me;
 
 import project.capstone.com.matchingkak.BaseAdapterContract;
 import project.capstone.com.matchingkak.BaseContract;
+import project.capstone.com.matchingkak.Main.me.data.InfoData;
 
 public interface meContract {
 
@@ -16,7 +17,7 @@ public interface meContract {
 
     }
     interface  View  extends  BaseContract.View{
-
+            void updateInfo(InfoData info);
     }
 
 }

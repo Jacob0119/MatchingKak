@@ -62,7 +62,7 @@ private Toolbar toolbar;
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         GetData task=new GetData();
-        String gm_no=getIntent().getStringExtra("gm_no");
+        String gm_no=getIntent().getStringExtra(config.GM_NO);
         task.execute(gm_no);
         //getSupportActionBar().setTitle(info.getString(Info.GM_TITLE));
 

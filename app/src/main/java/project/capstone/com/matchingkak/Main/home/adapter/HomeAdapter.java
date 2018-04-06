@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.ActivityStarterManager;
+import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
 import project.capstone.com.matchingkak.Main.home.adapter.holder.GameViewHolder;
@@ -19,11 +21,11 @@ import project.capstone.com.matchingkak.R;
 /**
  * Created by amco1 on 2018-03-21.
  */
-public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements HomeAdapterContract.Model,HomeAdapterContract.View{
+public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements HomeAdapterContract.Model,HomeAdapterContract.View,OnClickListener{
     static int GRID=1;
     static int LINEAR=2;
     private int type;
-
+    private OnClickListener listener;
     private List<HomeData> mDataset;
 
     private Context context;
@@ -31,6 +33,11 @@ public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements Ho
     @Override
     public void setUpdate() {
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void setOnItemClickListenter(OnClickListener listenter) {
+        this.listener=listenter;
     }
 
     @Override
@@ -48,14 +55,10 @@ public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements Ho
 
     public HomeAdapter(Context context){
         this.context=context;
+        setOnItemClickListenter(this);
         mDataset=new ArrayList<>();
     }
 
-
-    public HomeAdapter(Context context ,int type){
-        this.type=type;
-        this.context=context;
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -81,7 +84,7 @@ public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements Ho
 
 
 
-        holder.bind(context,mDataset.get(position),position,null);
+        holder.bind(context,mDataset.get(position),position,listener);
 
 
     }
@@ -94,8 +97,14 @@ public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements Ho
 
     public HomeData getItem(int position){
 
-        return mDataset.get(position );
+        return mDataset.get(position);
     }
 
 
+    @Override
+    public void OnClick(View v, int position) {
+
+        ActivityStarterManager.StartGameDetailActivity(context,this.getItem(position).getGmNo());
+
+    }
 }

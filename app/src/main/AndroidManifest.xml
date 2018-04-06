@@ -61,8 +61,9 @@
 
         <activity android:name=".Main.Editor.EditorActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".detail_info.DetailActivity"
-            android:theme="@style/AppTheme.ActionBar.Transparent"/>
+        <activity
+            android:name=".detail_info.DetailActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
         <activity android:name=".sns_login.loginActivity" />
         <activity android:name=".sns_login.SuccessActivity" />
         <activity android:name=".Main.Main2Activity" />
@@ -70,7 +71,8 @@
         <activity
             android:name=".Main.message.MessageDetail"
             android:label="@string/title_activity_message_detail"
-            android:theme="@style/AppTheme.ActionBar.Transparent"></activity>
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
+        <activity android:name=".list_game.ListGameActivity"></activity>
     </application>
 
 </manifest>

@@ -6,12 +6,13 @@ package project.capstone.com.matchingkak.Main.home;
 
 public interface HomeContract {
 
-    interface Presenter{
 
-        int BANNER_ADATER=1;
-        int MAIN_GAMELIST=2;
-        int RECOMMEND_GAMELIST=3;
-        int MENU_LIST=4;
+    interface Presenter{
+        int BANNER_ADATER           =1;
+        int MAIN_GAMELIST           =2;
+        int RECOMMEND_GAMELIST      =3;
+        int MENU_LIST               =4;
+
 
 
         void attachView(HomeContract.View view);
@@ -25,6 +26,10 @@ public interface HomeContract {
         void getMenu();
     }
 
+    interface PresenterForSportMenu{
+
+
+    }
     interface View{
 
         void updateBanner();

@@ -31,6 +31,9 @@ public class meListService extends APIAdapter {
         @POST(APIUrl.MYPAGE_POST)
         Call<List<gameData>> getMyPost();
 
+        @POST(APIUrl.MYPAGE_MYINFO)
+        Call<InfoData> getMyInfo();
+
     }
 
 }

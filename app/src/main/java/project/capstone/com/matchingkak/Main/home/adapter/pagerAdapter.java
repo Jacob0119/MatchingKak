@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
@@ -79,6 +80,11 @@ public class pagerAdapter extends PagerAdapter implements HomeAdapterContract.Vi
 
     @Override
     public void setUpdate() {
+
+    }
+
+    @Override
+    public void setOnItemClickListenter(OnClickListener listenter) {
 
     }
 

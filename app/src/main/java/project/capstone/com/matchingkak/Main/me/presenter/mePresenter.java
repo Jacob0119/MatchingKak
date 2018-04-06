@@ -7,6 +7,7 @@ import java.util.List;
 
 import project.capstone.com.matchingkak.BaseAdapterContract;
 import project.capstone.com.matchingkak.BaseContract;
+import project.capstone.com.matchingkak.Main.me.data.InfoData;
 import project.capstone.com.matchingkak.Main.me.data.gameData;
 import project.capstone.com.matchingkak.Main.me.data.meListService;
 import project.capstone.com.matchingkak.Main.me.meAdapterContract;
@@ -17,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class mePresenter implements meContract.Presenter {
-    private BaseContract.View view;
+    private meContract.View view;
     HashMap<Integer,meAdapterContract.model> modelMap;
     HashMap<Integer,meAdapterContract.view> viewMap;
 
@@ -30,7 +31,7 @@ public class mePresenter implements meContract.Presenter {
 
     @Override
     public void attatchView(BaseContract.View view) {
-            this.view=view;
+            this.view=(meContract.View)view;
 
     }
 
@@ -85,7 +86,18 @@ public class mePresenter implements meContract.Presenter {
                 Log.d("mePresenter","failed request ");
             }
         });
+        meListService.getRetrofit().getMyInfo().enqueue(new Callback<InfoData>() {
+            @Override
+            public void onResponse(Call<InfoData> call, Response<InfoData> response) {
 
+                    view.updateInfo(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<InfoData> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
