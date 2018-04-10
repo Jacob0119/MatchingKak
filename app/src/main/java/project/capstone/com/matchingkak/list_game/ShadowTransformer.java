@@ -2,9 +2,11 @@ package project.capstone.com.matchingkak.list_game;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 
 import project.capstone.com.matchingkak.list_game.adapter.CardAdapter;
+import project.capstone.com.matchingkak.list_game.adapter.CardItem;
 
 
 public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPager.PageTransformer {
@@ -52,6 +54,7 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
         float baseElevation = mAdapter.getBaseElevation();
         float realOffset;
         boolean goingLeft = mLastOffset > positionOffset;
+
 
         // If we're going backwards, onPageScrolled receives the last position
         // instead of the current one
@@ -102,6 +105,15 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
 
     @Override
     public void onPageSelected(int position) {
+        Log.d("ShadowTransformer","Position"+position);
+            if(position>=mAdapter.getCount()-4){
+
+                for(int i=0;i<5;i++){
+                    mAdapter.addCardItem(new CardItem("more",mAdapter.getCount()+""));
+                }
+                mAdapter.notifyItemsetChanged();
+
+            }
 
     }
 

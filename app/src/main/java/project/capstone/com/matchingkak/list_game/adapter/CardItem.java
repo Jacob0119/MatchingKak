@@ -3,19 +3,22 @@ package project.capstone.com.matchingkak.list_game.adapter;
 
 public class CardItem {
 
-    private int mTextResource;
-    private int mTitleResource;
+    private String mTextResource;
+    private String mTitleResource;
 
     public CardItem(int title, int text) {
-        mTitleResource = title;
-        mTextResource = text;
+        //mTitleResource = title;
+       // mTextResource = text;
     }
-
-    public int getText() {
+    public CardItem(String title,String text){
+            mTextResource=title;
+            mTitleResource=text;
+    }
+    public String getText() {
         return mTextResource;
     }
 
-    public int getTitle() {
+    public String getTitle() {
         return mTitleResource;
     }
 }

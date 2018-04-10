@@ -175,6 +175,8 @@ public class loginActivity extends AppCompatActivity {
                             .enqueue(new Callback<ResData>() {
                                 @Override
                                 public void onResponse(Call<ResData> call, Response<ResData> response) {
+                                    Toast.makeText(loginActivity.this,"response:"+ response.body().res+"", Toast.LENGTH_LONG).show();
+
                                     if(response.body().res) {
                                         Toast.makeText(loginActivity.this, response.body().res+"", Toast.LENGTH_LONG).show();
                                         SharedPreferencesManager.getInstanceOf(loginActivity.this).setLoginState(response.body().res);
@@ -190,6 +192,7 @@ public class loginActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<ResData> call, Throwable t) {
+                                    Toast.makeText(loginActivity.this,"response:failed", Toast.LENGTH_LONG).show();
 
                                 }
                             });

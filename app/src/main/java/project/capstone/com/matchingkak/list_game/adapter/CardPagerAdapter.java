@@ -26,6 +26,12 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     public void addCardItem(CardItem item) {
         mViews.add(null);
         mData.add(item);
+
+    }
+
+    @Override
+    public void notifyItemsetChanged() {
+        notifyDataSetChanged();
     }
 
     public float getBaseElevation() {
@@ -49,11 +55,13 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+
+        // cardview 생성하여 데이터랑 연결하기
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.list_game_cardview, container, false);
         container.addView(view);
         bind(mData.get(position), view);
-        CardView cardView = (CardView) view.findViewById(R.id.cardView);
+        CardView cardView =  view.findViewById(R.id.cardView);
 
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
@@ -71,8 +79,8 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     }
 
     private void bind(CardItem item, View view) {
-        TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
-        TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
+        TextView titleTextView = view.findViewById(R.id.titleTextView);
+        TextView contentTextView = view.findViewById(R.id.contentTextView);
         titleTextView.setText(item.getTitle());
         contentTextView.setText(item.getText());
     }

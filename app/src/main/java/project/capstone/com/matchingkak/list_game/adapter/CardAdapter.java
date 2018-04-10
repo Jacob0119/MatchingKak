@@ -8,7 +8,8 @@ public interface CardAdapter {
     int MAX_ELEVATION_FACTOR = 8;
 
     float getBaseElevation();
-
+    void addCardItem(CardItem item);
+    void notifyItemsetChanged();
     CardView getCardViewAt(int position);
 
     int getCount();

@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import project.capstone.com.matchingkak.ActivityStarterManager;
 import project.capstone.com.matchingkak.Main.home.adapter.HomeAdapter;
 import project.capstone.com.matchingkak.Main.home.adapter.menuAdapter;
 import project.capstone.com.matchingkak.Main.home.adapter.pagerAdapter;
@@ -145,6 +147,13 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         mRecyclerView3.setHasFixedSize(false);
 
 
+        TextView more=getView().findViewById(R.id.home_content2_more);
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityStarterManager.StartListGameActivity(getContext());
+            }
+        });
 /*
         RecyclerItemClickListener listener2=new RecyclerItemClickListener(context, mRecyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
