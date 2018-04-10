@@ -20,6 +20,7 @@ import project.capstone.com.matchingkak.Main.message.data.MSGData;
 import project.capstone.com.matchingkak.Main.message.presenter.messageContract;
 import project.capstone.com.matchingkak.Main.message.presenter.messagePresenter;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.config;
 
 public class MessageFragment extends Fragment implements messageContract.View{
     private static MessageFragment instance;
@@ -97,10 +98,9 @@ public class MessageFragment extends Fragment implements messageContract.View{
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent intent=new Intent(getContext(), project.capstone.com.matchingkak.MessageDetail.class);
+                Intent intent=new Intent(getContext(), MessageDetail.class);
                 MSGData data=(MSGData)mAdapter.getItem(position);
-                intent.putExtra("ms_no",data.getMs_no());
-                intent.putExtra("type","receive");
+                intent.putExtra(config.MSG_KEY,data);
                 startActivity(intent);
             }
 

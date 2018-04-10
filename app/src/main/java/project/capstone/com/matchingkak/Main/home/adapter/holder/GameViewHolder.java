@@ -41,7 +41,7 @@ public class GameViewHolder extends ViewHolder{
     }
 
     @Override
-    public void bind(Context context, Object data, int pos, OnClickListener listener) {
+    public void bind(Context context, Object data, final int pos, final OnClickListener listener) {
         HomeData item=(HomeData) data;
         this.date.setText(item.getGmDate());
         this.location.setText(item.getGmGym());
@@ -63,7 +63,17 @@ public class GameViewHolder extends ViewHolder{
                 .load(APIUrl.API_BASE_URL+item.getTmImg())
                 .apply(options.centerCrop())
                 .into(this.teamLogo);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(listener!=null)
+             listener.OnClick(view,pos);
+        }
+    });
+
     }
+
 
 
 

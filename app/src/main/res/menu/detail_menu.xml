@@ -4,7 +4,6 @@
 
     <item
         android:icon="@drawable/message"
-        
         android:iconTint="@color/white"
         android:iconTintMode="src_in"
         android:title="Message"

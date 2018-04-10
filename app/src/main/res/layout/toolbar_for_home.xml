@@ -3,7 +3,7 @@
 <android.support.design.widget.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:elevation="10dp"
+
     android:orientation="vertical"
     android:id="@+id/main_appbar"
     android:layout_width="match_parent"
@@ -12,7 +12,7 @@
     <android.support.design.widget.CollapsingToolbarLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/pure_gray"
         android:fitsSystemWindows="true"
         app:contentScrim="?attr/colorPrimary"
@@ -36,11 +36,15 @@
             android:layout_gravity="center"
             android:src="@drawable/main" />
 
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </android.support.design.widget.CollapsingToolbarLayout>
 
+    <Button
+
+        android:background="@drawable/rounded_shape"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </Button>
 </android.support.design.widget.AppBarLayout>
 

@@ -114,3 +114,5 @@ public class MSGAdapter extends  RecyclerView.Adapter<ViewHolder> implements mes
 
     }
 }
+
+

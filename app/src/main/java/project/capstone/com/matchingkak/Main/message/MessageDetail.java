@@ -1,364 +1,84 @@
 package project.capstone.com.matchingkak.Main.message;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
+import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Toast;
+import android.view.View;
+import android.view.WindowManager;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-
-import project.capstone.com.matchingkak.LoginActivity;
-import project.capstone.com.matchingkak.MainActivity;
+import project.capstone.com.matchingkak.Main.message.data.MSGData;
 import project.capstone.com.matchingkak.Message.Message2Activity;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.config;
+import project.capstone.com.matchingkak.databinding.MessageDetailBinding;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 
-import static project.capstone.com.matchingkak.R.id.webview_msg;
-import static project.capstone.com.matchingkak.R.menu.editor_menu;
-
-public class MessageDetail extends AppCompatActivity {
-    WebView myWebView;
-
-    @Override
-    public boolean onSupportNavigateUp() {
-
-        onBackPressed();
-        return true;
-    }
-
+public class MessageDetail extends AppCompatActivity implements View.OnClickListener {
+    private MSGData mData;
+    private MessageDetailBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+       // setContentView(R.layout.message_detail);
+        binding= DataBindingUtil.setContentView(this,R.layout.message_detail);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //noinspection deprecation
-            CookieSyncManager.createInstance(this);
-        }
-        Toolbar toolbar=findViewById(R.id.editor_toolbar);
+        mData=getIntent().getParcelableExtra(config.MSG_KEY);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        init();
 
-        Intent intent=getIntent();
-
-        String ms_no=intent.getStringExtra("ms_no");
-        String type=intent.getStringExtra("type");
-        myWebView = findViewById(webview_msg);
-
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setUserAgentString("MatchingkakApp");
-        webSettings.setJavaScriptEnabled(true);
-        myWebView.loadUrl(APIUrl.API_BASE_URL+APIUrl.messageDetail_URL+"?type="+type+"&ms_no="+ms_no);
-        myWebView.setWebViewClient(new myWebViewClient());
-        myWebView.addJavascriptInterface(new Object(){
-
-
-            @JavascriptInterface
-            public void onclickA(String mb_no){
-
-                Log.d("onclickA","start");
-                //Toast.makeText(MainActivity.this,mb_no,Toast.LENGTH_LONG).show();
-                //FirebaseMessaging.getInstance().subscribeToTopic("news");
-
-                String token= FirebaseInstanceId.getInstance().getToken();
-                sendRegistrationToServer(mb_no,token);
-            }
-            @JavascriptInterface
-            public void onclick_logout(String mb_no){
-
-                Log.d("Logout","start");
-                //Toast.makeText(MainActivity.this,mb_no,Toast.LENGTH_LONG).show();
-                //FirebaseMessaging.getInstance().subscribeToTopic("news");
-
-                //String token=FirebaseInstanceId.getInstance().getToken();
-                sendLogoutToServer(mb_no);
-            }
-            @JavascriptInterface
-            public void toastShort(){
-                Toast.makeText(MessageDetail.this,"onclick(value)",Toast.LENGTH_SHORT).show();
-
-
-            }
-            @JavascriptInterface
-            public void makeActivity(String mb_nick){
-
-                Toast.makeText(MessageDetail.this,mb_nick,Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getApplicationContext(), Message2Activity.class);
-                intent.putExtra("mb_nick",mb_nick);
-                startActivity(intent);
-
-            }
-            @JavascriptInterface
-            public void submit(){
-
-                finish();
-            }
-
-        },"app");
 
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(editor_menu,menu);
-        return super.onCreateOptionsMenu(menu);
+
+    void init(){
+
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        Glide.with(this).load(APIUrl.API_BASE_URL+mData.getTm_img()).apply(RequestOptions.circleCropTransform()).into(binding.msgDetailProfilePicture);
+        binding.msgDetailTmName.setText("teamGod");
+        binding.msgDetailUsernick.setText(mData.getMb_nick());
+        binding.msgDetailTitle.setText(mData.getMs_title());
+        binding.msgDetailDate.setText(mData.getMs_send_date());
+        binding.msgDetailMsgcontent.setText(mData.getMs_content());
+        binding.msgDetailReplybtn.setOnClickListener(this);
+
+
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.editor_cancle:
-                onBackPressed();
-                break;
-
-        }
-
-        return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);}
     }
+
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onClick(View view) {
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //noinspection deprecation
-            CookieSyncManager.getInstance().startSync();
-        }
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //noinspection deprecation
-            CookieSyncManager.getInstance().stopSync();
-        }
-    }
 
-    private class myWebViewClient extends WebViewClient {
-
-
-        @SuppressWarnings("deprecation")
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Log.d("url log",url);
-           if(url.contains("index.php")){
-
-               Intent intent=new Intent(MessageDetail.this,MainActivity.class);
-               intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-               startActivity(intent);
-               return true;
-           }
-          else if(url.contains("login.php")||url.contains("join.php")||url.contains("w_message")||url.contains("r_")||url.contains("editor")||url.contains("profile.php")){
-               Intent intent = new Intent(MessageDetail.this, LoginActivity.class);
-               intent.putExtra("url",url);
-               startActivity(intent);
-                return true;
-           }else if(url.contains("logout.php")){
-
-               return false;
-
-           }
-
-            return false;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                //noinspection deprecation
-                CookieSyncManager.getInstance().sync();
-            } else {
-                // 롤리팝 이상에서는 CookieManager의 flush를 하도록 변경됨.
-                CookieManager.getInstance().flush();
-            }
-        }
-    }
-
-    private void sendRegistrationToServer(final String mb_no,final String token){
-
-        new AsyncTask<Void,Void,Void>(){
-            private URL url;
-            private String data, strUrl, strCookie,result;
-
-            @Override
-            protected  void onPreExecute(){
-
-                super.onPreExecute();
-                strUrl="http://matchingkak.cafe24.com/fcm/register.php";
-                data="mb_no="+mb_no+"&mb_token="+token;
-                System.out.println(data);
-
-            }
-
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                try{
-
-                    url=new URL(strUrl);
-                    HttpURLConnection conn=(HttpURLConnection)url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    conn.setDefaultUseCaches(false);
-
-
-
-
-                    OutputStream os = conn.getOutputStream(); // 서버로 보내기 위한 출력 스트림
-                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8")); // UTF-8로 전송
-                    bw.write(data); // 매개변수 전송
-                    bw.flush();
-                    bw.close();
-                    os.close();
-
-                    strCookie=conn.getHeaderField("Set-Cookie");
-                    InputStream is=conn.getInputStream();
-
-
-
-
-
-
-
-                    StringBuilder builder=new StringBuilder();
-                    BufferedReader reader=new BufferedReader(new InputStreamReader(is,"UTF-8"));
-                    String line;
-                    while((line=reader.readLine())!=null){
-                        builder.append(line+"\n");
-
-
-                    }
-                    result=builder.toString();
-
-                }catch (MalformedURLException |ProtocolException e){
-                    e.printStackTrace();
-                }catch(IOException io){
-                    io.printStackTrace();
-
-                }return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-
-                super.onPostExecute(aVoid);
-                System.out.println(result);
-            }
-        }.execute();
-
-
-
-
-
-
-    }
-
-    private void sendLogoutToServer(final String mb_no){
-
-
-        new AsyncTask<Void,Void,Void>(){
-            private URL url;
-            private String data, strUrl, strCookie,result;
-
-            @Override
-            protected  void onPreExecute(){
-
-                super.onPreExecute();
-                strUrl="http://matchingkak.com/fcm/logout.php";
-                Log.d("Logout","start logout");
-                data="mb_no="+mb_no;
-
-                System.out.println(data);
-
-            }
-
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                try{
-
-                    url=new URL(strUrl);
-                    HttpURLConnection conn=(HttpURLConnection)url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    conn.setDefaultUseCaches(false);
-
-
-
-                    OutputStream os = conn.getOutputStream(); // 서버로 보내기 위한 출력 스트림
-                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8")); // UTF-8로 전송
-                    bw.write(data); // 매개변수 전송
-                    bw.flush();
-                    bw.close();
-                    os.close();
-
-
-
-                    //php 연산 결과값 가져오기
-                    strCookie=conn.getHeaderField("Set-Cookie");
-                    InputStream is=conn.getInputStream();
-                    StringBuilder builder=new StringBuilder();
-                    BufferedReader reader=new BufferedReader(new InputStreamReader(is,"UTF-8"));
-                    String line;
-                    while((line=reader.readLine())!=null){
-                        builder.append(line+"\n");
-
-
-                    }
-                    result=builder.toString();
-
-                }catch (MalformedURLException |ProtocolException e){
-                    e.printStackTrace();
-                }catch(IOException io){
-                    io.printStackTrace();
-
-                }return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Log.d("Logout","end of logout");
-                System.out.println(result);
-            }
-        }.execute();
-
-
-
+        Intent intent=new Intent(this, Message2Activity.class);
+        intent.putExtra(config.MB_NICK,mData.getMb_nick());
+        startActivity(intent);
+        overridePendingTransition(R.anim.anim_slide_up_for_new,R.anim.anim_slide_up_for_current);
 
     }
 }

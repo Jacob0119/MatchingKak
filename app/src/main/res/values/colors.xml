@@ -15,7 +15,7 @@
     <color name="primary_text">#4D4D4D</color>
     <color name="secondary_text">#b7b7b7</color>
     <color name="pretty_red">#F26362</color>
-    <color name="kakao_color">#c7ffd102 </color>
+    <color name="kakao_color">#c7ffd102</color>
     <color name="facebook_color">#d53b5998</color>
     <color name="naver_color">#df00bd38</color>
     <color name="transparent_white">#b2ffffff</color>
@@ -25,4 +25,6 @@
     <color name="chat_bubble_color">#7AAAAD</color>
     <color name="profile_pic_round">@color/natural_gray</color>
     <color name="black_alpha_40">#66000000</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

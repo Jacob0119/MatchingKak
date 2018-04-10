@@ -1,6 +1,7 @@
 package project.capstone.com.matchingkak.Main.me;
 
 import android.app.Fragment;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +14,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import project.capstone.com.matchingkak.Main.me.adapter.meAdapter;
+import project.capstone.com.matchingkak.Main.me.data.InfoData;
 import project.capstone.com.matchingkak.Main.me.presenter.mePresenter;
 import project.capstone.com.matchingkak.MainActivity;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.databinding.MeContentBinding;
+import project.capstone.com.matchingkak.databinding.MeUpperPartBinding;
+import project.capstone.com.matchingkak.restAPI.APIUrl;
 
 
 public class meFragment extends Fragment implements meContract.View{
@@ -30,7 +35,8 @@ public class meFragment extends Fragment implements meContract.View{
     private meContract.Presenter presenter;
     private RecyclerView.LayoutManager mLayoutManager1;
     private RecyclerView.LayoutManager mLayoutManager2;
-
+    private MeContentBinding binding;
+    private InfoData info;
     public meFragment() {
         // Required empty public constructor
     }
@@ -52,13 +58,15 @@ public class meFragment extends Fragment implements meContract.View{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.me_content_temp, container, false);
+        binding= DataBindingUtil.inflate(inflater,R.layout.me_content,container,false);
+
+        return binding.getRoot();
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         init();
         presenter.loadData();
 
@@ -66,7 +74,7 @@ public class meFragment extends Fragment implements meContract.View{
     void init(){
 
         ImageView edit=getView().findViewById(R.id.edit_image);
-        ImageView profile_picture=getView().findViewById(R.id.me_picture);
+        ImageView profile_picture=getView().findViewById(R.id.mypage_picture);
         Glide.with(this).load(R.drawable.edit_profile).apply(RequestOptions.circleCropTransform()).into(edit);
         Glide.with(this ).load(R.drawable.main_icon2).apply(RequestOptions.circleCropTransform()).into(profile_picture);
         presenter=new mePresenter();
@@ -100,5 +108,18 @@ public class meFragment extends Fragment implements meContract.View{
     }
 
 
+    @Override
+    public void updateInfo(InfoData info) {
+        MeUpperPartBinding upper=binding.constraintLayout2;
 
+        ImageView profile_pic=upper.mypagePicture;
+        Glide.with(this).load(APIUrl.API_BASE_URL+info.getTmImg())
+                .apply(RequestOptions.circleCropTransform())
+                .into(profile_pic);
+        upper.mypageTeamname.setText(info.getTmName());
+        upper.mypageUsername.setText(info.getMbNick());
+        upper.mypagePenaltyCount.setText(info.getTmPenalty());
+        upper.mypageMatchingCount.setText(info.getTmMatchCount());
+
+    }
 }

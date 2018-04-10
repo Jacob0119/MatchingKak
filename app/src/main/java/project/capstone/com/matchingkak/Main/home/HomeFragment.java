@@ -2,7 +2,6 @@ package project.capstone.com.matchingkak.Main.home;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -22,7 +21,6 @@ import project.capstone.com.matchingkak.Main.home.adapter.menuAdapter;
 import project.capstone.com.matchingkak.Main.home.adapter.pagerAdapter;
 import project.capstone.com.matchingkak.Main.home.presenter.HomePresenter;
 import project.capstone.com.matchingkak.R;
-import project.capstone.com.matchingkak.detail_info.DetailActivity;
 
 
 /**
@@ -72,6 +70,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         super.onCreate(savedInstanceState);
         presenter=new HomePresenter();
         presenter.attachView(this);
+
         context=getContext();
     }
 
@@ -88,12 +87,11 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     void loadAll(){
         presenter.showBanner();
-        presenter.getData(presenter.MAIN_GAMELIST);
-        presenter.getData(presenter.RECOMMEND_GAMELIST);
+        presenter.getData(HomeContract.Presenter.MAIN_GAMELIST);
+        presenter.getData(HomeContract.Presenter.RECOMMEND_GAMELIST);
         presenter.getMenu();
     }
     void init(){
-
 
 
         mProgress=getView().findViewById(R.id.main_progress);
@@ -101,22 +99,21 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
         ///배너부터
         pAdapter=new pagerAdapter(context);
-        presenter.setAdapterModel(pAdapter,presenter.BANNER_ADATER);
-        presenter.setAdapterView(pAdapter,presenter.BANNER_ADATER);
+        presenter.setAdapterModel(pAdapter,HomeContract.Presenter.BANNER_ADATER);
+        presenter.setAdapterView(pAdapter,HomeContract.Presenter.BANNER_ADATER);
         pager =getView().findViewById(R.id.main_view_pager);
         pager.setAdapter(pAdapter);
 
         ////main list
         mAdapter1=new HomeAdapter(context);
-
         mAdapter2=new HomeAdapter(context);
         mAdapter3=new menuAdapter(context);
-        presenter.setAdapterView(mAdapter1,presenter.RECOMMEND_GAMELIST);
-        presenter.setAdapterModel(mAdapter1,presenter.RECOMMEND_GAMELIST);
-        presenter.setAdapterView(mAdapter2,presenter.MAIN_GAMELIST);
-        presenter.setAdapterModel(mAdapter2,presenter.MAIN_GAMELIST);
-        presenter.setAdapterView(mAdapter3,presenter.MENU_LIST);
-        presenter.setAdapterModel(mAdapter3,presenter.MENU_LIST);
+        presenter.setAdapterView(mAdapter1,HomeContract.Presenter.RECOMMEND_GAMELIST);
+        presenter.setAdapterModel(mAdapter1,HomeContract.Presenter.RECOMMEND_GAMELIST);
+        presenter.setAdapterView(mAdapter2,HomeContract.Presenter.MAIN_GAMELIST);
+        presenter.setAdapterModel(mAdapter2,HomeContract.Presenter.MAIN_GAMELIST);
+        presenter.setAdapterView(mAdapter3,HomeContract.Presenter.MENU_LIST);
+        presenter.setAdapterModel(mAdapter3,HomeContract.Presenter.MENU_LIST);
 
         this.mLayoutManager1=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         mLayoutManager1.setAutoMeasureEnabled(true);
@@ -148,8 +145,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         mRecyclerView3.setHasFixedSize(false);
 
 
-
-        mRecyclerView2.addOnItemTouchListener(new RecyclerItemClickListener(context, mRecyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
+/*
+        RecyclerItemClickListener listener2=new RecyclerItemClickListener(context, mRecyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(context, DetailActivity.class);
@@ -161,9 +158,24 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             public void onLongItemClick(View view, int position) {
 
             }
-        }));
+        });
+        RecyclerItemClickListener listener1=new RecyclerItemClickListener(context, mRecyclerView1, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent=new Intent(context, DetailActivity.class);
+                intent.putExtra("gm_no",mAdapter1.getItem(position).getGmNo());
+                startActivity(intent);
 
+            }
 
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        });
+       // mRecyclerView2.addOnItemTouchListener(listener2);
+        //mRecyclerView1.addOnItemTouchListener(listener1);
+*/
         swipeRefreshLayout=getView().findViewById(R.id.main_swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -172,37 +184,11 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             }
         });
 
-/*
-        nestedScrollView=getView().findViewById(R.id.main_nested);
 
-        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if(v.getChildAt(v.getChildCount() - 1) != null) {
-                    if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
-                            scrollY > oldScrollY) {
-                            getNextPage();
-                    }
-                }
-            }
-
-
-        });
-*/
 
 
     }
 
-    void getFirstPage(){
-
-        presenter.showFirstPage();
-
-    }
-    void getNextPage(){
-            mProgress.setVisibility(View.VISIBLE);
-            mProgress.startNestedScroll(3);
-            presenter.showNextPage();
-        }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

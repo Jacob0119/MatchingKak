@@ -34,7 +34,7 @@ public class MenuViewHolder extends ViewHolder {
     }
 
     @Override
-    public void bind(Context context, Object item, int pos, OnClickListener listener) {
+    public void bind(Context context, Object item, final int pos, final OnClickListener listener) {
 
         MenuData data=(MenuData)item;
        // Log.d("MenuHolder",APIUrl.API_BASE_URL+((MenuData) item).getSport_img());
@@ -44,5 +44,13 @@ public class MenuViewHolder extends ViewHolder {
                 .into(sport_img);
 
         sport_name.setText(data.getSport_Name());
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if(listener!=null) listener.OnClick(view,pos);
+            }
+        });
+
     }
 }

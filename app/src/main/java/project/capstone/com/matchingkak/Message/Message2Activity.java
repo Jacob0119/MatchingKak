@@ -17,6 +17,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.config;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +41,7 @@ private String mb_nick;
     void init(){
 
         Intent intent=getIntent();
-        mb_nick=intent.getStringExtra("mb_nick");
+        mb_nick=intent.getStringExtra(config.MB_NICK);
         receiver=findViewById(R.id.message_reciever_text);
         receiver.setText(mb_nick);
         toolbar=findViewById(R.id.message_toolbar);
@@ -91,6 +92,7 @@ private String mb_nick;
                                            @Override
                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                                Message2Activity.this.finish();
+                                               animation();
                                            }
                                        }
                                 )
@@ -107,11 +109,16 @@ private String mb_nick;
 
 
     }
+    void animation(){
+        overridePendingTransition(R.anim.anim_slide_down_for_current,R.anim.anim_slide_down_for_new);
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                animation();
                 return true;
 
         }

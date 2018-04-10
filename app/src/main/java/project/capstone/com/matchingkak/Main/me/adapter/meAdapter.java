@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.ActivityStarterManager;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.me.adapter.holder.GameItemViewholder;
+import project.capstone.com.matchingkak.Main.me.data.gameData;
 import project.capstone.com.matchingkak.Main.me.meAdapterContract;
 import project.capstone.com.matchingkak.R;
 
@@ -19,14 +21,15 @@ import project.capstone.com.matchingkak.R;
  * Created by Lee on 2018-04-03.
  */
 
-public class meAdapter extends RecyclerView.Adapter<ViewHolder> implements meAdapterContract.model,meAdapterContract.view{
+public class meAdapter extends RecyclerView.Adapter<ViewHolder> implements meAdapterContract.model,meAdapterContract.view,OnClickListener{
 
-    List dataList;
+    List<gameData> dataList;
     private int feature;
     private Context context;
     final static int EMPTY=-1;
+    private OnClickListener listener;
     public meAdapter(Context context){
-
+        setOnClickListener(this);
         dataList=new ArrayList();
         this.context=context;
     }
@@ -42,7 +45,7 @@ public class meAdapter extends RecyclerView.Adapter<ViewHolder> implements meAda
         if(getItemViewType(position)==EMPTY){
 
         }else{
-            holder.bind(context,getItem(position),position,null);
+            holder.bind(context,getItem(position),position,listener);
 
         }
     }
@@ -62,7 +65,7 @@ public class meAdapter extends RecyclerView.Adapter<ViewHolder> implements meAda
 
     @Override
     public void setOnClickListener(OnClickListener clickListener) {
-
+            listener=clickListener;
     }
 
     @Override
@@ -79,7 +82,13 @@ public class meAdapter extends RecyclerView.Adapter<ViewHolder> implements meAda
 
             }else{
 
-                dataList.add(items);
+                dataList.addAll(items);
             }
+    }
+
+    @Override
+    public void OnClick(View v, int position) {
+        gameData data=(gameData)getItem(position);
+        ActivityStarterManager.StartGameDetailActivity(context,data.getGmNo());
     }
 }

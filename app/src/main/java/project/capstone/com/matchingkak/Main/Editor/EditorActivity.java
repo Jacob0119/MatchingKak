@@ -76,7 +76,8 @@ public class EditorActivity extends AppCompatActivity {
         Toolbar toolbar=findViewById(R.id.editor_toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("글쓰기");
+
 
         Intent intent=getIntent();
         url=intent.getStringExtra("url");
