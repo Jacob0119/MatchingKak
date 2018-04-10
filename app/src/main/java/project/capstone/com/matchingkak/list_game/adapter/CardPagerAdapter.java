@@ -1,23 +1,32 @@
 package project.capstone.com.matchingkak.list_game.adapter;
 
+import android.databinding.BindingAdapter;
+import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.databinding.ListGameCardviewBinding;
+
 
 public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
     private List<CardView> mViews;
     private List<CardItem> mData;
     private float mBaseElevation;
-
+    // binding;
+    ListGameCardviewBinding binding;
     public CardPagerAdapter() {
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
@@ -79,10 +88,21 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     }
 
     private void bind(CardItem item, View view) {
-        TextView titleTextView = view.findViewById(R.id.titleTextView);
-        TextView contentTextView = view.findViewById(R.id.contentTextView);
-        titleTextView.setText(item.getTitle());
-        contentTextView.setText(item.getText());
+         binding= DataBindingUtil.bind(view);
+         binding.setCarditem(item);
+        loadImage(binding.listGameViewPicture,item.getPicture(),view.getContext().getDrawable(R.drawable.main_logo));
+    }
+
+    @BindingAdapter({"imageUrl","error"})
+    public static void loadImage(ImageView imageView , String imageUrl, Drawable error){
+        RequestOptions requestOptions=new RequestOptions()
+                                        .centerCrop()
+                                         .circleCrop()
+                                        .error(error)
+                                        ;
+        Glide.with(imageView.getContext()).load(imageUrl).apply(requestOptions).into(imageView);
+
+
     }
 
 }
