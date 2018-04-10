@@ -16,20 +16,26 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.ActivityStarterManager;
+import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.databinding.ListGameCardviewBinding;
+import project.capstone.com.matchingkak.list_game.ListGameAdapterContract;
+import project.capstone.com.matchingkak.restAPI.APIUrl;
 
 
-public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
+public class CardPagerAdapter extends PagerAdapter implements CardAdapter ,ListGameAdapterContract.view,ListGameAdapterContract.model,OnClickListener{
 
     private List<CardView> mViews;
     private List<CardItem> mData;
     private float mBaseElevation;
+    private OnClickListener listener;
     // binding;
     ListGameCardviewBinding binding;
     public CardPagerAdapter() {
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
+        setOnClickListener(this);
     }
 
     public void addCardItem(CardItem item) {
@@ -63,12 +69,18 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
 
         // cardview 생성하여 데이터랑 연결하기
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.list_game_cardview, container, false);
         container.addView(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.OnClick(v,position);
+            }
+        });
         bind(mData.get(position), view);
         CardView cardView =  view.findViewById(R.id.cardView);
 
@@ -77,7 +89,11 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         }
 
         cardView.setMaxCardElevation(mBaseElevation * MAX_ELEVATION_FACTOR);
-        mViews.set(position, cardView);
+
+        if(mViews.size()<=position)
+            mViews.add(position, cardView);
+        else
+            mViews.set(position,cardView);
         return view;
     }
 
@@ -88,9 +104,10 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     }
 
     private void bind(CardItem item, View view) {
+
          binding= DataBindingUtil.bind(view);
          binding.setCarditem(item);
-        loadImage(binding.listGameViewPicture,item.getPicture(),view.getContext().getDrawable(R.drawable.main_logo));
+        loadImage(binding.listGameViewPicture, APIUrl.API_BASE_URL+item.getPicture(),view.getContext().getDrawable(R.drawable.main_logo));
     }
 
     @BindingAdapter({"imageUrl","error"})
@@ -105,4 +122,36 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
     }
 
+    @Override
+    public void notifyAdapter() {
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener clickListener) {
+
+        listener=clickListener;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mData.get(position);
+    }
+
+    @Override
+    public void addItems(List items, boolean isUpper) {
+
+        if(isUpper){
+            mData=items;
+        }else{
+
+            mData.addAll(items);
+        }
+    }
+
+    @Override
+    public void OnClick(View v, int position) {
+        CardItem item=mData.get(position);
+        ActivityStarterManager.StartGameDetailActivity(v.getContext(),item.getGmNo());
+    }
 }

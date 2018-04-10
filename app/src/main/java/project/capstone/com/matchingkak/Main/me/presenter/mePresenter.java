@@ -63,22 +63,19 @@ public class mePresenter implements meContract.Presenter {
             public void onResponse(Call<List<gameData>> call, Response<List<gameData>> response) {
                 modelMap.get(mePresenter.ME_MYPOST).addItems(response.body(),true);
                 viewMap.get(mePresenter.ME_MYPOST).notifyAdapter();
-                Log.d("mePresenter","success post ");
             }
 
             @Override
             public void onFailure(Call<List<gameData>> call, Throwable t) {
-                Log.d("mePresenter","failed post ");
 
             }
         });
         meListService.getRetrofit().getRequestList().enqueue(new Callback<List<gameData>>() {
             @Override
             public void onResponse(Call<List<gameData>> call, Response<List<gameData>> response) {
-                Log.d("mePresenter",response.body().toString());
+
                 modelMap.get(mePresenter.ME_REQUEST).addItems(response.body(),true);
                 viewMap.get(mePresenter.ME_REQUEST).notifyAdapter();
-                Log.d("mePresenter","success request ");
             }
 
             @Override

@@ -4,15 +4,19 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.databinding.ActivityListGameBinding;
-import project.capstone.com.matchingkak.list_game.adapter.CardItem;
 import project.capstone.com.matchingkak.list_game.adapter.CardPagerAdapter;
+import project.capstone.com.matchingkak.list_game.presenter.ListGamePresenter;
 
-public class ListGameActivity extends AppCompatActivity {
+public class ListGameActivity extends AppCompatActivity implements ListGameContract.View {
     ActivityListGameBinding binding;
     CardPagerAdapter mAdapter;
     ShadowTransformer transformer;
+    ListGameContract.Presenter presenter;
+
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,17 +31,29 @@ public class ListGameActivity extends AppCompatActivity {
     void init(){
 
         mAdapter=new CardPagerAdapter();
-        mAdapter.addCardItem(new CardItem("1","Example1"));
-        mAdapter.addCardItem(new CardItem("2","Example2"));
-        mAdapter.addCardItem(new CardItem("3","Example3"));
-        mAdapter.addCardItem(new CardItem("4","Example4"));
-        mAdapter.addCardItem(new CardItem("5","Example5"));
+        presenter=new ListGamePresenter();
 
-      transformer=new ShadowTransformer(binding.listGameViewPager,mAdapter);
-    transformer.enableScaling(true);
+
+
+
+        transformer=new ShadowTransformer(binding.listGameViewPager,mAdapter,presenter);
         binding.listGameViewPager.setAdapter(mAdapter);
-       binding.listGameViewPager.setPageTransformer(false,transformer);
-        binding.listGameViewPager.setOffscreenPageLimit(3);
+        binding.listGameViewPager.setPageTransformer(false,transformer);
+        binding.listGameViewPager.setOffscreenPageLimit(1);
+
+
+        presenter.attatchView(this);
+        presenter.setAdapterModel(mAdapter);
+        presenter.setAdapterView(mAdapter);
+        presenter.loadData(new HashMap<String,String>());
+
+
+
+
+    }
+
+    @Override
+    public void done(int resultCode, String[] input) {
 
     }
 }

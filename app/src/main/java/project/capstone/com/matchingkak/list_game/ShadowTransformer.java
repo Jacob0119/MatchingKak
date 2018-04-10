@@ -5,8 +5,9 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 
+import java.util.HashMap;
+
 import project.capstone.com.matchingkak.list_game.adapter.CardAdapter;
-import project.capstone.com.matchingkak.list_game.adapter.CardItem;
 
 
 public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPager.PageTransformer {
@@ -15,14 +16,18 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
     private CardAdapter mAdapter;
     private float mLastOffset;
     private boolean mScalingEnabled;
-
-    public ShadowTransformer(ViewPager viewPager, CardAdapter adapter) {
+    private ListGameContract.Presenter presenter;
+    public ShadowTransformer(ViewPager viewPager, CardAdapter adapter,ListGameContract.Presenter presenter) {
         mViewPager = viewPager;
         viewPager.addOnPageChangeListener(this);
         mAdapter = adapter;
+        mScalingEnabled=true;
+        this.presenter=presenter;
     }
 
     public void enableScaling(boolean enable) {
+       // if(mAdapter.getCount() !=0)
+
         if (mScalingEnabled && !enable) {
             // shrink main card
             CardView currentCard = mAdapter.getCardViewAt(mViewPager.getCurrentItem());
@@ -108,10 +113,7 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
         Log.d("ShadowTransformer","Position"+position);
             if(position>=mAdapter.getCount()-4){
 
-                for(int i=0;i<5;i++){
-                    mAdapter.addCardItem(new CardItem("more",mAdapter.getCount()+""));
-                }
-                mAdapter.notifyItemsetChanged();
+               presenter.loadNext(new HashMap<String, String>());
 
             }
 

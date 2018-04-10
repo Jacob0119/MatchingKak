@@ -1,40 +1,96 @@
 package project.capstone.com.matchingkak.list_game.adapter;
 
 
-import project.capstone.com.matchingkak.restAPI.APIUrl;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class CardItem {
-
-    private String state;
+    @SerializedName("gm_no")
+    @Expose
+    private String gmNo;
+    @SerializedName("title")
+    @Expose
     private String title;
-    private String location;
+    @SerializedName("teamName")
+    @Expose
+    private String teamName;
+    @SerializedName("picture")
+    @Expose
+    private String picture;
+    @SerializedName("sport")
+    @Expose
+    private String sport;
+    @SerializedName("date")
+    @Expose
     private String date;
-    private String weather;
-    private String picture= APIUrl.API_BASE_URL+"images/team-log2.png";
+    @SerializedName("location")
+    @Expose
+    private String location;
+    @SerializedName("state")
+    @Expose
+    private String state;
 
-    public CardItem(int title, int text) {
-        //mTitleResource = title;
-       // mTextResource = text;
-    }
-    public CardItem(String title,String date){
-            this.title=title;
-            this.date=date;
-    }
-    public String getDate() {
-        return date;
+    public String getGmNo() {
+        return gmNo;
     }
 
-    public String getPicture(){
-        return this.picture;
+    public void setGmNo(String gmNo) {
+        this.gmNo = gmNo;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getState() {return state;}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public String getLocation(){return location;}
+    public String getTeamName() {
+        return teamName;
+    }
 
-    public String getWeather(){return weather;}
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 }
