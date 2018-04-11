@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import project.capstone.com.matchingkak.GameItemViewUtils;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.me.data.gameData;
@@ -48,17 +49,8 @@ public class GameItemViewholder extends ViewHolder {
         this.location.setText(item.getGmGym());
         this.sport.setText(item.getTmSport());
         RequestOptions options=new RequestOptions();
-        View state_back=itemView.findViewById(R.id.game_view_state_back);
-        if(item.getGmState().equals("0"))//성사대기
-        {   state_back.setBackgroundColor(context.getColor(R.color.pretty_red));
 
-            this.state_text.setText("요청가능");
-
-        }else{
-            state_back.setBackgroundColor(context.getColor(R.color.pretty_blue));
-
-            this.state_text.setText("성사완료");
-        }
+        GameItemViewUtils.set_state(state_text,item.getGmState());
         Glide.with(context)
 
                 .load(APIUrl.API_BASE_URL+item.getTmImg())

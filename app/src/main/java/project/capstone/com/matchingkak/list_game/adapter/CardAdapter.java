@@ -3,7 +3,7 @@ package project.capstone.com.matchingkak.list_game.adapter;
 
 import android.support.v7.widget.CardView;
 
-public interface CardAdapter {
+public interface CardAdapter  {
 
     int MAX_ELEVATION_FACTOR = 8;
 

@@ -2,27 +2,29 @@ package project.capstone.com.matchingkak.list_game;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 
-import java.util.HashMap;
-
+import project.capstone.com.matchingkak.databinding.ActivityListGameBinding;
 import project.capstone.com.matchingkak.list_game.adapter.CardAdapter;
 
 
 public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPager.PageTransformer {
 
     private ViewPager mViewPager;
-    private CardAdapter mAdapter;
+    private ListGameAdapterContract.view mAdapter;
     private float mLastOffset;
     private boolean mScalingEnabled;
+    private int prevPosition;
     private ListGameContract.Presenter presenter;
-    public ShadowTransformer(ViewPager viewPager, CardAdapter adapter,ListGameContract.Presenter presenter) {
-        mViewPager = viewPager;
-        viewPager.addOnPageChangeListener(this);
+    ActivityListGameBinding binding;
+    public ShadowTransformer(ActivityListGameBinding binding, ListGameAdapterContract.view adapter,ListGameContract.Presenter presenter) {
+        this.binding=binding;
+        mViewPager = binding.listGameViewPager;
+        mViewPager.addOnPageChangeListener(this);
         mAdapter = adapter;
         mScalingEnabled=true;
         this.presenter=presenter;
+        prevPosition=0;
     }
 
     public void enableScaling(boolean enable) {
@@ -110,11 +112,14 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
 
     @Override
     public void onPageSelected(int position) {
-        Log.d("ShadowTransformer","Position"+position);
-            if(position>=mAdapter.getCount()-4){
 
-               presenter.loadNext(new HashMap<String, String>());
+       // mAdapter.setChangeRootBackground(binding.listGameBg,position);
+      //  Log.d("ShadowTransformer","Position"+position);
+        if(prevPosition>=position) return;
+            if(position>=mAdapter.getCount()-2){
 
+               presenter.loadNext();
+                prevPosition=position;
             }
 
     }

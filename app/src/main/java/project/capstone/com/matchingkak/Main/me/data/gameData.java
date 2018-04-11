@@ -81,6 +81,7 @@ public class gameData {
     public String getGmDate() {
 
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+
         Date date = null;
         try {
             date = dt.parse(gmDate);

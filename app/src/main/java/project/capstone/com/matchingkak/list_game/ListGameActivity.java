@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.HashMap;
 
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.config;
 import project.capstone.com.matchingkak.databinding.ActivityListGameBinding;
 import project.capstone.com.matchingkak.list_game.adapter.CardPagerAdapter;
 import project.capstone.com.matchingkak.list_game.presenter.ListGamePresenter;
@@ -36,7 +37,7 @@ public class ListGameActivity extends AppCompatActivity implements ListGameContr
 
 
 
-        transformer=new ShadowTransformer(binding.listGameViewPager,mAdapter,presenter);
+        transformer=new ShadowTransformer(binding,mAdapter,presenter);
         binding.listGameViewPager.setAdapter(mAdapter);
         binding.listGameViewPager.setPageTransformer(false,transformer);
         binding.listGameViewPager.setOffscreenPageLimit(1);
@@ -45,7 +46,8 @@ public class ListGameActivity extends AppCompatActivity implements ListGameContr
         presenter.attatchView(this);
         presenter.setAdapterModel(mAdapter);
         presenter.setAdapterView(mAdapter);
-        presenter.loadData(new HashMap<String,String>());
+        presenter.setParameterMap((HashMap)getIntent().getSerializableExtra(config.LIST_GAME_MAP));
+        presenter.loadData();
 
 
 

@@ -2,6 +2,8 @@ package project.capstone.com.matchingkak.list_game.adapter;
 
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
@@ -11,12 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import project.capstone.com.matchingkak.ActivityStarterManager;
+import project.capstone.com.matchingkak.GameItemViewUtils;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.databinding.ListGameCardviewBinding;
@@ -24,7 +31,7 @@ import project.capstone.com.matchingkak.list_game.ListGameAdapterContract;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 
 
-public class CardPagerAdapter extends PagerAdapter implements CardAdapter ,ListGameAdapterContract.view,ListGameAdapterContract.model,OnClickListener{
+public class CardPagerAdapter extends PagerAdapter implements ListGameAdapterContract.view,ListGameAdapterContract.model,OnClickListener{
 
     private List<CardView> mViews;
     private List<CardItem> mData;
@@ -32,6 +39,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter ,ListG
     private OnClickListener listener;
     // binding;
     ListGameCardviewBinding binding;
+
     public CardPagerAdapter() {
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
@@ -56,6 +64,16 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter ,ListG
     @Override
     public CardView getCardViewAt(int position) {
         return mViews.get(position);
+    }
+
+    @Override
+    public void setChangeRootBackground(View v, int position) {
+            String imageUrl=APIUrl.API_BASE_URL+mData.get(position).getPicture();
+
+
+        Glide.with(v.getContext()).load(imageUrl)
+                .apply(RequestOptions.bitmapTransform(new MultiTransformation<Bitmap>(new CenterCrop(),new BlurTransformation(),new ColorFilterTransformation(Color.BLACK))))
+                .into((ImageView)v);
     }
 
     @Override
@@ -106,15 +124,16 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter ,ListG
     private void bind(CardItem item, View view) {
 
          binding= DataBindingUtil.bind(view);
+
          binding.setCarditem(item);
-        loadImage(binding.listGameViewPicture, APIUrl.API_BASE_URL+item.getPicture(),view.getContext().getDrawable(R.drawable.main_logo));
+            GameItemViewUtils.set_state(binding.listGameViewState,item.getState());
+         loadImage(binding.listGameViewPicture, APIUrl.API_BASE_URL+item.getPicture(),view.getContext().getDrawable(R.drawable.main_logo));
     }
 
     @BindingAdapter({"imageUrl","error"})
     public static void loadImage(ImageView imageView , String imageUrl, Drawable error){
         RequestOptions requestOptions=new RequestOptions()
                                         .centerCrop()
-                                         .circleCrop()
                                         .error(error)
                                         ;
         Glide.with(imageView.getContext()).load(imageUrl).apply(requestOptions).into(imageView);

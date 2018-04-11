@@ -1,15 +1,17 @@
 package project.capstone.com.matchingkak.Main.home.adapter;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import project.capstone.com.matchingkak.ActivityStarterManager;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
@@ -79,6 +81,14 @@ public class menuAdapter extends RecyclerView.Adapter<ViewHolder> implements Hom
 
     @Override
     public void OnClick(View v, int position) {
-        Snackbar.make(v,menuList.get(position).getSport_index()+"",Snackbar.LENGTH_SHORT).show();
+
+        HashMap<String,String> map=new HashMap<>();
+        String sportIdx=String.valueOf(getItem(position).getSport_index());
+        Log.d("menuAdapter",sportIdx);
+        map.put("sport",sportIdx);
+
+        ActivityStarterManager.StartListGameActivity(v.getContext(),map);
     }
+
+    public MenuData getItem(int position){return menuList.get(position);}
 }

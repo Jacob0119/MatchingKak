@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
@@ -8,117 +9,214 @@
             type="project.capstone.com.matchingkak.list_game.adapter.CardItem"/>
 
     </data>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cardView"
-    android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:layout_gravity="center"
-    app:cardUseCompatPadding="true">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20dp"
+        app:cardUseCompatPadding="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/list_game_view_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@{carditem.title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_game_view_picture" />
+            <View
 
-        <ImageView
-            android:id="@+id/list_game_view_picture"
-            android:layout_width="119dp"
-            android:layout_height="119dp"
-            android:layout_gravity="top|end"
-            android:layout_marginTop="16dp"
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/list_game_view_state"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:background="@color/pretty_red"
+                android:elevation="2dp"
+                android:gravity="center_horizontal"
+                android:padding="2dp"
+                android:text="성사완료"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/list_game_view_state"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:background="@color/pretty_red"
-            android:gravity="center_horizontal"
-            android:padding="2dp"
-            android:text="성사완료"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textColor="@color/white"
-            android:textSize="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/list_game_view_picture"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_gravity="top|end"
 
-        <TextView
-            android:id="@+id/list_game_view_weather_T"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="location"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/list_game_view_weather_P"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/list_game_view_weather_P"
-            app:layout_constraintTop_toTopOf="@+id/list_game_view_weather_P" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/list_game_view_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="location"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_game_view_title" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_game_view_picture">
 
-        <ImageView
-            android:id="@+id/list_game_view_weather_P"
-            android:layout_width="37dp"
-            android:layout_height="36dp"
-            android:layout_gravity="top|end"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/sun"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/list_game_view_location"
-            app:layout_constraintHorizontal_bias="0.222"
-            app:layout_constraintStart_toEndOf="@+id/list_game_view_location"
-            app:layout_constraintTop_toBottomOf="@+id/list_game_view_location"
-            app:layout_constraintVertical_bias="0.105" />
+                <TextView
+                    android:id="@+id/list_game_view_state2"
+                    style="@style/list_game_text_basic_red"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rounded_textview"
+                    android:gravity="center_horizontal"
+                    android:padding="2dp"
+                    android:text="@{carditem.sport}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="배드민턴" />
 
-        <TextView
-            android:id="@+id/list_game_view_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="@{carditem.date}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintBaseline_toBaselineOf="@+id/list_game_view_weather_T"
-            app:layout_constraintEnd_toStartOf="@+id/list_game_view_weather_P"
-            app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/list_game_dday"
+                    style="@style/list_game_text_basic_red"
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="@{carditem._DDay}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/list_game_view_state2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/list_game_view_state2"
+                    app:layout_constraintTop_toBottomOf="@+id/list_game_view_state2"
+                    tools:text="D-20" />
 
-    </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/list_game_view_title"
+                    style="@style/list_game_text_basic"
+                    android:layout_width="0dp"
+                    android:layout_height="26dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="5dp"
+                    android:text="@{carditem.title}"
+                    app:layout_constraintBottom_toBottomOf="@+id/list_game_dday"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/list_game_view_state2"
+                    app:layout_constraintTop_toTopOf="@+id/list_game_view_state2"
+                    tools:text="ㅎㅎㅎㅎ 농구 고고" />
+            </android.support.constraint.ConstraintLayout>
 
-</android.support.v7.widget.CardView>
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/list_game_view_weather_P"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/sun" />
+
+                    <TextView
+                        android:id="@+id/list_game_view_weather_T"
+                        style="@style/list_game_text_basic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="맑음 뒤 흐림"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/list_game_view_location"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/list_game_view_date"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/pin" />
+
+                <TextView
+                    android:id="@+id/list_game_view_date"
+                    style="@style/list_game_text_basic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="left"
+                    android:text="@{carditem.date}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2018/04/23\n 6:00" />
+
+                <TextView
+                    android:id="@+id/list_game_view_location"
+                    style="@style/list_game_text_basic"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="left|center_horizontal|center"
+                    android:text="@{carditem.location}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/list_game_view_date"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
 </layout>

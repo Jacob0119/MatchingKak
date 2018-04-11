@@ -3,6 +3,8 @@ package project.capstone.com.matchingkak;
 import android.content.Context;
 import android.content.Intent;
 
+import java.util.HashMap;
+
 import project.capstone.com.matchingkak.detail_info.DetailActivity;
 import project.capstone.com.matchingkak.list_game.ListGameActivity;
 
@@ -19,10 +21,10 @@ public class ActivityStarterManager {
         context.startActivity(intent);
     }
 
-    public static void StartListGameActivity(Context context){
+    public static void StartListGameActivity(Context context, HashMap<String,String> parameters){
 
         Intent intent=new Intent(context, ListGameActivity.class);
-
+        intent.putExtra(config.LIST_GAME_MAP,parameters);
         context.startActivity(intent);
 
     }

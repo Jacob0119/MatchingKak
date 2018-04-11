@@ -17,6 +17,8 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import project.capstone.com.matchingkak.ActivityStarterManager;
 import project.capstone.com.matchingkak.Main.home.adapter.HomeAdapter;
 import project.capstone.com.matchingkak.Main.home.adapter.menuAdapter;
@@ -151,7 +153,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityStarterManager.StartListGameActivity(getContext());
+                ActivityStarterManager.StartListGameActivity(getContext(),new HashMap<String, String>());
             }
         });
 /*

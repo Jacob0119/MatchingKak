@@ -2,8 +2,8 @@ package project.capstone.com.matchingkak.list_game.presenter;
 
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import project.capstone.com.matchingkak.BaseAdapterContract;
 import project.capstone.com.matchingkak.list_game.ListGameAdapterContract;
@@ -20,8 +20,12 @@ public class ListGamePresenter implements ListGameContract.Presenter {
     ListGameContract.View view;
     ListGameAdapterContract.model adapterModel;
     ListGameAdapterContract.view adpaterView;
+    private  HashMap<String,String> options;
     private int page=1;
 
+    public ListGamePresenter(){
+        options=new HashMap<String,String>();
+    }
     @Override
     public void attatchView(ListGameContract.View view) {
         this.view=view;
@@ -39,7 +43,7 @@ public class ListGamePresenter implements ListGameContract.Presenter {
 
     @Override
     public void setAdapterView(BaseAdapterContract.view view) {
-            this.adpaterView=view;
+            this.adpaterView=(ListGameAdapterContract.view)view;
     }
 
     @Override
@@ -49,8 +53,9 @@ public class ListGamePresenter implements ListGameContract.Presenter {
 
 
     @Override
-    public void loadData(final Map<String, String> options) {
+    public void loadData() {
 
+       // Log.d("ListGamePresenter",page+"");
 
         ListGameService.getRetrofit().getListOfGames(options).enqueue(new Callback<List<CardItem>>() {
             @Override
@@ -69,10 +74,15 @@ public class ListGamePresenter implements ListGameContract.Presenter {
     }
 
     @Override
-    public void loadNext(Map<String, String> options) {
+    public void loadNext() {
         page++;
         options.put("page",String.valueOf(page));
-        loadData(options);
+        loadData();
 
+    }
+
+    @Override
+    public void setParameterMap(HashMap<String, String> map) {
+        options=map;
     }
 }

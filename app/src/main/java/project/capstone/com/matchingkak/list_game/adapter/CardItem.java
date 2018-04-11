@@ -4,6 +4,12 @@ package project.capstone.com.matchingkak.list_game.adapter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import project.capstone.com.matchingkak.GameItemViewUtils;
+
 public class CardItem {
     @SerializedName("gm_no")
     @Expose
@@ -29,6 +35,7 @@ public class CardItem {
     @SerializedName("state")
     @Expose
     private String state;
+
 
     public String getGmNo() {
         return gmNo;
@@ -71,9 +78,25 @@ public class CardItem {
     }
 
     public String getDate() {
-        return date;
+        String result="정보없음";
+        try{
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date                time         =simpleDateFormat.parse(this.date);
+            simpleDateFormat.applyPattern("yyyy.MM.dd.");
+            result      =simpleDateFormat.format(time);
+        }catch (ParseException e){
+
+        }
+
+
+        return  result;
     }
 
+    public String get_DDay(){
+
+        return GameItemViewUtils.getD_day("yyyy-MM-dd HH:mm:ss",this.date);
+
+    }
     public void setDate(String date) {
         this.date = date;
     }
