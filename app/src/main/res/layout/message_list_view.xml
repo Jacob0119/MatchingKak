@@ -12,13 +12,17 @@
     android:layout_margin="1dp"
     app:contentPadding="1dp"
   >
-<ImageView
-    android:visibility="invisible"
-    android:id="@+id/message_new"
-    android:scaleType="centerInside"
-    android:layout_width="10dp"
-    android:layout_height="10dp"
-    android:src="@drawable/new_bubble"/>
+
+    <ImageView
+        android:id="@+id/message_new"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:elevation="1dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/new_bubble"
+        android:visibility="invisible" />
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"

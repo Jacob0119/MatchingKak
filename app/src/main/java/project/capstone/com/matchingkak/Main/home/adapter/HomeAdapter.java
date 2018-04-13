@@ -30,6 +30,7 @@ public class HomeAdapter extends  RecyclerView.Adapter<ViewHolder> implements Ho
 
     private Context context;
 
+
     @Override
     public void setUpdate() {
         notifyDataSetChanged();

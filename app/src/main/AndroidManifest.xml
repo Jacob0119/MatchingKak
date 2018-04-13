@@ -66,7 +66,13 @@
             android:theme="@style/AppTheme.ActionBar.Transparent" />
         <activity android:name=".sns_login.loginActivity" />
         <activity android:name=".sns_login.SuccessActivity" />
-        <activity android:name=".Main.Main2Activity" />
+        <activity android:name=".Main.Main2Activity" >
+                <intent-filter>
+                    <action android:name="android.intent.action.SEARCH"></action>
+                </intent-filter>
+
+
+        </activity>
         <activity android:name=".Message.Message2Activity" />
         <activity
             android:name=".Main.message.MessageDetail"

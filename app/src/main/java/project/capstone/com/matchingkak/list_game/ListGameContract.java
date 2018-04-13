@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import project.capstone.com.matchingkak.BaseContract;
 
-public interface ListGameContract extends BaseContract {
+ public interface ListGameContract extends BaseContract {
 
     interface Presenter extends BaseContract.Presenter{
         void loadData();

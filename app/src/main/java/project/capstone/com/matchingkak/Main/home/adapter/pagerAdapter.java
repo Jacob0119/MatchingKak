@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.GameItemViewUtils;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
 import project.capstone.com.matchingkak.R;
@@ -29,28 +30,29 @@ public class pagerAdapter extends PagerAdapter implements HomeAdapterContract.Vi
     List<String> list;
     private Context context;
     LayoutInflater inflater;
+
     public pagerAdapter(final Context context)  {
         this.context=context;
         list=new ArrayList<String>();
 
     }
 
-
+    public int getRealCount(){return list.size();}
     void setList(List<String> images){
 
         list=images;
-        notifyDataSetChanged();
 
     }
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        GameItemViewUtils.debug("pagerAdapter",position+"");
         inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view=inflater.inflate(R.layout.banner_view,null);
         ImageView image=view.findViewById(R.id.main_view_pager_img);
 
         RequestOptions options=new RequestOptions();
-        //Log.d("pAdapter",APIUrl.API_BASE_URL+list.get(position).toString());
+        position%=getRealCount();
         Glide.with(context)
                 .load(APIUrl.API_BASE_URL+list.get(position).toString())
                 .apply(options.centerCrop())
@@ -62,15 +64,18 @@ public class pagerAdapter extends PagerAdapter implements HomeAdapterContract.Vi
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+      //  position%=getRealCount();
+        //super.destroyItem(container,position,object);
 
         ViewPager vp=(ViewPager) container;
         View view=(View)object;
         vp.removeView(view);
+
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return list.size()==0?0:Integer.MAX_VALUE;
     }
 
     @Override
@@ -80,7 +85,7 @@ public class pagerAdapter extends PagerAdapter implements HomeAdapterContract.Vi
 
     @Override
     public void setUpdate() {
-
+            notifyDataSetChanged();
     }
 
     @Override
@@ -98,4 +103,5 @@ public class pagerAdapter extends PagerAdapter implements HomeAdapterContract.Vi
             list.clear();
             this.setList(data);
     }
+
 }

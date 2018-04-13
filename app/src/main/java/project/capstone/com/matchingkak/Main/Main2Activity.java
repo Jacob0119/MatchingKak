@@ -41,6 +41,7 @@ public class Main2Activity extends AppCompatActivity {
     private CustomViewPager mViewPager;
     private ViewPagerAdapter mAdapter;
     private BottomNavigationView navigationView;
+
     Fragment[] frag=new Fragment[5];
 
     private int selectedTab=0;
@@ -60,6 +61,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
     }
+
+
 
     private void loadFragment(int i) {
 

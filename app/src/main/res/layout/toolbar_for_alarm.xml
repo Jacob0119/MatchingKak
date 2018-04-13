@@ -3,7 +3,6 @@
 <android.support.design.widget.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_appbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,21 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pure_gray"
-        android:fitsSystemWindows="true"
         app:contentScrim="?attr/colorPrimary"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:layout_scrollFlags="scroll|enterAlways"
         app:titleEnabled="false">
 
 
         <android.support.v7.widget.Toolbar
 
 
-            android:id="@+id/main_toolbar"
+            android:id="@+id/alarm_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            app:layout_collapseMode="pin" >
-
+           >
+        <ImageView
+            android:layout_marginRight="2dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/bell"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
         <TextView
             style="@style/primary_text"
             android:layout_width="wrap_content"

@@ -3,12 +3,15 @@ package project.capstone.com.matchingkak.Main.home;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +21,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.Timer;
 
 import project.capstone.com.matchingkak.ActivityStarterManager;
+import project.capstone.com.matchingkak.InfiniteViewPager;
 import project.capstone.com.matchingkak.Main.home.adapter.HomeAdapter;
 import project.capstone.com.matchingkak.Main.home.adapter.menuAdapter;
 import project.capstone.com.matchingkak.Main.home.adapter.pagerAdapter;
@@ -38,7 +43,8 @@ import project.capstone.com.matchingkak.R;
 public class HomeFragment extends Fragment implements HomeContract.View {
 
     private HomeContract.Presenter presenter;
-
+    private Toolbar searchView;
+    private android.support.v7.widget.Toolbar toolbar;
     private RecyclerView mRecyclerView1,mRecyclerView2,mRecyclerView3;
     private RecyclerView.LayoutManager mLayoutManager1,mLayoutManager2,mLayoutManager3;
     private HomeAdapter mAdapter1,mAdapter2;
@@ -47,6 +53,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private ViewPager pager;
     private pagerAdapter pAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private static Timer timer;
     NestedScrollView nestedScrollView;
      Context context;
     // TODO: Rename parameter arguments, choose names that match
@@ -72,6 +79,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void onCreate(Bundle savedInstanceState) {
        // context=getContext();
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        setRetainInstance(true);
         presenter=new HomePresenter();
         presenter.attachView(this);
 
@@ -84,19 +93,35 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
 
 
-       init();
-
-    loadAll();
+        init();
+        loadAll();
     }
 
     void loadAll(){
+        ((InfiniteViewPager)pager).stopAutoScroll();
         presenter.showBanner();
         presenter.getData(HomeContract.Presenter.MAIN_GAMELIST);
         presenter.getData(HomeContract.Presenter.RECOMMEND_GAMELIST);
         presenter.getMenu();
+
     }
+
+
+
+
     void init(){
 
+        toolbar=getView().findViewById(R.id.main_toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        searchView=getView().findViewById(R.id.main_search);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view,"searching,,,",Snackbar.LENGTH_SHORT).show();
+            }
+        });
 
         mProgress=getView().findViewById(R.id.main_progress);
 
@@ -107,6 +132,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         presenter.setAdapterView(pAdapter,HomeContract.Presenter.BANNER_ADATER);
         pager =getView().findViewById(R.id.main_view_pager);
         pager.setAdapter(pAdapter);
+
 
         ////main list
         mAdapter1=new HomeAdapter(context);
@@ -212,6 +238,9 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Override
     public void updateBanner() {
 
+
+
+        ((InfiniteViewPager)pager).startAutoScroll();
     }
 
     @Override

@@ -13,26 +13,15 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-
-            <View
-
-                android:id="@+id/view6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="8dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/list_game_view_state"
@@ -59,13 +48,56 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_game_view_picture">
+
+                <TextView
+                    android:id="@+id/list_game_dday"
+                    style="@style/list_game_text_basic_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="@{carditem._DDay}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/list_game_view_state2"
+                    app:layout_constraintStart_toStartOf="@+id/list_game_view_state2"
+                    app:layout_constraintTop_toBottomOf="@+id/list_game_view_state2"
+                    tools:text="D-20" />
+
+                <TextView
+                    android:id="@+id/list_game_view_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/main_font"
+                    android:lines="2"
+                    android:padding="5dp"
+                    android:text="@{carditem.title}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/list_game_view_state2"
+                    tools:text="ㅎㅎㅎㅎ 농구 고고" />
 
                 <TextView
                     android:id="@+id/list_game_view_state2"
@@ -81,127 +113,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="배드민턴" />
-
-                <TextView
-                    android:id="@+id/list_game_dday"
-                    style="@style/list_game_text_basic_red"
-                    android:layout_width="0dp"
-                    android:layout_height="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:text="@{carditem._DDay}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/list_game_view_state2"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/list_game_view_state2"
-                    app:layout_constraintTop_toBottomOf="@+id/list_game_view_state2"
-                    tools:text="D-20" />
-
-                <TextView
-                    android:id="@+id/list_game_view_title"
-                    style="@style/list_game_text_basic"
-                    android:layout_width="0dp"
-                    android:layout_height="26dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="8dp"
-                    android:padding="5dp"
-                    android:text="@{carditem.title}"
-                    app:layout_constraintBottom_toBottomOf="@+id/list_game_dday"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/list_game_view_state2"
-                    app:layout_constraintTop_toTopOf="@+id/list_game_view_state2"
-                    tools:text="ㅎㅎㅎㅎ 농구 고고" />
             </android.support.constraint.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/list_game_view_weather_P"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/sun" />
-
-                    <TextView
-                        android:id="@+id/list_game_view_weather_T"
-                        style="@style/list_game_text_basic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:gravity="left|center_vertical"
-                        android:text="맑음 뒤 흐림"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view6"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerInside"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/list_game_view_location"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/list_game_view_date"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/pin" />
-
-                <TextView
-                    android:id="@+id/list_game_view_date"
-                    style="@style/list_game_text_basic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:gravity="left"
-                    android:text="@{carditem.date}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="2018/04/23\n 6:00" />
+                app:layout_constraintTop_toBottomOf="@+id/view6">
 
                 <TextView
                     android:id="@+id/list_game_view_location"
@@ -210,12 +133,59 @@
                     android:layout_height="wrap_content"
 
                     android:layout_gravity="right"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
                     android:gravity="left|center_horizontal|center"
                     android:text="@{carditem.location}"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/list_game_view_date"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="세종대학교" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/list_game_view_location"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/pin" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/calendar" />
+
+                <TextView
+                    android:id="@+id/list_game_view_date"
+                    style="@style/list_game_text_basic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="4dp"
+                    android:gravity="left"
+                    android:text="@{carditem.date}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2018/04/23\n 6:00" />
             </android.support.constraint.ConstraintLayout>
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>

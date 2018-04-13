@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.List;
 
+import project.capstone.com.matchingkak.GameItemViewUtils;
 import project.capstone.com.matchingkak.Main.home.HomeAdapterContract;
 import project.capstone.com.matchingkak.Main.home.HomeContract;
 import project.capstone.com.matchingkak.Main.home.data.HomeListService;
@@ -19,7 +20,7 @@ import retrofit2.Response;
  */
 
 public class HomePresenter implements HomeContract.Presenter {
-
+    private static String TAG=HomePresenter.class.getName();
     private HashMap<Integer,HomeAdapterContract.Model> adapterModelMap;
     private HashMap<Integer,HomeAdapterContract.View> adapterViewMap;
     private HomeContract.View MainView;
@@ -106,13 +107,15 @@ public class HomePresenter implements HomeContract.Presenter {
             HomeListService.getRetrofit().getBanner().enqueue(new Callback<List<String>>() {
                 @Override
                 public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                            GameItemViewUtils.debug(TAG,response.body().size()+"");
                             model.set(response.body());
                             view.setUpdate();
+                            MainView.updateBanner();
                 }
 
                 @Override
                 public void onFailure(Call<List<String>> call, Throwable t) {
-
+                    GameItemViewUtils.debug(TAG,"Failed");
                 }
             });
     }

@@ -24,7 +24,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="8dp">
-
+            <TextView
+                style="@style/rounded_text_blue"
+                android:padding="3dp"
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="성사완료"
+               />
             <TextView
                 android:id="@+id/alarm_list_title"
                 style="@style/primary_text_for_list"

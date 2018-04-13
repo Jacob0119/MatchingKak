@@ -20,15 +20,17 @@
                     style="@style/home_cardview_title"
 
                     android:text=""/>
+
                 <TextView
                     android:id="@+id/home_content2_more"
-                    android:gravity="end|center_vertical"
-                    android:layout_centerInParent="true"
                     style="@style/primary_text_for_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="more>"
-                    />
+                    android:layout_centerInParent="true"
+                    android:gravity="end|center_vertical"
+                    android:paddingRight="20dp"
+                    android:text="더보기 >"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
 

@@ -3,9 +3,7 @@ package project.capstone.com.matchingkak.Main.alarm.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import project.capstone.com.matchingkak.GameItemViewUtils;
 
 /**
  * Created by amco1 on 2018-03-16.
@@ -105,7 +103,7 @@ public class alarmItem {
     }
 
     public String getAlarm_send_date() {
-
+/*
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = null;
         try {
@@ -117,7 +115,12 @@ public class alarmItem {
 
 
         return dt1.format(date);
+
+  */
+
+        return GameItemViewUtils.getElapsed_time(GameItemViewUtils.DatePattern,this.time);
     }
+
 
 
 

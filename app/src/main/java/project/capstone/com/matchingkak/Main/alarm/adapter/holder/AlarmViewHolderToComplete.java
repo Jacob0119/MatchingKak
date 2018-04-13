@@ -36,7 +36,7 @@ public class AlarmViewHolderToComplete extends ViewHolder {
     @Override
     public void bind(Context context, Object data, final int pos, final OnClickListener listener) {
         alarmItem item=(alarmItem)data;
-        alarm_title.setText(pos+"."+item.getUser()+"님과 경기 성사 완료");
+        alarm_title.setText(item.getUser()+"님과 경기 성사 완료");
         alarm_date.setText(item.getAlarm_send_date());
         RequestOptions options=new RequestOptions();
         Glide.with(context)

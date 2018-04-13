@@ -6,9 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import project.capstone.com.matchingkak.GameItemViewUtils;
 
 /**
  * Created by amco1 on 2018-03-28.
@@ -105,17 +103,7 @@ public class MSGData implements Parcelable {
 
     public String getMs_send_date() {
 
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date = null;
-        try {
-            date = dt.parse(ms_send_date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd");
-
-
-        return dt1.format(date);
+        return GameItemViewUtils.getCustomDate(GameItemViewUtils.DatePattern,this.ms_send_date,GameItemViewUtils.SimpleDatePattern);
     }
 
     public void setMs_send_date(String ms_send_date) {

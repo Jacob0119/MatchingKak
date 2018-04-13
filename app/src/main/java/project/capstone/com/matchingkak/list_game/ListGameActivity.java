@@ -3,6 +3,7 @@ package project.capstone.com.matchingkak.list_game;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import java.util.HashMap;
 
@@ -31,6 +32,11 @@ public class ListGameActivity extends AppCompatActivity implements ListGameContr
 
     void init(){
 
+
+        android.support.v7.widget.Toolbar toolbar=findViewById(R.id.list_game_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mAdapter=new CardPagerAdapter();
         presenter=new ListGamePresenter();
 
@@ -52,6 +58,16 @@ public class ListGameActivity extends AppCompatActivity implements ListGameContr
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case  android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -188,12 +188,23 @@
     <item name="android:gravity">center</item>
     <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
     <item name="android:lines">1</item>
+    <item name="android:textSize">10dp</item>
 
 </style>
 <style name="list_game_text_basic_red" parent="list_game_text_basic">
     <item name="android:textColor">@color/pretty_red</item>
-
 </style>
+<style name="rounded_text_red" parent="list_game_text_basic">
+    <item name="android:textColor">@color/pretty_red</item>
+    <item name="android:backgroundTint">@color/pretty_red</item>
+    <item name="android:background">@drawable/rounded_textview</item>
+</style>
+    <style name="rounded_text_blue" parent="list_game_text_basic">
+        <item name="android:textColor">@color/pretty_blue</item>
+        <item name="android:backgroundTint">@color/pretty_blue</item>
+        <item name="android:background">@drawable/rounded_textview</item>
+    </style>
+
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>

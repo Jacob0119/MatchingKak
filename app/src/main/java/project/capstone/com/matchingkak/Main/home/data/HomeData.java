@@ -3,9 +3,7 @@ package project.capstone.com.matchingkak.Main.home.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import project.capstone.com.matchingkak.GameItemViewUtils;
 
 public class HomeData {
 
@@ -76,17 +74,7 @@ public class HomeData {
 
     public String getGmDate() {
 
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date = null;
-        try {
-            date = dt.parse(gmDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd");
-
-
-        return dt1.format(date);
+     return GameItemViewUtils.getCustomDate(GameItemViewUtils.DatePattern,this.gmDate,GameItemViewUtils.SimpleDatePattern);
     }
 
     public void setGmDate(String gmDate) {
