@@ -78,7 +78,7 @@ public class MessageDetail extends AppCompatActivity implements View.OnClickList
         Intent intent=new Intent(this, Message2Activity.class);
         intent.putExtra(config.MB_NICK,mData.getMb_nick());
         startActivity(intent);
-        overridePendingTransition(R.anim.anim_slide_up_for_new,R.anim.anim_slide_up_for_current);
+        overridePendingTransition(R.anim.anim_slide_up_for_new,R.anim.do_nothing);
 
     }
 }

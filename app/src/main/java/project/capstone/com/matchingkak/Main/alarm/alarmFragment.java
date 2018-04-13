@@ -18,14 +18,13 @@ import android.widget.ProgressBar;
 
 import project.capstone.com.matchingkak.Main.alarm.adapter.alarmAdapter;
 import project.capstone.com.matchingkak.Main.alarm.presenter.alarmPresenter;
-import project.capstone.com.matchingkak.Main.home.RecyclerItemClickListener;
 import project.capstone.com.matchingkak.Message.Message2Activity;
 import project.capstone.com.matchingkak.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class alarmFragment extends Fragment implements alarmContract.View{
+public class alarmFragment extends android.support.v4.app.Fragment implements alarmContract.View{
 
 
     private int lastPosition=-1;
@@ -64,7 +63,7 @@ public static alarmFragment newInstance(){
     }
 
     void init(){
-        mAdapter=new alarmAdapter(getContext());
+        mAdapter=new alarmAdapter(getContext(),getChildFragmentManager());
         presenter=new alarmPresenter();
         presenter.attatchView(this);
         presenter.setAdapterModel(mAdapter);
@@ -88,10 +87,11 @@ public static alarmFragment newInstance(){
        // AnimationManager.runLayoutAnimation(mRecyclerView);
 
         this.mLayoutManager=new LinearLayoutManager(context);
-        mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setFocusableInTouchMode(false);
         mRecyclerView.setHasFixedSize(false);
+
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -121,21 +121,7 @@ public static alarmFragment newInstance(){
 
             }
         });
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                //Intent intent=new Intent(context, DetailActivity.class);
-                //intent.putExtra("gm_no",mAdapter.getItem(position).getGmNo());
-                //startActivity(intent);
-                //Toast.makeText(context,mAdapter.getItem(position).getMs_content(),Toast.LENGTH_SHORT).show();
 
-            }
-
-            @Override
-            public void onLongItemClick(View view, int position) {
-
-            }
-        }));
 
 
 /*

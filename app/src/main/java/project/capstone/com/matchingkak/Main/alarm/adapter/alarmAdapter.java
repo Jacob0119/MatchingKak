@@ -1,6 +1,7 @@
 package project.capstone.com.matchingkak.Main.alarm.adapter;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +12,19 @@ import android.view.animation.AnimationUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.capstone.com.matchingkak.Main.alarm.alarmAdapterContract;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
+import project.capstone.com.matchingkak.Main.alarm.BottomSheetFragment;
 import project.capstone.com.matchingkak.Main.alarm.adapter.holder.AlarmViewHolderToComplete;
 import project.capstone.com.matchingkak.Main.alarm.adapter.holder.AlarmViewHolderToSubmit;
+import project.capstone.com.matchingkak.Main.alarm.alarmAdapterContract;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmItem;
 import project.capstone.com.matchingkak.R;
 
 /**
  * Created by amco1 on 2018-03-16.
  */
-public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements alarmAdapterContract.model,alarmAdapterContract.view {
+public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements alarmAdapterContract.model,alarmAdapterContract.view,OnClickListener {
 
 
     private int lastPosition=-1;
@@ -30,6 +32,7 @@ public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements 
     private List<alarmItem> mDataset;
     private OnClickListener clicklistener;
     private Context context;
+    private FragmentManager fragmentManager;
 private final int SUBMIT=0;
     private final int COMPLETE=1;
 
@@ -38,6 +41,11 @@ private final int SUBMIT=0;
     public alarmAdapter(Context context){
         this.context=context;
         mDataset=new ArrayList<>();
+        setOnClickListener(this);
+    }
+    public alarmAdapter(Context context, FragmentManager fragmentManager){
+        this(context);
+        this.fragmentManager=fragmentManager;
     }
     public alarmAdapter(List MSGDataSet){
 
@@ -134,5 +142,15 @@ private final int SUBMIT=0;
     public void addItems(List items, boolean isUpper) {
             if(isUpper) setList(items);
             else addList(items);
+    }
+
+
+    @Override
+    public void OnClick(View v, int position) {
+        //Toast.makeText(context,"wow:position",Toast.LENGTH_SHORT).show();
+       // BottomSheetDialog dialog=new BottomSheetDialog(context);
+        //dialog.show();
+        BottomSheetFragment dialog=BottomSheetFragment.newInstance(getItem(position));
+        dialog.show(fragmentManager,"good");
     }
 }

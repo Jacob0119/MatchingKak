@@ -1,80 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.v7.widget.CardView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.v7.widget.CardView
     style="@style/alarm_CardView"
-    android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:clickable="true"
-    android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
 
         <ImageView
             android:id="@+id/alarm_image"
-            style="@style/image_in_list" />
+            style="@style/image_in_list"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/alarm_list_date"
+            style="@style/date_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
 
-            <TextView
-                style="@style/rounded_text_red"
-                android:padding="3dp"
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="경기요청"
-                />
+            android:text="2017/4/23"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/alarm_list_title"
+            app:layout_constraintTop_toBottomOf="@+id/alarm_list_title" />
 
-            <TextView
-                android:id="@+id/alarm_list_title"
-                style="@style/primary_text_for_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="장소" />
+        <TextView
+            android:id="@+id/alarm_list_title"
+            style="@style/primary_text_for_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:lines="2"
+            android:text="장소211111111111111111111111111111111111111111111111111111"
+            app:layout_constraintEnd_toStartOf="@+id/alarm_menu"
+            app:layout_constraintStart_toEndOf="@+id/alarm_image"
+            app:layout_constraintTop_toBottomOf="@+id/alarm_menu" />
 
-            <TextView
-                android:id="@+id/alarm_list_date"
-                style="@style/date_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="2017/4/23" />
+        <TextView
+            android:id="@+id/alarm_tag"
+            style="@style/rounded_text_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:paddingTop="2dp"
+            android:text="경기요청"
+            app:layout_constraintEnd_toStartOf="@+id/alarm_menu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/alarm_image"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right">
+        <TextView
+            android:id="@+id/alarm_menu"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:text="⋮"
+            android:textAppearance="?android:textAppearanceLarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/alarm_submit"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/submit" />
-
-                <Button
-                    android:id="@+id/alarm_reject"
-                    style="@style/AppTheme.RoundedCornerMaterialButton"
-                    android:backgroundTint="@color/pretty_red"
-                    android:text="거절" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
+</layout>

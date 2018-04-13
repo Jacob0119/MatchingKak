@@ -1,7 +1,11 @@
 package project.capstone.com.matchingkak;
 
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +18,12 @@ import java.util.Date;
 public class GameItemViewUtils {
     public final static String DatePattern="yyyy-MM-dd HH:mm:ss";
     public final static String SimpleDatePattern="yyyy.MM.dd.";
+    public static void setCircleImage(ImageView view,String url){
+
+        Glide.with(view.getContext()).load(url).apply(RequestOptions.circleCropTransform())
+                .into(view);
+
+    }
     public static String getCustomDate(String datePattern,String source,String customPattern){
         String result=source;
         SimpleDateFormat format=new SimpleDateFormat(datePattern);

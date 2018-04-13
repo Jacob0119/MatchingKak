@@ -36,7 +36,7 @@
 
 
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
-
+        app:layout_behavior="info.androidramp.googleplusbottomtoolbar.ScrollingToolbarBehavior"
         android:id="@+id/main_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

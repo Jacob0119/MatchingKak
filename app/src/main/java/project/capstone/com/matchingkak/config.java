@@ -10,4 +10,5 @@ public class config {
  final public static String MB_NICK="MB_NICK";
  final public static String GM_NO  ="GM_NO";
  final public static String LIST_GAME_MAP="PARAMETER";
+ final public static String ALARM_ITEM="ALARM_ITEM";
 }

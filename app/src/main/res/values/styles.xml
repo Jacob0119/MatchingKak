@@ -109,12 +109,12 @@
 
     </style>
 
-    <style name="primary_text_for_list" parent="@android:style/Widget.TextView">
+    <style name="primary_text_for_list">
         <item name="android:gravity">center|left</item>
         <item name="android:textSize">13dp</item>
         <item name="android:textColor">@color/primary_text</item>
         <item name="android:layout_margin">2dp</item>
-        <item name="android:singleLine">true</item>
+
         <item name="android:fontFamily">@font/main_font</item>
 
 
@@ -130,7 +130,7 @@
 
     </style>
 
-    <style name="secondary_text_small" parent="@android:style/Widget.TextView">
+    <style name="secondary_text_small" >
         <item name="android:gravity">center</item>
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">bold</item>
@@ -140,12 +140,10 @@
 
     </style>
 
-    <style name="date_text" parent="@android:style/Widget.TextView">
+    <style name="date_text" >
         <item name="android:textSize">10sp</item>
-        <item name="android:gravity">right|bottom</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/pretty_red</item>
-        <item name="android:layout_margin">2dp</item>
+
     </style>
 
     <style name="login_btn">
@@ -207,5 +205,23 @@
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
+    </style>
+<style name="alarm_image">
+    <item name="android:layout_width">25dp</item>
+    <item name="android:layout_height">25dp</item>
+   <item name="android:tint">@color/pretty_red</item>
+    <item name="android:scaleType">centerInside</item>
+</style>
+    <style name="alarm_dialog_text">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#505050</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
+    </style>
+    <style name="alarm_layout">
+
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingLeft">20dp</item>
     </style>
 </resources>

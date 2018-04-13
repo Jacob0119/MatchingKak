@@ -110,7 +110,7 @@ private String mb_nick;
 
     }
     void animation(){
-        overridePendingTransition(R.anim.anim_slide_down_for_current,R.anim.anim_slide_down_for_new);
+        overridePendingTransition(R.anim.do_nothing,R.anim.anim_slide_down_for_new);
 
     }
     @Override

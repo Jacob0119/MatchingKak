@@ -26,5 +26,5 @@
     <color name="profile_pic_round">@color/natural_gray</color>
     <color name="black_alpha_40">#66000000</color>
 
-    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay">@color/pretty_gray</color>
 </resources>

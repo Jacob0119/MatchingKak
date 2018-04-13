@@ -1,6 +1,7 @@
 package project.capstone.com.matchingkak.Main.alarm.adapter.holder;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmItem;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.databinding.AlarmListViewForSubmitBinding;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 
 /**
@@ -19,19 +21,17 @@ import project.capstone.com.matchingkak.restAPI.APIUrl;
  */
 public  class AlarmViewHolderToSubmit extends ViewHolder {
 
-
+        AlarmListViewForSubmitBinding binding;
     private TextView alarm_title,alarm_date;
-    private View submit,reject;
     private ImageView profile;
     private OnClickListener listener;
     public AlarmViewHolderToSubmit(View v){
 
         super(v);
 
+
         alarm_title         =v.findViewById(R.id.alarm_list_title);
         alarm_date          =v.findViewById(R.id.alarm_list_date);
-        submit              =v.findViewById(R.id.alarm_submit);
-        reject              =v.findViewById(R.id.alarm_reject);
         profile             =v.findViewById(R.id.alarm_image);
     }
 
@@ -40,24 +40,23 @@ public  class AlarmViewHolderToSubmit extends ViewHolder {
 
     @Override
     public   void bind(Context context, Object data, final int pos, final OnClickListener listener){
-        alarmItem item=(alarmItem)data;
+
+       binding= DataBindingUtil.bind(this.itemView);
+            alarmItem item=(alarmItem)data;
 
             this.listener=listener;
 
-            alarm_date.setText(item.getAlarm_send_date());
+            binding.alarmListDate.setText(item.getAlarm_send_date());
              RequestOptions options=new RequestOptions();
 
              Glide.with(context)
              .load(APIUrl.API_BASE_URL+item.getTm_img())
              .apply(options.centerCrop())
-             .into(profile);
+             .into(binding.alarmImage);
 
-            alarm_title.setText(item.getUser()+"님이 경기를 요청하였습니다.");
-            submit.setFocusableInTouchMode(false);
-            reject.setFocusableInTouchMode(false);
-            setOnClickListener(submit, pos);
-            setOnClickListener(reject, pos);
+            binding.alarmListTitle.setText(item.getUser()+"님이 경기를 요청하였습니다.");
 
+            setOnClickListener(binding.alarmMenu,pos);
     }
 
     void setOnClickListener(View v,final int pos){

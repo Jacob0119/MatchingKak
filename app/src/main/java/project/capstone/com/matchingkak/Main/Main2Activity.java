@@ -1,15 +1,15 @@
 package project.capstone.com.matchingkak.Main;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
+import android.support.v4.app.FragmentManager;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -28,7 +28,6 @@ import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
 import project.capstone.com.matchingkak.Main.alarm.alarmFragment;
 import project.capstone.com.matchingkak.Main.home.HomeFragment;
 import project.capstone.com.matchingkak.Main.me.meFragment;
-import project.capstone.com.matchingkak.Main.message.MessageFragment;
 import project.capstone.com.matchingkak.Main.message.MessageParentFragment;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
@@ -40,9 +39,7 @@ public class Main2Activity extends AppCompatActivity {
 
     private CustomViewPager mViewPager;
     private ViewPagerAdapter mAdapter;
-    private BottomNavigationView navigationView;
 
-    Fragment[] frag=new Fragment[5];
 
     private int selectedTab=0;
 
@@ -64,29 +61,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-    private void loadFragment(int i) {
 
-        if(frag[i]==null)
-            frag[i] = getFrament(i);
-
-        FragmentTransaction ft=getFragmentManager().beginTransaction();
-
-        ft.replace(R.id.main_view_pager, frag[i]);
-        ft.commit();
-    }
-
-    Fragment getFrament(int i){
-
-        switch (i){
-            case 0:return HomeFragment.newInstance();
-            case 1: return HomeFragment.newInstance();
-            case 2:return meFragment.newInstance();
-            case 3:return MessageFragment.newInstance();
-            case 4:return HomeFragment.newInstance();
-            default:return HomeFragment.newInstance();
-        }
-
-    }
    void init(){
 
 
@@ -131,7 +106,7 @@ public class Main2Activity extends AppCompatActivity {
 
         mViewPager =  findViewById(R.id.main_view_pager);
 
-        mAdapter = new ViewPagerAdapter (this.getFragmentManager());
+        mAdapter = new ViewPagerAdapter (getSupportFragmentManager());
        mAdapter.addFragment(HomeFragment.newInstance(), "home");
        mAdapter.addFragment(MessageParentFragment.newInstance(), "message");
        mAdapter.addFragment(meFragment.newInstance(), "me");
@@ -193,7 +168,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
    }
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -203,7 +178,7 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public android.support.v4.app.Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
 

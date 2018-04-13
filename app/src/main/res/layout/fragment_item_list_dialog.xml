@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="dialog"
+            type="project.capstone.com.matchingkak.Main.alarm.BottomSheetFragment"/>
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+
+   >
+
+    <!-- NOTE: This list should be displayed in a list
+    instead of nested layouts -->
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:cardElevation="1dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/alarm_dialog_image"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+            <TextView
+                android:id="@+id/alarm_dialog_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/main_font"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/black_overlay"
+                app:layout_constraintBottom_toBottomOf="@+id/alarm_dialog_image"
+                app:layout_constraintStart_toEndOf="@+id/alarm_dialog_image"
+                app:layout_constraintTop_toTopOf="@+id/alarm_dialog_image"
+                tools:text="jacob" />
+
+            <ImageView
+                android:id="@+id/alarm_dialog_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/clear" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+    <LinearLayout
+        android:id="@+id/alarm_dialog_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        style="@style/alarm_layout">
+
+        <ImageView
+
+            android:id="@+id/like4"
+          style="@style/alarm_image"
+            android:src="@drawable/handshake"
+            />
+
+        <TextView
+            style="@style/alarm_dialog_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="경기 정보"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alarm_dialog_message"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        style="@style/alarm_layout">
+
+        <ImageView
+            android:id="@+id/like3"
+            style="@style/alarm_image"
+            android:src="@drawable/message"
+           />
+
+        <TextView
+            style="@style/alarm_dialog_text"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="메시지 보내기" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alarm_dialog_like"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        style="@style/alarm_layout"
+       >
+
+
+        <ImageView
+            android:id="@+id/like"
+            style="@style/alarm_image"
+            android:src="@drawable/like"
+          />
+
+        <TextView
+            style="@style/alarm_dialog_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="좋아요"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alarm_dialog_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        style="@style/alarm_layout">
+
+
+        <ImageView
+            android:id="@+id/like2"
+            style="@style/alarm_image"
+            android:src="@drawable/dustbin" />
+
+        <TextView
+            style="@style/alarm_dialog_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="삭제"
+         />
+
+    </LinearLayout>
+
+</LinearLayout>
+</layout>

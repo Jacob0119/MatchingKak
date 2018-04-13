@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <include layout="@layout/toolbar_for_alarm"/>
+
     <RelativeLayout
-        android:layout_weight="1"
-        android:orientation="vertical"
+
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="match_parent"
+
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ProgressBar
+
+            android:id="@+id/message_progress"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@id/message_swipe_refresh"
+            android:layout_marginBottom="8dp"
+            tools:layout_editor_absoluteX="0dp" />
 
         <android.support.v4.widget.SwipeRefreshLayout
 
             android:id="@+id/message_swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/message_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutAnimation="@anim/layout_animation_fall_down"
+                 />
 
-
-
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/message_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layoutAnimation="@anim/layout_animation_fall_down" />
         </android.support.v4.widget.SwipeRefreshLayout>
-        <ProgressBar
-
-            android:layout_alignBottom="@id/message_swipe_refresh"
-            android:id="@+id/message_progress"
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
 
 
     </RelativeLayout>
