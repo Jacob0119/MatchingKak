@@ -1,12 +1,13 @@
 package project.capstone.com.matchingkak.Main.home;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -155,7 +156,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
       //  this.mLayoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         this.mLayoutManager2=new GridLayoutManager(context,2);
-        mLayoutManager2.setAutoMeasureEnabled(true);
         mRecyclerView2=getView().findViewById(R.id.home_recyler2);
         mRecyclerView2.setNestedScrollingEnabled(false);
         mRecyclerView2.setLayoutManager(mLayoutManager2);
@@ -164,9 +164,10 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
         LayoutAnimationController controller= AnimationUtils.loadLayoutAnimation(context,R.anim.layout_animation_fall_up);
         mRecyclerView2.setLayoutAnimation(controller);
+       // mRecyclerView2.addOnScrollListener(new HomeScrollListener(getContext(),this));
+mRecyclerView2.setItemAnimator(new DefaultItemAnimator());
 
         this.mLayoutManager3=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-        mLayoutManager3.setAutoMeasureEnabled(true);
         mRecyclerView3=getView().findViewById(R.id.home_recyler3);
         mRecyclerView3.setNestedScrollingEnabled(false);
         mRecyclerView3.setLayoutManager(mLayoutManager3);

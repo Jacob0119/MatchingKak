@@ -11,7 +11,7 @@ import android.support.v4.app.TaskStackBuilder;
 
 import com.google.firebase.messaging.RemoteMessage;
 
-import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
+import project.capstone.com.matchingkak.Main.Main2Activity;
 
 /**
  * Created by Lee on 2017-05-27.
@@ -35,25 +35,34 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
     private void sendNotfication(String type,String messageBody){  //푸시 알림 설정
         String url="http://matchingkak.com";
-        Intent intent=new Intent(this,MainActivity.class);
+        Intent intent=new Intent(this,Main2Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Intent intent2=new Intent(this,EditorActivity.class);
+        Intent intent2;
 
+        TaskStackBuilder  stackBuilder=TaskStackBuilder.create(this);
         switch(type){
 
             case MSG:
                 url="http://matchingkak.com/list_message_receive.php";
+                intent.putExtra(config.NOTI_SELECTED_TAB,1);
+
+                 stackBuilder=TaskStackBuilder.create(this);
+                stackBuilder.addParentStack(Main2Activity.class);
+                stackBuilder.addNextIntent(intent);
+            
                 break;
             case NEWS:
                 url="http://matchingkak.com/news.php";
+                intent.putExtra(config.NOTI_SELECTED_TAB,3);
+                 stackBuilder=TaskStackBuilder.create(this);
+                stackBuilder.addParentStack(Main2Activity.class);
+                stackBuilder.addNextIntent(intent);
+
                 break;
         }
 
-        intent2.putExtra("url", url);
-        TaskStackBuilder stackBuilder=TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(intent);
-        stackBuilder.addNextIntent(intent2);
+
+
 
         PendingIntent pendingIntent=stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
 

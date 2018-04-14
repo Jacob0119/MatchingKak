@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import java.util.HashMap;
 
+import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
 import project.capstone.com.matchingkak.Message.Message2Activity;
 import project.capstone.com.matchingkak.detail_info.DetailActivity;
 import project.capstone.com.matchingkak.list_game.ListGameActivity;
@@ -35,5 +36,11 @@ public class ActivityStarterManager {
         context.startActivity(intent);
 
 
+    }
+    public static void StartWebActivity(Context context,String Url,String title){
+        Intent intent = new Intent(context, EditorActivity.class);
+        intent.putExtra("url", Url);
+        intent.putExtra("title",title);
+        context.startActivity(intent);
     }
 }

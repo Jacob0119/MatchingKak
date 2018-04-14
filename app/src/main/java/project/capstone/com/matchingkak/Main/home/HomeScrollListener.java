@@ -1,4 +1,4 @@
-package project.capstone.com.matchingkak.Main.alarm;
+package project.capstone.com.matchingkak.Main.home;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,13 +13,13 @@ import project.capstone.com.matchingkak.R;
  * Created by Lee on 2018-03-22.
  */
 
-public class alarmScrollListener extends RecyclerView.OnScrollListener {
+public class HomeScrollListener extends RecyclerView.OnScrollListener {
 
     private int lastPosition=-1;
     private int firstPosition=-1;
     private Context context;
-    private alarmFragment parent;
-    public alarmScrollListener(Context context,alarmFragment parent){
+    private HomeFragment parent;
+    public HomeScrollListener(Context context, HomeFragment parent){
 
         this.context=context;
         this.parent=parent;
@@ -38,8 +38,8 @@ public class alarmScrollListener extends RecyclerView.OnScrollListener {
             int itemTotalCount = recyclerView.getAdapter().getItemCount() - 1;
             if (lastVisibleItemPosition == itemTotalCount) {
                 //끝에 도달
-                parent.getNextData();
-                return;
+
+
             }else if(firstPosition>firstVisible){
                 View item= layoutManager.findViewByPosition(firstVisible);
                 setAnimation(item, R.anim.item_animation_fall_down);

@@ -97,6 +97,7 @@ class AlertState implements State{
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     show(info.getBtnState().getMsg());
                 }
             });
@@ -155,7 +156,7 @@ class NormalState implements State{
 
     @TargetApi(23)
     @Override
-    public void setSubmitButton(Button button) {
+    public void setSubmitButton(final Button button) {
         if(button!=null&&this.context!=null) {
             button.setText("요청하기");
             button.setBackgroundColor(context.getColor(R.color.colorPrimary_light));
@@ -166,6 +167,11 @@ class NormalState implements State{
                    DetailService.getRetrofit().requestMatch(info.getGmNo()).enqueue(new Callback<RequestResult>() {
                       @Override
                       public void onResponse(Call<RequestResult> call, Response<RequestResult> response) {
+                            info.getBtnState().setBtnState(String.valueOf(StateManager.STATE_ALERT));
+                            info.getBtnState().setContent("요청 완료");
+                            info.getBtnState().setMsg("요청 대기 중입니다.");
+                            StateManager.getInstance().setState(StateManager.STATE_ALERT,info,context);
+                            StateManager.getInstance().setBtn(button);
 
                           Toast.makeText(context,response.body().msg,Toast.LENGTH_SHORT).show();
                       }

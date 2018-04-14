@@ -25,6 +25,6 @@
     <color name="chat_bubble_color">#7AAAAD</color>
     <color name="profile_pic_round">@color/natural_gray</color>
     <color name="black_alpha_40">#66000000</color>
-
+    <color name="black">#000000</color>
     <color name="black_overlay">@color/pretty_gray</color>
 </resources>

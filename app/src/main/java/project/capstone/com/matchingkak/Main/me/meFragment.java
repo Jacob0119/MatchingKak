@@ -1,8 +1,8 @@
 package project.capstone.com.matchingkak.Main.me;
 
-import android.support.v4.app.Fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import project.capstone.com.matchingkak.ActivityStarterManager;
 import project.capstone.com.matchingkak.Main.me.adapter.meAdapter;
 import project.capstone.com.matchingkak.Main.me.data.InfoData;
 import project.capstone.com.matchingkak.Main.me.presenter.mePresenter;
@@ -73,7 +74,7 @@ public class meFragment extends Fragment implements meContract.View{
     }
     void init(){
 
-        ImageView edit=getView().findViewById(R.id.edit_image);
+        ImageView edit=getView().findViewById(R.id.me_edit_image);
         ImageView profile_picture=getView().findViewById(R.id.mypage_picture);
         Glide.with(this).load(R.drawable.edit_profile).apply(RequestOptions.circleCropTransform()).into(edit);
         Glide.with(this ).load(R.drawable.main_icon2).apply(RequestOptions.circleCropTransform()).into(profile_picture);
@@ -99,7 +100,13 @@ public class meFragment extends Fragment implements meContract.View{
         presenter.setAdapterView(postAdapter,presenter.ME_MYPOST);
         presenter.setAdapterModel(postAdapter,presenter.ME_MYPOST);
 
-
+        View v=getView().findViewById(R.id.me_edit_image);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityStarterManager.StartWebActivity(getContext(),APIUrl.API_BASE_URL+APIUrl.POFILE_URL,"프로필 수정");
+            }
+        });
 
     }
     @Override

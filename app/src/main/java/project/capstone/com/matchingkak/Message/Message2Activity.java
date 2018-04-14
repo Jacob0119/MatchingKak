@@ -52,8 +52,7 @@ private String mb_nick;
         findViewById(R.id.message_edit_layout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                hideKeyboard();
                 return true;
             }
         });
@@ -91,6 +90,7 @@ private String mb_nick;
                                 .onAny(new MaterialDialog.SingleButtonCallback() {
                                            @Override
                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                               hideKeyboard();
                                                Message2Activity.this.finish();
                                                animation();
                                            }
@@ -109,6 +109,10 @@ private String mb_nick;
 
 
     }
+    void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
     void animation(){
         overridePendingTransition(R.anim.do_nothing,R.anim.anim_slide_down_for_new);
 
@@ -117,6 +121,7 @@ private String mb_nick;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                hideKeyboard();
                 onBackPressed();
                 animation();
                 return true;

@@ -13,7 +13,7 @@
     <dimen name="elevation_level2">10dp</dimen>
     <dimen name="elevation_level3">15dp</dimen>
     <dimen name="me_margin_side">30dp</dimen>
-    <dimen name="list_game_viewpager_padding">40dp</dimen>
+    <dimen name="list_game_viewpager_padding">20dp</dimen>
     <dimen name="list_item_spacing">16dp</dimen>
     <dimen name="list_item_spacing_half">8dp</dimen>
 

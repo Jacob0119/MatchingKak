@@ -92,35 +92,7 @@ public static alarmFragment newInstance(){
         mRecyclerView.setFocusableInTouchMode(false);
         mRecyclerView.setHasFixedSize(false);
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager layoutManager=LinearLayoutManager.class.cast(recyclerView.getLayoutManager());
-                int lastVisible=layoutManager.findLastVisibleItemPosition();
-                int firstVisible=layoutManager.findFirstVisibleItemPosition();
-
-                int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-                int itemTotalCount = recyclerView.getAdapter().getItemCount() - 1;
-                if (lastVisibleItemPosition == itemTotalCount) {
-                    //끝에 도달
-                    getData(++page,false);
-                     return;
-                }else if(firstPosition>firstVisible){
-                    View item= layoutManager.findViewByPosition(firstVisible);
-                    setAnimation(item,R.anim.item_animation_fall_down);
-                    lastPosition=lastVisible;
-                    firstPosition=firstVisible;
-                }
-               else if(lastPosition<lastVisible){
-                    View item= layoutManager.findViewByPosition(lastVisible);
-                   setAnimation(item,R.anim.item_animation_fall_up);
-                    lastPosition=lastVisible;
-                    firstPosition=firstVisible;
-                }
-
-            }
-        });
+        mRecyclerView.addOnScrollListener(new alarmScrollListener(getContext(),this));
 
 
 
@@ -147,6 +119,9 @@ public static alarmFragment newInstance(){
         item.startAnimation(animation);
 
 
+    }
+    public void getNextData(){
+        getData(++page,false);
     }
     void getData(int page, final boolean isUpper){
         if(!isUpper) {

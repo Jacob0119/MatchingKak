@@ -36,7 +36,7 @@ public class StateManager {
         switch (stateCode){
 
             case STATE_MINE:
-                state=new MineState(context );
+                state=new MineState(context ); //수정
                  break;
             case STATE_ALERT:
                 state= new AlertState(context,info);

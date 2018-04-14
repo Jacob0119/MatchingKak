@@ -1,140 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
     android:layout_margin="@dimen/margin_bottom">
-<LinearLayout
 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-    android:layout_margin="@dimen/margin_bottom"
-    android:padding="10dp"
-
-    >
-
-
-    <LinearLayout
-
-        android:paddingBottom="15dp"
-        android:background="@drawable/layout_view_bg"
-        android:layout_margin="@dimen/margin_bottom"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:fontFamily="@font/main_font"
+            android:id="@+id/detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
 
         <LinearLayout
-            android:background="@drawable/layout_view_bg_right"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="팀 명"
-                style="@style/primary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/Detail_tm_name"
-                style="@style/secondary_text"
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/margin_bottom"
+            android:layout_marginBottom="8dp"
+
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="카카오" />
-        </LinearLayout>
+                android:layout_margin="@dimen/margin_bottom"
+                android:background="@drawable/layout_view_bg"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
 
 
-        <LinearLayout
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_view_bg_right"
+                    android:orientation="vertical">
 
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="작성자"
-                style="@style/primary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    <TextView
+                        style="@style/primary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="팀 명" />
 
-            <TextView
-                android:id="@+id/Detail_mb_nick"
-                style="@style/secondary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="jacob" />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/margin_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/Detail_tm_name"
+                        style="@style/secondary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="카카오" />
+                </LinearLayout>
 
 
-        <LinearLayout
+                <LinearLayout
 
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="유니폼 색"
-                style="@style/primary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/Detail_gm_color"
-                style="@style/secondary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="빨강" />
-        </LinearLayout>
+                    <TextView
+                        style="@style/primary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="작성자" />
 
+                    <TextView
+                        android:id="@+id/Detail_mb_nick"
+                        style="@style/secondary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="jacob" />
+                </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="경고 횟수"
-                style="@style/primary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="100"
-                android:textColor="@color/pretty_red"
-                style="@style/secondary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="매칭 횟수"
-                style="@style/primary_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/Detail_match_count"
-                style="@style/secondary_text"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="100"
-                android:textColor="@color/pretty_red" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_bottom"
+                android:orientation="horizontal">
 
-</LinearLayout></android.support.v7.widget.CardView>
+
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/primary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="유니폼 색" />
+
+                    <TextView
+                        android:id="@+id/Detail_gm_color"
+                        style="@style/secondary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="빨강" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/primary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="경고 횟수" />
+
+                    <TextView
+                        style="@style/secondary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textColor="@color/pretty_red" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/primary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="매칭 횟수" />
+
+                    <TextView
+                        android:id="@+id/Detail_match_count"
+                        style="@style/secondary_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textColor="@color/pretty_red" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

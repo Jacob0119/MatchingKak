@@ -63,7 +63,7 @@
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".detail_info.DetailActivity"
-            android:theme="@style/AppTheme.ActionBar.Transparent" />
+            android:theme="@style/AppTheme.collapsing"/>
         <activity android:name=".sns_login.loginActivity" />
         <activity android:name=".sns_login.SuccessActivity" />
         <activity android:name=".Main.Main2Activity" >

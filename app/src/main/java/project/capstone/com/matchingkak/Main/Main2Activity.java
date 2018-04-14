@@ -1,15 +1,13 @@
 package project.capstone.com.matchingkak.Main;
 
 
-import android.support.v4.app.FragmentManager;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -24,12 +22,13 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.capstone.com.matchingkak.Main.Editor.EditorActivity;
+import project.capstone.com.matchingkak.ActivityStarterManager;
 import project.capstone.com.matchingkak.Main.alarm.alarmFragment;
 import project.capstone.com.matchingkak.Main.home.HomeFragment;
 import project.capstone.com.matchingkak.Main.me.meFragment;
 import project.capstone.com.matchingkak.Main.message.MessageParentFragment;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.config;
 import project.capstone.com.matchingkak.restAPI.APIUrl;
 
 import static project.capstone.com.matchingkak.R.drawable.alarm;
@@ -47,6 +46,8 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+
 
         init();
 
@@ -83,9 +84,7 @@ public class Main2Activity extends AppCompatActivity {
                    selectedTab=i;
                }
                else {
-                   Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
-                   intent.putExtra("url", APIUrl.API_BASE_URL+APIUrl.EDITOR_URL);
-                   startActivity(intent);
+                   ActivityStarterManager.StartWebActivity(Main2Activity.this, APIUrl.API_BASE_URL+APIUrl.EDITOR_URL,"글쓰기");
                    bottomNavigationView.selectTab(selectedTab);
                }
            }
@@ -131,7 +130,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-
+    mViewPager.setCurrentItem( getIntent().getIntExtra(config.NOTI_SELECTED_TAB,0));
 /*
        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
            @Override

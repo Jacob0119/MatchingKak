@@ -1,13 +1,16 @@
 package project.capstone.com.matchingkak.detail_info;
-
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -32,11 +37,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.GameItemViewUtils;
 import project.capstone.com.matchingkak.Message.Message2Activity;
 import project.capstone.com.matchingkak.R;
 import project.capstone.com.matchingkak.config;
 import retrofit2.Call;
 import retrofit2.Response;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -58,6 +66,7 @@ private Toolbar toolbar;
          toolbar=findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -144,13 +153,26 @@ private Toolbar toolbar;
 
 
     }
+    static final int state_w=1;
+    static final int state_b=2;
+    void setToolbarTheme(int state){
+        if(state==state_b) {
+            MenuItem testItem = (MenuItem) toolbar.getMenu().findItem(R.id.detail_message_icon);
+            testItem.setIcon(R.drawable.mail_black);
+
+        }
+        else{
+            MenuItem testItem = (MenuItem) toolbar.getMenu().findItem(R.id.detail_message_icon);
+            testItem.setIcon(R.drawable.mail_white);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.detail_message:
+            case R.id.detail_message_icon:
                 Intent intent=new Intent(this,Message2Activity.class);
                 intent.putExtra(config.MB_NICK,info.getMbNick());
                 startActivity(intent);
@@ -181,9 +203,48 @@ private Toolbar toolbar;
         stateManager.setState(btnState,info,this);
         Button submit= findViewById(R.id.Detail_submit_btn);
         stateManager.setBtn(submit);
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.detail_collapsing);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.detail_appbar);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
 
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle(info.getGmTitle());
+                   // setTheme(R.style.AppTheme_white);
+                    isShow = true;
+                    collapsingToolbarLayout.setStatusBarScrim(getDrawable(R.color.white));
+                    final Drawable upArrow =getDrawable(R.drawable.abc_ic_ab_back_material);
+                    upArrow.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
+                    getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+                    MenuItem testItem = (MenuItem) toolbar.getMenu().findItem(R.id.detail_message_icon);
+                    testItem.setIcon(R.drawable.mail_black);
+                } else if(isShow) {
+                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                    //setTheme(R.style.AppTheme_ActionBar);
+                    isShow = false;
+                    collapsingToolbarLayout.setStatusBarScrim(getDrawable(R.color.white));
+                    final Drawable upArrow =getDrawable(R.drawable.abc_ic_ab_back_material);
+                    upArrow.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_ATOP);
+                    getSupportActionBar().setHomeAsUpIndicator(upArrow);
+                    MenuItem testItem = (MenuItem) toolbar.getMenu().findItem(R.id.detail_message_icon);
+                    testItem.setIcon(R.drawable.mail_white);
+
+
+                }
+            }
+        });
         toolbar.setTitle(info.getGmTitle());
 
+
+        TextView gm_title=findViewById(R.id.detail_title);
+        gm_title.setText(info.getGmTitle());
         TextView gm_memo= findViewById(R.id.Detail_gm_memo);
         gm_memo.setText(info.getGmMemo());
         TextView gm_date= findViewById(R.id.Detail_gm_date );
@@ -198,11 +259,30 @@ private Toolbar toolbar;
         mb_nick.setText(info.getMbNick());
         TextView match_count=findViewById(R.id.Detail_match_count);
         match_count.setText(info.getTmMatchCount());
+        LikeButton likeButton=findViewById(R.id.detail_like);
+
+        likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+              //  Snackbar.make(likeButton,"관심 경기에 추가",Snackbar.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                //Snackbar.make(likeButton,"관심 경기에서 제거",Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+        TextView Dday=findViewById(R.id.detail_dday_text);
+        String day= GameItemViewUtils.getD_day(GameItemViewUtils.SimpleDatePattern,info.getGmDate());
+        Dday.setText(day);
 
         imageView= findViewById(R.id.Detail_team_img);
+
              Glide.with(this)
-                .load(domain+info.getTmImg())
-                .into(imageView);
+                     .load(domain+info.getTmImg())
+                     .transition(withCrossFade())
+                     .into(imageView);
 
         initMap(info.getGmAddr());
 

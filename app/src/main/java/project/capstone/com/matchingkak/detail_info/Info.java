@@ -3,9 +3,10 @@ package project.capstone.com.matchingkak.detail_info;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import project.capstone.com.matchingkak.GameItemViewUtils;
 
 
- class BtnState {
+class BtnState {
 
     @SerializedName("btnState")
     @Expose
@@ -125,7 +126,8 @@ public class Info {
     }
 
     public String getGmDate() {
-        return gmDate;
+
+        return GameItemViewUtils.getCustomDate(GameItemViewUtils.DatePattern,this.gmDate,GameItemViewUtils.SimpleDatePattern);
     }
 
     public void setGmDate(String gmDate) {

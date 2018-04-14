@@ -8,23 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import project.capstone.com.matchingkak.ActivityStarterManager;
 import project.capstone.com.matchingkak.Main.OnClickListener;
 import project.capstone.com.matchingkak.Main.ViewHolder;
+import project.capstone.com.matchingkak.Main.alarm.BottomSheetDialogContract;
 import project.capstone.com.matchingkak.Main.alarm.BottomSheetFragment;
 import project.capstone.com.matchingkak.Main.alarm.adapter.holder.AlarmViewHolderToComplete;
 import project.capstone.com.matchingkak.Main.alarm.adapter.holder.AlarmViewHolderToSubmit;
 import project.capstone.com.matchingkak.Main.alarm.alarmAdapterContract;
 import project.capstone.com.matchingkak.Main.alarm.data.alarmItem;
 import project.capstone.com.matchingkak.R;
+import project.capstone.com.matchingkak.config;
 
 /**
  * Created by amco1 on 2018-03-16.
  */
-public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements alarmAdapterContract.model,alarmAdapterContract.view,OnClickListener {
+public class alarmAdapter extends  RecyclerView.Adapter<ViewHolder>  implements BottomSheetDialogContract.Listener,alarmAdapterContract.model,alarmAdapterContract.view,OnClickListener {
 
 
     private int lastPosition=-1;
@@ -70,7 +74,7 @@ private final int SUBMIT=0;
 
     @Override
     public int getItemViewType(int position) {
-        if (mDataset.get(position).getState().equals("0")) {
+        if (mDataset.get(position).getState().equals(config.ALARAM_REQEUST)) {
             return SUBMIT;
         } else {
             return COMPLETE;
@@ -150,7 +154,41 @@ private final int SUBMIT=0;
         //Toast.makeText(context,"wow:position",Toast.LENGTH_SHORT).show();
        // BottomSheetDialog dialog=new BottomSheetDialog(context);
         //dialog.show();
-        BottomSheetFragment dialog=BottomSheetFragment.newInstance(getItem(position));
+        BottomSheetFragment dialog=BottomSheetFragment.newInstance(getItem(position),position);
         dialog.show(fragmentManager,"good");
+        dialog.attachListener(this);
+    }
+
+    @Override
+    public void OnClickListener(int ResultCode,int position) {
+        //for BottomDialog
+        switch (ResultCode)
+        {
+
+            case DELETE:
+                try {
+                    mDataset.remove(position);
+                    this.notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, getItemCount());
+                    break;
+                } catch (android.database.SQLException e) {
+                    e.printStackTrace();
+                }
+
+            case DETAIL:
+                ActivityStarterManager.StartGameDetailActivity(context,getItem(position).getRq_count_no());break;
+
+            case LIKE:
+                Toast.makeText(context,"LIKE",Toast.LENGTH_SHORT).show();break;
+            case MESSAGE:
+                ActivityStarterManager.StartWriteMessageActivity(context,getItem(position).getUser()); break;
+            case BottomSheetDialogContract.Listener.SUBMIT:
+                Toast.makeText(context,"submit",Toast.LENGTH_SHORT).show();break;
+            case REJECT:
+                Toast.makeText(context,"rejected",Toast.LENGTH_SHORT).show();break;
+
+
+        }
+
     }
 }
