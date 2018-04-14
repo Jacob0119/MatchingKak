@@ -49,7 +49,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                  stackBuilder=TaskStackBuilder.create(this);
                 stackBuilder.addParentStack(Main2Activity.class);
                 stackBuilder.addNextIntent(intent);
-            
+
                 break;
             case NEWS:
                 url="http://matchingkak.com/news.php";
